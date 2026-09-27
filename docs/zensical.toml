@@ -2,10 +2,10 @@
 site_name = "Launchpad"
 site_description = "A complete starter kit for the MERN stack."
 
-copyright = 'Copyright &copy; 2026 Abdul Kareem · <a href="https://github.com/abdulkareemakn/mern-app-starter/blob/main/LICENSE">MIT License</a>'
+copyright = 'Copyright &copy; 2026 Abdul Kareem · <a href="https://github.com/abdulkareemakn/launchpad/blob/main/LICENSE">MIT License</a>'
 
-repo_url = "https://github.com/abdulkareemakn/mern-app-starter"
-repo_name = "abdulkareemakn/mern-app-starter"
+repo_url = "https://github.com/abdulkareemakn/launchpad"
+repo_name = "abdulkareemakn/launchpad"
 edit_uri = "blob/main/docs/docs/"
 
 nav = [
@@ -59,7 +59,7 @@ nav = [
   ] },
 ]
 
-# extra_css = ["stylesheets/extra.css"]
+extra_css = ["stylesheets/home.css"]
 # extra_javascript = ["javascripts/extra.js"]
 
 [project.theme]
@@ -100,18 +100,21 @@ logo = "assets/launchpad.svg"
 
 [[project.theme.palette]]
 media = "(prefers-color-scheme)"
+primary = "custom"
 toggle.icon = "lucide/sun-moon"
 toggle.name = "Switch to light mode"
 
 [[project.theme.palette]]
 media = "(prefers-color-scheme: light)"
 scheme = "default"
+primary = "custom"
 toggle.icon = "lucide/sun"
 toggle.name = "Switch to dark mode"
 
 [[project.theme.palette]]
 media = "(prefers-color-scheme: dark)"
 scheme = "slate"
+primary = "custom"
 toggle.icon = "lucide/moon"
 toggle.name = "Switch to system preference"
 

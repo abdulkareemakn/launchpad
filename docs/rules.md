@@ -72,10 +72,10 @@ This site documents the shipped starter for learners, contributors, and operator
 
 ### 6. Platform guidance
 
-47. Treat Windows as the primary beginner path. Put its tab first and provide exact PowerShell commands, installer choices, service names, prompts, and verification steps.
+47. Treat Windows as the primary beginner path. Put its tab first and provide exact PowerShell commands, installer choices, prompts, and verification steps.
 48. Do not assume Windows has `openssl`, Bash, Homebrew, or GNU utilities.
 49. Prefer an already-required cross-platform tool, such as Node.js, when one command can safely serve every platform.
-50. Keep macOS and Linux instructions complete. Separate them when their package managers or service behavior differ.
+50. Keep macOS and Linux install instructions complete. When Docker provides a local service, use one Docker Compose workflow across platforms instead of native service alternatives.
 51. Do not publish distro commands that may install an unsupported Node.js version. Prefer current official installation guidance when repositories vary.
 52. Show expected output or a verification command after installation steps that commonly fail.
 
@@ -134,4 +134,4 @@ Review the generated page at desktop and narrow widths in light and dark modes. 
 
 - [Zensical authoring](https://zensical.org/docs/authoring/)
 - [Zensical validation](https://zensical.org/docs/setup/validation/)
-- [Application repository](https://github.com/abdulkareemakn/mern-app-starter)
+- [Application repository](https://github.com/abdulkareemakn/launchpad)

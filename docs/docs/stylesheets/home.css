@@ -1,0 +1,126 @@
+:root > * {
+  --md-primary-fg-color: #258ea6;
+  --md-primary-fg-color--light: #4b9ab5;
+  --md-primary-fg-color--dark: #1e7083;
+}
+
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: #258ea6;
+  --md-primary-fg-color--light: #4b9ab5;
+  --md-primary-fg-color--dark: #1e7083;
+}
+
+body:has(.home-hero) .md-main__inner.md-grid {
+  max-width: 68rem;
+}
+
+body:has(.home-hero) .md-sidebar--primary,
+body:has(.home-hero) .md-sidebar--secondary {
+  display: none;
+}
+
+body:has(.home-hero) .md-content__inner {
+  max-width: 68rem;
+  margin: 0;
+}
+
+.home-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 15rem;
+  align-items: center;
+  gap: 2rem;
+  margin: 2rem 0 3rem;
+}
+
+.home-hero__copy h1 {
+  margin: 0 0 0.35rem;
+  font-size: clamp(2.25rem, 5vw, 3.25rem);
+  line-height: 1.05;
+}
+
+.home-hero__copy h1 + p {
+  margin-top: 0;
+}
+
+.home-hero__copy p {
+  max-width: 40rem;
+  line-height: 1.7;
+}
+
+.home-hero__copy h1 + p {
+  font-size: 1.1rem;
+}
+
+.home-hero__copy .md-button {
+  margin: 0.5rem 0.5rem 0 0;
+}
+
+.home-hero__art {
+  display: grid;
+  aspect-ratio: 1;
+  place-items: center;
+}
+
+.home-hero__logo {
+  display: block;
+  width: 11rem;
+}
+
+.home-features {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.home-card {
+  display: flex;
+  min-height: 7rem;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 0.6rem;
+  color: var(--md-default-fg-color);
+  text-decoration: none;
+  transition: border-color 150ms ease, background-color 150ms ease;
+}
+
+.home-card:hover {
+  border-color: var(--md-primary-fg-color);
+  background: var(--md-code-bg-color);
+}
+
+.home-card span {
+  color: var(--md-default-fg-color--light);
+  font-size: 0.85rem;
+}
+
+@media (max-width: 700px) {
+  .home-hero {
+    grid-template-columns: minmax(0, 1fr) 6rem;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .home-hero__art {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: start;
+  }
+
+  .home-hero__logo {
+    width: 5.5rem;
+  }
+
+  .home-hero__copy h1 {
+    font-size: 2.25rem;
+  }
+
+  .home-features {
+    grid-template-columns: 1fr;
+  }
+
+  .home-card {
+    min-height: auto;
+  }
+}
