@@ -6,9 +6,8 @@
     "resolveJsonModule": true,
     "rootDir": "src",
     "outDir": "dist",
-    "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*.ts"]
     },
     "customConditions": ["development"],
     "rewriteRelativeImportExtensions": true,
