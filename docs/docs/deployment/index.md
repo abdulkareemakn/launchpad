@@ -5,28 +5,36 @@ description: Choose how to run the complete React, Express, and MongoDB applicat
 
 # Deployment
 
-My recommendation for deploying the starter kit is using [**Deno Deploy & Atlas**](/deployment/production). There are several other options and you may choose whichever platform you like.
-
-I do not recommend using Vercel because [triangle man](https://x.com/rauchg/status/1972669025525158031?lang=en).
+This starter kit supports Railway for a hosted application and Docker Compose for a
+single-host stack. Both use one Express process to serve the React app and API.
+Railway is the recommended student deployment path: GitHub deploys the app, while
+MongoDB and a private storage bucket live in the same Railway project.
 
 <div class="grid cards" markdown>
 
-- [**Deno Deploy + Atlas**](/deployment/production)
+- [**Railway**](/deployment/production)
 
-  Managed runtime for a public deployment. Configure `MONGODB_URI` to MongoDB Atlas.
+  Deploy from GitHub using the Dockerfile. Define the app, MongoDB, and bucket with
+  infrastructure as code. Sleeping services have cold starts and usage is metered.
 
 - [**Docker & Compose**](/deployment/docker)
 
-  Runs the app and a local MongoDB container together. Protect and back up the database volume.
+  Run the app and MongoDB on a host you manage. Configure HTTPS, production storage,
+  backups, and deployment updates yourself.
 
 - [**Production build**](/deployment/production-build)
-  Build the client and server for another Node-compatible host, usually with Atlas as the database.
+
+  Build the client and server for another Node-compatible host with a reachable
+  MongoDB database and an S3-compatible storage provider.
 
 </div>
 
-Before going public, set a unique `BETTER_AUTH_SECRET`, use HTTPS origins, configure `MONGODB_URI`, verify email delivery, and run the [security checklist](../reference/security-checklist.md).
+Before going public, set a unique `BETTER_AUTH_SECRET`, use matching HTTPS origins,
+configure the database and storage, verify email delivery, and run the
+[security checklist](/reference/security-checklist).
 
 ## References
 
-- [Security checklist](/reference/security-checklist)
-- [Development workflow](/installation/development-workflow/#environment-variables)
+- [Railway infrastructure as code](https://docs.railway.com/infrastructure-as-code)
+- [Railway pricing](https://railway.com/pricing)
+- [Docker Compose](https://docs.docker.com/compose/)

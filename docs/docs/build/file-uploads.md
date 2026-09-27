@@ -11,8 +11,9 @@ Express checks permission and issues a presigned URL, a temporary link that auth
 one storage operation without exposing the server's storage credentials.
 
 Direct uploads keep file bytes out of the API process. The AWS SDK's S3-compatible
-client supports Cloudflare R2 and Backblaze B2 through configuration. Both are
-recommended providers. The starter ships backend routes; it does not include an
+client supports Railway buckets, Cloudflare R2, and Backblaze B2 through configuration.
+The [Railway deployment guide](/deployment/production) connects the bucket using
+infrastructure references. The starter ships backend routes; it does not include an
 upload component, a delete endpoint, or a public serving layer.
 
 !!! warning "A signed URL grants temporary access"
