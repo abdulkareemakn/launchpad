@@ -19,4 +19,4 @@ COPY --from=build --chown=node:node /runtime ./
 COPY --from=build --chown=node:node /app/apps/client/dist /app/client/dist
 USER node
 EXPOSE 3001
-CMD ["node", "dist/index.js"]
+CMD ["node", "--import", "./alias-runtime.js", "dist/index.js"]

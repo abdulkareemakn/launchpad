@@ -1,7 +1,7 @@
-import { createApp } from "#/app";
-import { createAuth } from "#/auth";
-import { readConfig } from "#/config";
-import { connectDatabase, disconnectDatabase } from "#/database";
+import { createApp } from "@/app";
+import { createAuth } from "@/auth";
+import { readConfig } from "@/config";
+import { connectDatabase, disconnectDatabase } from "@/database";
 
 const config = readConfig(process.env);
 try {

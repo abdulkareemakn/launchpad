@@ -9,16 +9,16 @@ import type {
 import { type RequestHandler, Router } from "express";
 import { extension } from "mime-types";
 
-import type { Config } from "#/config";
-import { createStorage } from "#/lib/storage";
-import type { AuthenticatedLocals } from "#/middleware/auth";
-import { type ValidatedLocals, validate } from "#/middleware/validate";
-import { File } from "#/models/file";
+import type { Config } from "@/config";
+import { createStorage } from "@/lib/storage";
+import type { AuthenticatedLocals } from "@/middleware/auth";
+import { type ValidatedLocals, validate } from "@/middleware/validate";
+import { File } from "@/models/file";
 import {
   createUploadSchema,
   emptyUploadBodySchema,
   uploadParamsSchema,
-} from "#/schemas/uploads";
+} from "@/schemas/uploads";
 
 export function uploadsRouter(config: Config) {
   const router = Router();

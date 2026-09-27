@@ -2,9 +2,6 @@
   "name": "@mern/client",
   "private": true,
   "type": "module",
-  "imports": {
-    "#/*": "./src/*"
-  },
   "scripts": {
     "dev": "vite --port 3000 --strictPort",
     "generate-routes": "tsr generate",

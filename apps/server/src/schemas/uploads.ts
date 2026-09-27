@@ -1,6 +1,6 @@
 import * as z from "zod";
 
-import type { Config } from "#/config";
+import type { Config } from "@/config";
 
 export function createUploadSchema(config: Config) {
   return z.object({

@@ -62,19 +62,18 @@ types only, `emails` contains email templates, and `mail` runs the local develop
 
 ## Source path aliases
 
-The client and server map both `@/*` and `#/*` to their own `src/` directory.
-Use `@/` for client UI imports, matching the shadcn configuration, and `#/` for
-other client-local or server-local modules:
+The client and server map `@/*` to their own `src/` directories. Use `@/` for
+all app-local imports, including shadcn UI components:
 
 ```ts
 import { Button } from "@/components/ui/button";
-import { authClient } from "#/lib/auth-client";
+import { authClient } from "@/lib/auth-client";
 ```
 
-The mappings are defined in each app's `tsconfig.json`. The server also exposes
-`#/*` through conditional package imports so it resolves to `src/` in
-development and compiled `dist/` files in production. Use `#/` in server source;
-Node does not resolve the `@/` form at runtime.
+TypeScript uses the `paths` mappings. Vite resolves the client mapping, and
+`apps/server/alias-runtime.js` resolves server imports to `src/` in development
+and `dist/` in production. Deno's deploy import map points the same alias at the
+compiled server files.
 
 ## Root configuration files
 

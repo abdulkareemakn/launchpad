@@ -5,10 +5,10 @@ import { toNodeHandler } from "better-auth/node";
 import express, { type ErrorRequestHandler } from "express";
 import mongoose from "mongoose";
 
-import type { createAuth } from "#/auth";
-import type { Config } from "#/config";
-import { authMiddleware } from "#/middleware/auth";
-import { uploadsRouter } from "#/routes/uploads";
+import type { createAuth } from "@/auth";
+import type { Config } from "@/config";
+import { authMiddleware } from "@/middleware/auth";
+import { uploadsRouter } from "@/routes/uploads";
 
 export function createApp(auth: ReturnType<typeof createAuth>, config: Config) {
   const app = express();
