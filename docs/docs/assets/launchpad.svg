@@ -1,4 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="currentColor" role="img" aria-labelledby="title">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title">
   <title id="title">Launchpad</title>
-  <path d="M24 16h28v58l-28 28zM28 108l28-28h56l-16 28z"/>
+  <style>
+    .tile { fill: #eef2ff; }
+    .mark { fill: #258ea6; }
+    @media (prefers-color-scheme: dark) {
+      .tile { fill: #1e293b; }
+    }
+  </style>
+  <rect class="tile" width="128" height="128" rx="28"/>
+  <path class="mark" d="M24 16h28v58l-28 28zM28 108l28-28h56l-16 28z"/>
 </svg>
