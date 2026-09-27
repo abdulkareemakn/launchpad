@@ -145,10 +145,10 @@ pnpm check
 pnpm format
 ```
 
-`pnpm check` reports formatting and lint problems. `pnpm format` writes
-formatting changes and safe Biome fixes. See [formatting](/quality/formatting),
-[linting](/quality/linting), and the official [Biome formatter](https://biomejs.dev/formatter/)
-and [linter](https://biomejs.dev/linter/) documentation.
+`pnpm check` reports lint and formatting problems. `pnpm format` writes
+formatting changes and safe lint fixes. See [formatting](/quality/formatting),
+[linting](/quality/linting), and the official [Oxfmt](https://oxc.rs/docs/guide/usage/formatter)
+and [Oxlint](https://oxc.rs/docs/guide/usage/linter) documentation.
 
 ## Run the tests
 

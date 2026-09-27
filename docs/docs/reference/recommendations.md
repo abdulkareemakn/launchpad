@@ -29,11 +29,11 @@ Keep documentation in the application repository as Markdown and build a
 static site. This keeps docs reviewable with code and avoids a database or CMS
 until non-developers genuinely need one.
 
-| Situation | Recommendation |
-| --- | --- |
-| This starter or a Markdown-first project | [Zensical](https://zensical.org/docs/create-your-site/) |
+| Situation                                           | Recommendation                                             |
+| --------------------------------------------------- | ---------------------------------------------------------- |
+| This starter or a Markdown-first project            | [Zensical](https://zensical.org/docs/create-your-site/)    |
 | React/MDX, versioned docs, or a larger product site | [Docusaurus](https://docusaurus.io/docs/docs-introduction) |
-| Vue/Vite or a fast content-focused site | [VitePress](https://vitepress.dev/guide/what-is-vitepress) |
+| Vue/Vite or a fast content-focused site             | [VitePress](https://vitepress.dev/guide/what-is-vitepress) |
 
 For this repository, keep using Zensical. It already matches the Markdown
 content, navigation, preview, and static build workflow here.

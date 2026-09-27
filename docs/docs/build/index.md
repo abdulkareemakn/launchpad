@@ -12,36 +12,46 @@ may only need a route and database query. Start with the smallest relevant path.
 
 <div class="grid cards" markdown>
 
-- [__Database__](/build/database)
+- [**Database**](/build/database)
 
-    Add application models with Mongoose.
-- [__Authentication__](/build/authentication)
+  Add application models with Mongoose.
 
-    Configure Better Auth and protect data on the server.
-- [__Validation__](/build/validation)
+- [**Authentication**](/build/authentication)
 
-    Check untrusted request data before it reaches the database or another service.
-- [__API routes__](/build/api-routes)
+  Configure Better Auth and protect data on the server.
 
-    Define a contract, implement an Express handler, and call it from the client.
-- [__File uploads__](/build/file-uploads)
+- [**Validation**](/build/validation)
 
-    Upload to private storage, confirm metadata, and request temporary downloads.
-- [__Cron jobs__](/build/cron-jobs)
+  Check untrusted request data before it reaches the database or another service.
 
-    Schedule cleanup of abandoned uploads.
-- [__Client pages__](/build/client-pages)
+- [**API routes**](/build/api-routes)
 
-    Add typed TanStack Router pages and loaders.
-- [__Emails__](/build/emails)
+  Define a contract, implement an Express handler, and call it from the client.
 
-    Render React Email templates and send them with Resend.
-- [__Middleware__](/build/middleware)
+- [**File uploads**](/build/file-uploads)
 
-    Reuse authentication and authorization guards.
-- [__404 page__](/build/not-found-page)
+  Upload to private storage, confirm metadata, and request temporary downloads.
 
-    Customize the screen shown for an unknown URL.
+- [**Cron jobs**](/build/cron-jobs)
+
+  Schedule cleanup of abandoned uploads.
+
+- [**Client pages**](/build/client-pages)
+
+  Add typed TanStack Router pages and loaders.
+
+- [**Emails**](/build/emails)
+
+  Render React Email templates and send them with Resend.
+
+- [**Middleware**](/build/middleware)
+
+  Reuse authentication and authorization guards.
+
+- [**404 page**](/build/not-found-page)
+
+  Customize the screen shown for an unknown URL.
+
 </div>
 
 ## Next step

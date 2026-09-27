@@ -1,6 +1,7 @@
 import { betterAuth } from "better-auth";
 import { mongodbAdapter } from "better-auth/adapters/mongodb";
 import mongoose from "mongoose";
+
 import type { Config } from "#/config";
 
 export function createAuth(config: Config) {

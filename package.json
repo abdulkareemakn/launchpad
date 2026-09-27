@@ -2,10 +2,6 @@
   "name": "mern-template",
   "private": true,
   "type": "module",
-  "packageManager": "pnpm@11.3.0",
-  "engines": {
-    "node": ">=24.0.0"
-  },
   "scripts": {
     "dev": "pnpm --parallel --filter @mern/server --filter @mern/mail dev",
     "dev:ui": "pnpm --filter @mern/client dev",
@@ -16,8 +12,10 @@
     "ui": "cd apps/client && pnpm dlx shadcn@latest",
     "design": "designmd",
     "design:lint": "designmd lint DESIGN.md",
-    "check": "biome check .",
-    "format": "biome check --write .",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
+    "check": "pnpm lint && oxfmt --check .",
+    "format": "oxlint --fix && oxfmt .",
     "test": "pnpm test:unit && pnpm test:integration",
     "test:unit": "pnpm --filter @mern/server test:unit",
     "test:integration": "pnpm --filter @mern/server test:integration",
@@ -29,10 +27,16 @@
     "docker:down": "docker compose down"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.4.5",
     "@google/design.md": "0.4.0",
     "@playwright/test": "^1.63.0",
+    "@shadcn/lint": "0.2.0",
     "mongoose": "^9.10.1",
+    "oxfmt": "^0.70.0",
+    "oxlint": "^1.85.0",
     "typescript": "7.0.2"
-  }
+  },
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "packageManager": "pnpm@11.3.0"
 }

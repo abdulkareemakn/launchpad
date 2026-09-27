@@ -53,7 +53,6 @@ Node.js 24+ is required.
 
 Official install instructions: [Git](https://git-scm.com/downloads) · [Node.js](https://nodejs.org/en/download)
 
-
 ## pnpm
 
 The repository pins pnpm 11.3.0 in the root `package.json`.
@@ -98,7 +97,7 @@ Official install instructions: [pnpm](https://pnpm.io/installation)
 ## An editor
 
 Use any editor with TypeScript support. The repository includes shared settings in
-`.vscode/`; Biome handles formatting and linting from the workspace root.
+`.vscode/`; Oxfmt and Oxlint handle formatting and linting from the workspace root.
 
 ## Next steps
 

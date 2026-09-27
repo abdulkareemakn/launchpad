@@ -15,7 +15,6 @@ constraints.
     Zod is used for input validation at the application level while Mongoose protects write access at the database
     level. It's a good habit to adopt both.
 
-
 ## Project structure
 
 ```text

@@ -1,5 +1,6 @@
 import request from "supertest";
 import { describe, expect, test } from "vitest";
+
 import { createApp } from "../../apps/server/src/app.ts";
 import type { createAuth } from "../../apps/server/src/auth.ts";
 import type { Config } from "../../apps/server/src/config.ts";

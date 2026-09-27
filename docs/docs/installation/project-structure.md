@@ -43,7 +43,8 @@ This starter kit is organized as a monorepo, with separate pnpm workspaces for t
 ├── .vscode/                    # Workspace editor settings
 ├── .env.example                # Local environment template
 ├── DESIGN.md                    # Product design direction
-├── biome.json                  # Formatting and linting configuration
+├── .oxfmtrc.json               # Oxfmt configuration
+├── .oxlintrc.json              # Oxlint configuration
 ├── compose.db.yaml             # Development MongoDB service
 ├── compose.yaml                # Full app + MongoDB stack
 ├── deno.json                   # Deno Deploy configuration
@@ -83,7 +84,7 @@ Most root-level configuration is for development and deployment:
 - `pnpm-workspace.yaml` defines `apps/*` and `packages/*` as workspace packages.
 - `package.json` contains the commands for development, builds, checks, tests,
   and Docker Compose.
-- `biome.json` configures formatting and linting.
+- `.oxfmtrc.json` and `.oxlintrc.json` configure formatting and linting.
 - `compose.db.yaml` starts MongoDB for local development; `compose.yaml` starts
   the production-style app and MongoDB stack.
 - `Dockerfile` builds the client and server into the production image.

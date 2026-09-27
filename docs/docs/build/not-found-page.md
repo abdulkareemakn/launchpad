@@ -2,6 +2,7 @@
 title: 404 page
 description: Customize the starter's existing not-found screen for URLs that do not match a client route.
 ---
+
 # 404 page
 
 This starter kit includes a default 404 page at `apps/client/src/pages/404.tsx`.

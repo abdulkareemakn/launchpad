@@ -10,24 +10,30 @@ For step-by-step implementation, start with [Build your app](/build/).
 
 <div class="grid cards" markdown>
 
-- [__Commands__](/reference/commands)
+- [**Commands**](/reference/commands)
 
-    Every script available at the workspace root.
-- [__API endpoints__](/reference/api-endpoints)
+  Every script available at the workspace root.
 
-    The routes the starter ships and what they return.
-- [__Tech stack__](/reference/tech-stack)
+- [**API endpoints**](/reference/api-endpoints)
 
-    Direct technologies and canonical manifests.
-- [__Recommendations__](/reference/recommendations)
+  The routes the starter ships and what they return.
 
-    Practical defaults for domains, docs sites, and API references.
-- [__Security checklist__](/reference/security-checklist)
+- [**Tech stack**](/reference/tech-stack)
 
-    What to confirm before exposing a deployment.
-- [__Agent skills__](/reference/skills)
+  Direct technologies and canonical manifests.
 
-    The repository-local agent skills and what each one covers.
+- [**Recommendations**](/reference/recommendations)
+
+  Practical defaults for domains, docs sites, and API references.
+
+- [**Security checklist**](/reference/security-checklist)
+
+  What to confirm before exposing a deployment.
+
+- [**Agent skills**](/reference/skills)
+
+  The repository-local agent skills and what each one covers.
+
 </div>
 
 ## References

@@ -1,4 +1,5 @@
 import { randomBytes, randomUUID } from "node:crypto";
+
 import {
   DeleteObjectCommand,
   HeadObjectCommand,
@@ -16,6 +17,7 @@ import {
   test,
   vi,
 } from "vitest";
+
 import { createApp } from "../../apps/server/src/app.ts";
 import { createAuth } from "../../apps/server/src/auth.ts";
 import { readConfig } from "../../apps/server/src/config.ts";
@@ -137,22 +139,22 @@ describe("uploads API", () => {
     });
   });
 
-  test.each([
-    "get",
-    "confirm",
-  ])("%s rejects non-owners, malformed IDs, and missing files", async (action) => {
-    const file = await pending();
-    const run = (agent: typeof owner, id: string) =>
-      action === "get"
-        ? agent.get(`/api/uploads/${id}`)
-        : agent.post(`/api/uploads/${id}/confirm`);
-    expect((await run(other, file.id)).status).toBe(403);
-    expect((await run(owner, "invalid")).status).toBe(400);
-    expect(
-      (await run(owner, new mongoose.Types.ObjectId().toString())).status,
-    ).toBe(404);
-    expect(send).not.toHaveBeenCalled();
-  });
+  test.each(["get", "confirm"])(
+    "%s rejects non-owners, malformed IDs, and missing files",
+    async (action) => {
+      const file = await pending();
+      const run = (agent: typeof owner, id: string) =>
+        action === "get"
+          ? agent.get(`/api/uploads/${id}`)
+          : agent.post(`/api/uploads/${id}/confirm`);
+      expect((await run(other, file.id)).status).toBe(403);
+      expect((await run(owner, "invalid")).status).toBe(400);
+      expect(
+        (await run(owner, new mongoose.Types.ObjectId().toString())).status,
+      ).toBe(404);
+      expect(send).not.toHaveBeenCalled();
+    },
+  );
 
   test("confirmation rejects a missing object and metadata mismatches", async () => {
     const file = await pending();

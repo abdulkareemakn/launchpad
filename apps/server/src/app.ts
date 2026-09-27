@@ -1,8 +1,10 @@
 import { fileURLToPath } from "node:url";
+
 import type { ApiError, HealthResponse, MeResponse } from "@mern/shared";
 import { toNodeHandler } from "better-auth/node";
 import express, { type ErrorRequestHandler } from "express";
 import mongoose from "mongoose";
+
 import type { createAuth } from "#/auth";
 import type { Config } from "#/config";
 import { authMiddleware } from "#/middleware/auth";

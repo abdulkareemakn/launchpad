@@ -5,6 +5,6 @@ packages:
 injectWorkspacePackages: true
 
 allowBuilds:
-  '@scarf/scarf': true
+  "@scarf/scarf": true
   esbuild: true
   lightningcss: true

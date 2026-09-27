@@ -60,7 +60,7 @@ Use `Link` for internal navigation:
 ```tsx
 import { Link } from "@tanstack/react-router";
 
-<Link to="/widgets">View widgets</Link>
+<Link to="/widgets">View widgets</Link>;
 ```
 
 TypeScript checks the destination and any required parameters against the generated route tree.

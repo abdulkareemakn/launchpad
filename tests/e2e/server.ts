@@ -1,5 +1,7 @@
 import { randomBytes } from "node:crypto";
+
 import mongoose from "mongoose";
+
 import { createApp } from "../../apps/server/src/app.ts";
 import { createAuth } from "../../apps/server/src/auth.ts";
 import { readConfig } from "../../apps/server/src/config.ts";

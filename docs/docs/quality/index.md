@@ -9,15 +9,18 @@ Run the checks from the repository root after each focused change.
 
 <div class="grid cards" markdown>
 
-- [__Formatting__](/quality/formatting)
+- [**Formatting**](/quality/formatting)
 
-    Format source and apply Biome's safe fixes.
-- [__Linting__](/quality/linting)
+  Format source with Oxfmt.
 
-    Find common correctness and style problems.
-- [__Testing__](/quality/testing)
+- [**Linting**](/quality/linting)
 
-    Run Vitest unit tests, Supertest API tests, and Playwright browser workflows.
+  Find common correctness and style problems.
+
+- [**Testing**](/quality/testing)
+
+  Run Vitest unit tests, Supertest API tests, and Playwright browser workflows.
+
 </div>
 
 ## References

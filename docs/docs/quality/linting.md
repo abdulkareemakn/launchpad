@@ -1,101 +1,78 @@
 ---
 title: Linting
-description: Catch correctness problems and organize imports with Biome's recommended rules.
+description: Catch JavaScript and TypeScript correctness problems with Oxlint.
 ---
 
-# Linting with Biome
+# Linting with Oxlint
 
-This starter kit uses Biome's linter instead of ESLint. The root configuration applies one rule set throughout the pnpm workspace.
+This starter kit uses [Oxlint](https://oxc.rs/docs/guide/usage/linter) for JavaScript and TypeScript linting. The root `.oxlintrc.json` applies one rule set throughout the pnpm workspace.
 
-## Run the checks
-
-```sh
-pnpm check
-```
-
-Biome checks formatting, lint rules, and enabled source actions together. Read the diagnostic category to distinguish a formatting failure from a correctness warning.
-
-Apply formatting and safe fixes with:
+## Run the linter
 
 ```sh
-pnpm format
+pnpm lint
 ```
 
-Unsafe fixes are not applied automatically. Review the diagnostic and change the code yourself when Biome marks a fix as unsafe.
+Apply safe automatic fixes with:
+
+```sh
+pnpm lint:fix
+```
+
+`pnpm check` runs the linter and the Oxfmt formatting check together.
 
 ## Configuration
 
-```json title="biome.json"
+The root config treats correctness diagnostics as errors and enables Oxlint's native plugins for the technologies used by the repository:
+
+```json title=".oxlintrc.json"
 {
-  "linter": {
-    "enabled": true,
-    "rules": {
-      "recommended": true
-    }
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": [
+    "eslint",
+    "typescript",
+    "unicorn",
+    "oxc",
+    "import",
+    "react",
+    "jsx-a11y",
+    "vitest",
+    "node"
+  ],
+  "categories": {
+    "correctness": "error"
   },
-  "assist": {
-    "actions": {
-      "source": {
-        "organizeImports": "on"
-      }
-    }
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "vitest/no-standalone-expect": "off",
+    "vitest/require-mock-type-parameters": "off",
+    "vitest/require-to-throw-message": "off"
   }
 }
 ```
 
-The recommended rules catch common correctness, suspicious-code, and maintainability problems. Import organization is enabled as a source action, so `pnpm format` may remove or reorder imports.
+The React rule is disabled because this project uses the automatic JSX runtime. Three Vitest rules are disabled because they reject valid hooks, untyped mock inference, and intentional error-only assertions already used by the tests. The plugins are built into Oxlint, so they do not require separate npm packages.
 
-Tailwind directives are also enabled for CSS parsing:
-
-```json
-{
-  "css": {
-    "parser": {
-      "tailwindDirectives": true
-    }
-  }
-}
-```
+Generated routes, generated documentation, and agent tooling are ignored. Keep lasting workspace policy in the root config instead of adding package-local files.
 
 ## Fix a diagnostic
 
-Use this order:
-
 1. Read the rule name and explanation.
-2. Fix the code if the rule identified a real issue.
-3. Run `pnpm format` for safe mechanical fixes.
+2. Fix the code when the rule identifies a real issue.
+3. Run `pnpm lint:fix` for safe mechanical fixes.
 4. Run `pnpm check` again.
 
-Do not disable a rule only to make the command green. If a recommended rule genuinely conflicts with the repository, add the narrowest root override and document why.
+Do not disable a rule only to make the command green. If a rule conflicts with the repository's runtime or generated code, add the narrowest root override and record the reason.
 
-```json
-{
-  "linter": {
-    "enabled": true,
-    "rules": {
-      "recommended": true,
-      "correctness": {
-        "noUnusedVariables": "off"
-      }
-    }
-  }
-}
-```
-
-Avoid package-local Biome files unless a package has a lasting and unavoidable difference.
-
-## Check one path
-
-While iterating, Biome can check a smaller target:
+To check one path while iterating, run:
 
 ```sh
-pnpm exec biome check apps/server/src
+pnpm exec oxlint apps/server/src
 ```
-
-Run the root `pnpm check` before finishing so unrelated workspace configuration is not missed.
 
 ## References
 
-- [Biome linter](https://biomejs.dev/linter/)
-- [Biome recommended rules](https://biomejs.dev/linter/rules/)
-- [Biome assists](https://biomejs.dev/assist/)
+- [Oxlint configuration](https://oxc.rs/docs/guide/usage/linter/config)
+- [Oxlint built-in plugins](https://oxc.rs/docs/guide/usage/linter/plugins)
+- [Oxlint automatic fixes](https://oxc.rs/docs/guide/usage/linter/automatic-fixes)
+- [Oxlint editor setup](https://oxc.rs/docs/guide/usage/linter/editors)

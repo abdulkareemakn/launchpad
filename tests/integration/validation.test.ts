@@ -2,6 +2,7 @@ import express from "express";
 import request from "supertest";
 import { describe, expect, test } from "vitest";
 import * as z from "zod";
+
 import { validate } from "../../apps/server/src/middleware/validate.ts";
 
 function createValidationApp(onInvalid?: () => void) {

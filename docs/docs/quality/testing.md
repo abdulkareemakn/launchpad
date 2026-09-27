@@ -28,13 +28,13 @@ that a real user can complete important workflows through the browser.
 
 Run commands from the repository root.
 
-| Command | What it runs |
-| --- | --- |
-| `pnpm test` | Unit tests followed by API integration tests |
-| `pnpm test:unit` | All tests in `tests/unit/` |
-| `pnpm test:integration` | All tests in `tests/integration/` |
-| `pnpm test:e2e` | Playwright tests in Chromium |
-| `pnpm test:e2e:ui` | Playwright's interactive test UI |
+| Command                            | What it runs                                    |
+| ---------------------------------- | ----------------------------------------------- |
+| `pnpm test`                        | Unit tests followed by API integration tests    |
+| `pnpm test:unit`                   | All tests in `tests/unit/`                      |
+| `pnpm test:integration`            | All tests in `tests/integration/`               |
+| `pnpm test:e2e`                    | Playwright tests in Chromium                    |
+| `pnpm test:e2e:ui`                 | Playwright's interactive test UI                |
 | `pnpm exec playwright test --list` | Lists discovered E2E tests without running them |
 
 `pnpm test` does not run E2E tests. E2E tests start two application processes, require

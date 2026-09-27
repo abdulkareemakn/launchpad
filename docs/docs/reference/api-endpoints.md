@@ -31,11 +31,11 @@ Better Auth handles everything under `/api/auth/*`. Its handler is mounted befor
 This starter kit uploads file bytes directly to a private S3-compatible bucket. All three
 upload routes require a Better Auth session and configured storage:
 
-| Route | Successful response |
-| --- | --- |
-| `POST /api/uploads` with `{ filename, mimeType, sizeBytes }` | `201 { fileId, uploadUrl, key }` |
-| `POST /api/uploads/:id/confirm` with no body or `{}` | `200` with the shared `FileResponse` |
-| `GET /api/uploads/:id` with no body | `200 { downloadUrl }` |
+| Route                                                        | Successful response                  |
+| ------------------------------------------------------------ | ------------------------------------ |
+| `POST /api/uploads` with `{ filename, mimeType, sizeBytes }` | `201 { fileId, uploadUrl, key }`     |
+| `POST /api/uploads/:id/confirm` with no body or `{}`         | `200` with the shared `FileResponse` |
+| `GET /api/uploads/:id` with no body                          | `200 { downloadUrl }`                |
 
 PUT URLs require the exact declared content type and byte length. PUT and GET URLs expire
 after five minutes. Confirmation checks stored size and MIME metadata. Pending files cannot

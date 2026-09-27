@@ -1,4 +1,5 @@
 import { beforeEach, expect, test, vi } from "vitest";
+
 import type { Config } from "../../apps/server/src/config.ts";
 
 const { createTransport, sendMail } = vi.hoisted(() => ({

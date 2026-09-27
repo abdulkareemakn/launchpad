@@ -7,12 +7,12 @@ description: Build React Email templates, inspect local messages with MailDev, a
 
 This starter kit separates email authoring, local delivery, inspection, and production delivery:
 
-| Tool | Responsibility |
-| --- | --- |
-| React Email | Compose and preview HTML templates with React components |
-| Nodemailer | Send application messages to the local SMTP server during development |
-| MailDev | Capture those SMTP messages and show them in a browser inbox |
-| Resend | Deliver messages to real recipients in production |
+| Tool        | Responsibility                                                        |
+| ----------- | --------------------------------------------------------------------- |
+| React Email | Compose and preview HTML templates with React components              |
+| Nodemailer  | Send application messages to the local SMTP server during development |
+| MailDev     | Capture those SMTP messages and show them in a browser inbox          |
+| Resend      | Deliver messages to real recipients in production                     |
 
 Application code calls `sendEmail()`; the helper selects Nodemailer or Resend from validated server configuration. A previewed template is not an email sent by the application. Inspect MailDev to verify the whole development flow.
 
@@ -33,10 +33,10 @@ apps/server/src/lib/
 
 The email tools use fixed localhost ports:
 
-| Tool | Command | URL |
-| --- | --- | --- |
+| Tool                | Command         | URL                     |
+| ------------------- | --------------- | ----------------------- |
 | React Email preview | `pnpm dev:mail` | `http://localhost:3002` |
-| MailDev inbox | `pnpm dev` | `http://localhost:3003` |
+| MailDev inbox       | `pnpm dev`      | `http://localhost:3003` |
 
 React Email previews templates while you edit them. MailDev shows messages actually sent by the application during development.
 
@@ -108,7 +108,9 @@ export type Email = {
 export function sendEmail(email: Email, config: Config) {
   if (config.nodeEnv === "production")
     return new Resend(config.resendApiKey).emails.send(email);
-  return nodemailer.createTransport({ host: "127.0.0.1", port: 3025 }).sendMail(email);
+  return nodemailer
+    .createTransport({ host: "127.0.0.1", port: 3025 })
+    .sendMail(email);
 }
 ```
 
@@ -117,13 +119,16 @@ export function sendEmail(email: Email, config: Config) {
 ```ts title="apps/server/src/routes/onboarding.ts"
 import { sendEmail } from "../lib/email-client.ts";
 
-await sendEmail({
-  from: "Your App <onboarding@example.com>",
-  to: user.email,
-  subject: "Welcome to Your App",
-  html: "<p>Welcome to Your App!</p>",
-  text: "Welcome to Your App!",
-}, config);
+await sendEmail(
+  {
+    from: "Your App <onboarding@example.com>",
+    to: user.email,
+    subject: "Welcome to Your App",
+    html: "<p>Welcome to Your App!</p>",
+    text: "Welcome to Your App!",
+  },
+  config,
+);
 ```
 
 Validate recipients and template input before sending. Do not include secrets or raw request data in email logs.

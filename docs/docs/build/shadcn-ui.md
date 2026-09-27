@@ -56,7 +56,7 @@ import { Button } from "@/components/ui/button";
 
 <Button render={<Link to="/" />} nativeButton={false} variant="outline">
   Home
-</Button>
+</Button>;
 ```
 
 Keep reusable primitives in `components/ui` and feature compositions in `components`. Preserve labels, keyboard focus, disabled states, and status announcements when customizing forms.

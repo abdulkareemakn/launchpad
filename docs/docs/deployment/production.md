@@ -47,7 +47,6 @@ edit that in the same app settings screen after the first deployment.
     The wizard collects them while still creating a GitHub-backed app, so every later push
     automatically builds and deploys it.
 
-
 ## Set environment variables
 
 After the first build returns the production URL, create a temporary `.env.production` file in the project root:
@@ -87,7 +86,6 @@ deno deploy env update-contexts RESEND_API_KEY production
 deno deploy env update-contexts APP_URL production
 deno deploy env update-contexts BETTER_AUTH_URL production
 ```
-
 
 The CLI saves the app selected during creation. If you open another checkout or shell,
 select it before managing variables: `deno deploy switch --org your-org --app your-app`.

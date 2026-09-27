@@ -52,7 +52,8 @@ import type { Config } from "./config.ts";
 
 export function createAuth(config: Config) {
   const db = mongoose.connection.db;
-  if (!db) throw new Error("Connect to MongoDB before initializing authentication");
+  if (!db)
+    throw new Error("Connect to MongoDB before initializing authentication");
 
   return betterAuth({
     appName: "MERN starter",
@@ -61,7 +62,11 @@ export function createAuth(config: Config) {
     secret: config.secret,
     trustedOrigins: [config.appUrl],
     advanced: { ipAddress: { ipAddressHeaders: ["x-mern-client-ip"] } },
-    emailAndPassword: { enabled: true, minPasswordLength: 8, maxPasswordLength: 128 },
+    emailAndPassword: {
+      enabled: true,
+      minPasswordLength: 8,
+      maxPasswordLength: 128,
+    },
     rateLimit: { enabled: true, storage: "database" },
   });
 }

@@ -1,5 +1,7 @@
 import { randomBytes } from "node:crypto";
+
 import { describe, expect, test } from "vitest";
+
 import { readConfig } from "../../apps/server/src/config.ts";
 
 const validEnv = {

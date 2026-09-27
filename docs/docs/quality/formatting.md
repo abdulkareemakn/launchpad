@@ -1,11 +1,11 @@
 ---
 title: Formatting
-description: Format the entire workspace consistently with the root Biome configuration.
+description: Format the workspace consistently with the root Oxfmt configuration.
 ---
 
-# Formatting with Biome
+# Formatting with Oxfmt
 
-This starter kit uses [Biome](https://biomejs.dev/) for formatting. One root `biome.json` applies to the client, server, shared packages, tests, and configuration files.
+This starter kit uses [Oxfmt](https://oxc.rs/docs/guide/usage/formatter) to format source, tests, documentation, and configuration files. The root `.oxfmtrc.json` keeps every workspace package consistent.
 
 ## Format the workspace
 
@@ -15,13 +15,7 @@ Run this from the repository root:
 pnpm format
 ```
 
-The script runs:
-
-```sh
-biome check --write .
-```
-
-It formats supported files, organizes imports, and applies safe lint fixes. Review the resulting diff because one command can update several packages.
+This applies Oxlint's safe fixes, then writes Oxfmt changes and sorts imports. Review the resulting diff because the command can update several packages.
 
 ## Check without writing
 
@@ -29,67 +23,35 @@ It formats supported files, organizes imports, and applies safe lint fixes. Revi
 pnpm check
 ```
 
-This verifies formatting and lint rules without changing files. It is the command to use before committing and in continuous integration.
+This runs Oxlint and verifies Oxfmt output without changing files. Use it before committing and in continuous integration.
 
 ## Configuration
 
-The formatter configuration is intentionally small:
+The root configuration uses Oxfmt defaults, enables import sorting, and excludes generated or tool-owned files:
 
-```json title="biome.json"
+```json title=".oxfmtrc.json"
 {
-  "formatter": {
-    "enabled": true,
-    "indentStyle": "space"
-  }
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "sortImports": true,
+  "ignorePatterns": [
+    ".agents/**",
+    ".claude/**",
+    "apps/client/src/routeTree.gen.ts",
+    "docs/site/**"
+  ]
 }
 ```
 
-Unspecified options use the defaults from the installed Biome version. Keep shared formatting policy in the root file so packages do not drift.
-
-## Included and generated files
-
-The root `files.includes` setting scans the workspace and excludes dependencies and generated output:
-
-```json
-{
-  "files": {
-    "includes": [
-      "**",
-      "!!**/node_modules",
-      "!!**/dist",
-      "!!**/.tanstack",
-      "!!**/routeTree.gen.ts",
-      "!!**/pnpm-lock.yaml"
-    ]
-  }
-}
-```
-
-Do not hand-format `routeTree.gen.ts` or the lockfile. Their generators own their contents.
+Oxfmt also respects `.gitignore`, ignores dependency and version-control directories, and always ignores lockfiles. Do not hand-format `routeTree.gen.ts`, generated documentation, or `pnpm-lock.yaml`; their generators own those files.
 
 ## Editor setup
 
-Install the Biome editor extension and select Biome as the formatter for supported files. The root configuration remains the source of truth, regardless of editor settings.
+Install the recommended Oxc extension in VS Code or a compatible editor. The committed workspace settings use it for supported files, enable format-on-save, and apply explicit safe lint fixes on save.
 
-Use format-on-save only if you are comfortable reviewing changes across imports and lint fixes. The repository commands are still the final check.
-
-## Change formatting rules
-
-Add an option only when the project needs a stable rule that differs from Biome's default:
-
-```json
-{
-  "formatter": {
-    "enabled": true,
-    "indentStyle": "space",
-    "lineWidth": 100
-  }
-}
-```
-
-After changing a global rule, run `pnpm format`, review the full diff, and commit the configuration and mechanical changes together.
+Keep shared policy in the root configuration. Add an option only when the project needs a stable rule that differs from Oxfmt's default. After a global rule changes, run `pnpm format` and review the full diff.
 
 ## References
 
-- [Biome formatter](https://biomejs.dev/formatter/)
-- [Biome configuration](https://biomejs.dev/reference/configuration/)
+- [Oxfmt configuration](https://oxc.rs/docs/guide/usage/formatter/config)
+- [Oxfmt ignore files](https://oxc.rs/docs/guide/usage/formatter/ignore-files)
+- [Oxfmt editor setup](https://oxc.rs/docs/guide/usage/formatter/editors)

@@ -133,9 +133,12 @@ If widgets belong to signed-in users, add `ownerId` to the model, set it when cr
 app.get("/api/widgets/mine", authMiddleware(auth), async (_req, res) => {
   const ownerId = res.locals.session.user.id;
   const widgets = await Widget.find({ ownerId }).lean();
-  res.json({ widgets: widgets.map((widget) => ({
-    id: widget._id.toString(), name: widget.name,
-  })) } satisfies WidgetListResponse);
+  res.json({
+    widgets: widgets.map((widget) => ({
+      id: widget._id.toString(),
+      name: widget.name,
+    })),
+  } satisfies WidgetListResponse);
 });
 ```
 
