@@ -10,6 +10,20 @@ body,
   min-height: 100%;
 }
 
+.landing-page {
+  --landing-accent: oklch(0.599872 0.097245 217.123682);
+  --landing-accent-hover: oklch(0.647199 0.086972 223.063812);
+}
+
+.landing-primary-action {
+  background-color: var(--landing-accent);
+  color: #fff;
+}
+
+.landing-primary-action:hover {
+  background-color: var(--landing-accent-hover);
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

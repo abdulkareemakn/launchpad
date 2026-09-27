@@ -4,7 +4,7 @@ import { buttonVariants } from "@/components/ui/button";
 
 export const Route = createFileRoute("/")({ component: Home });
 
-const repository = "https://github.com/abdulkareemakn/mern-app-starter";
+const repository = "https://github.com/abdulkareemakn/launchpad";
 const docs = "https://mern-app-starter.pages.dev";
 const setupGuide = `${docs}/installation/`;
 const productName = "Launchpad";
@@ -123,7 +123,7 @@ const chapters = [
 
 function Home() {
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="landing-page min-h-screen bg-background text-foreground">
       <a
         className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-6 focus:z-10 focus:rounded-md focus:bg-background focus:p-4 focus:outline-2"
         href="#main"
@@ -137,7 +137,7 @@ function Home() {
             alt=""
             width="32"
             height="32"
-            className="size-8 shrink-0 dark:invert"
+            className="size-8 shrink-0"
           />
           <span>{productName}</span>
           <span className="font-normal text-muted-foreground">
@@ -180,7 +180,10 @@ function Home() {
             MongoDB · Express · React · Node.js
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
-            <a className={primaryAction} href={setupGuide}>
+            <a
+              className={`${primaryAction} landing-primary-action`}
+              href={setupGuide}
+            >
               Documentation
             </a>
             <a className={`${linkStyle} text-sm font-medium`} href={repository}>
