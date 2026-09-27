@@ -15,6 +15,7 @@ const externalLogos: Record<string, string> = {
     "https://raw.githubusercontent.com/better-auth/better-auth/v1.7.5/docs/public/branding/svg/better-auth-mark-bg-light.svg",
   oxc: "https://cdn.jsdelivr.net/gh/oxc-project/oxc-assets@main/icon-flat-light.svg",
   vitest: "https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/vitest.svg",
+  railway: "https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/railway.svg",
 };
 const linkStyle =
   "inline-flex min-h-11 items-center underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground";
@@ -87,10 +88,10 @@ const chapters = [
     start: 8,
     features: [
       {
-        title: "Deno Deploy",
+        title: "Railway",
         description:
-          "Build and runtime configuration deploys the React client and Express API together.",
-        logo: "deno",
+          "Deploy the React client and Express API together from GitHub with the production Dockerfile.",
+        logo: "railway",
       },
       {
         title: "Docker & Compose",

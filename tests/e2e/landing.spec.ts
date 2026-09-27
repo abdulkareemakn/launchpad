@@ -23,7 +23,7 @@ test("introduces the course starter", async ({ page }) => {
     "Resend & local email",
     "Object storage",
     "Reusable middleware",
-    "Deno Deploy",
+    "Railway",
     "Docker & Compose",
     "Formatting & linting",
     "Unit, integration & end-to-end tests",
