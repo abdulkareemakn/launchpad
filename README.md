@@ -1,4 +1,4 @@
-# MERN course starter
+# Launchpad — MERN course starter
 
 A pnpm workspace with React, Vite, TanStack Router, Express 5, TypeScript, Mongoose, and Better Auth. The frontend includes shadcn/ui with Base UI and Tailwind CSS; Oxfmt and Oxlint handle formatting and linting from the root.
 

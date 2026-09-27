@@ -1,6 +1,6 @@
 ---
 version: alpha
-name: MERN Course Starter
+name: Launchpad — MERN Course Starter
 colors:
   background: "oklch(1 0 0)"
   foreground: "oklch(0.145 0 0)"
