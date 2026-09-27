@@ -1,9 +1,9 @@
 ---
-title: Railway deployment
+title: Railway
 description: Deploy the application, MongoDB, and private file storage to Railway from GitHub using infrastructure as code.
 ---
 
-# Railway deployment
+# Railway
 
 This starter kit deploys to Railway as one web service, one MongoDB service with a
 persistent volume, and one private S3-compatible bucket. Express serves the built
