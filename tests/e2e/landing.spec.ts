@@ -30,16 +30,10 @@ test("introduces the course starter", async ({ page }) => {
     "Unit, integration & end-to-end tests",
     "GitHub Actions",
   ]);
-  await expect(page.getByText("In progress", { exact: true })).toBeVisible();
-  await expect(
-    page.getByText("Scheduling required", { exact: true }),
-  ).toBeVisible();
-  await page.getByRole("link", { name: "What's included" }).click();
-  await expect(page).toHaveURL(/#included$/);
   await expect(
     page.getByRole("link", { name: "Read the setup guide" }).first(),
   ).toHaveAttribute(
     "href",
-    "https://github.com/abdulkareemakn/mern-app-starter/blob/main/docs/docs/installation/installation.md",
+    "https://mern-app-starter.pages.dev/installation/installation/",
   );
 });
