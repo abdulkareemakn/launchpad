@@ -9,7 +9,6 @@
     }
   },
   "scripts": {
-    "uploads:cleanup": "node --conditions=development --env-file-if-exists=../../.env src/scripts/cleanup-uploads.ts",
     "dev": "node --conditions=development --env-file-if-exists=../../.env --watch src/index.ts",
     "build": "tsc",
     "typecheck": "tsc --noEmit",

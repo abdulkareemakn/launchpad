@@ -60,12 +60,6 @@ const envSchema = z
           ),
         "STORAGE_ALLOWED_MIME_TYPES must contain comma-separated MIME types with known extensions",
       ),
-    STORAGE_PENDING_MAX_AGE_HOURS: z.coerce
-      .number()
-      .int()
-      .min(1)
-      .max(8760)
-      .default(24),
   })
   .superRefine((env, context) => {
     const storageKeys = [
@@ -148,7 +142,6 @@ export function readConfig(env: NodeJS.ProcessEnv) {
         : undefined,
     storageMaxUploadBytes: parsed.STORAGE_MAX_UPLOAD_BYTES,
     storageAllowedMimeTypes: parsed.STORAGE_ALLOWED_MIME_TYPES,
-    storagePendingMaxAgeHours: parsed.STORAGE_PENDING_MAX_AGE_HOURS,
     trustProxy:
       parsed.TRUST_PROXY?.split(",")
         .map((value) => value.trim())

@@ -68,7 +68,6 @@ describe("readConfig", () => {
     expect(readConfig(validEnv)).toMatchObject({
       storage: undefined,
       storageMaxUploadBytes: 26214400,
-      storagePendingMaxAgeHours: 24,
     });
     expect(() =>
       readConfig({
@@ -86,7 +85,6 @@ describe("readConfig", () => {
         STORAGE_SECRET_ACCESS_KEY: "test-secret",
         STORAGE_ALLOWED_MIME_TYPES: " image/png, application/pdf,image/png ",
         STORAGE_MAX_UPLOAD_BYTES: "1000",
-        STORAGE_PENDING_MAX_AGE_HOURS: "48",
       }),
     ).toMatchObject({
       storage: {
@@ -96,7 +94,6 @@ describe("readConfig", () => {
       },
       storageAllowedMimeTypes: ["image/png", "application/pdf"],
       storageMaxUploadBytes: 1000,
-      storagePendingMaxAgeHours: 48,
     });
   });
 
@@ -104,7 +101,6 @@ describe("readConfig", () => {
     { STORAGE_MAX_UPLOAD_BYTES: "0" },
     { STORAGE_MAX_UPLOAD_BYTES: "1.5" },
     { STORAGE_MAX_UPLOAD_BYTES: "5000000001" },
-    { STORAGE_PENDING_MAX_AGE_HOURS: "0" },
     { STORAGE_ALLOWED_MIME_TYPES: "" },
     { STORAGE_ALLOWED_MIME_TYPES: "image/*" },
     { STORAGE_ALLOWED_MIME_TYPES: "application/x-unknown-upload-format" },

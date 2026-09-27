@@ -101,14 +101,6 @@ export function uploadsRouter(config: Config) {
     async (_req, res) => {
       let file = res.locals.file;
       if (file.status === "pending") {
-        const cutoff = () =>
-          new Date(Date.now() - config.storagePendingMaxAgeHours * 3_600_000);
-        if (file.createdAt <= cutoff()) {
-          res.status(409).json({
-            error: "Upload has expired; start a new upload",
-          } satisfies ApiError);
-          return;
-        }
         const object = await storage.headObject(file.key);
         if (!object) {
           res
@@ -125,13 +117,8 @@ export function uploadsRouter(config: Config) {
           } satisfies ApiError);
           return;
         }
-        // Recheck expiry atomically after HEAD: cleanup only handles expired pending files.
         const confirmed = await File.findOneAndUpdate(
-          {
-            _id: file._id,
-            status: "pending",
-            createdAt: { $gt: cutoff() },
-          },
+          { _id: file._id, status: "pending" },
           { $set: { status: "confirmed", confirmedAt: new Date() } },
           { returnDocument: "after" },
         );

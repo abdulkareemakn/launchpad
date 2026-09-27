@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Clock3 } from "lucide-react";
 
 import { buttonVariants } from "@/components/ui/button";
 
@@ -71,7 +70,7 @@ const chapters = [
       {
         title: "Object storage",
         description:
-          "Private S3-compatible uploads with signed URLs, ownership checks, upload confirmation, private downloads, and cleanup tools.",
+          "Private S3-compatible uploads with signed URLs, ownership checks, upload confirmation, and private downloads.",
         logo: "bucket",
       },
       {
@@ -80,17 +79,12 @@ const chapters = [
           "Shared Express middleware handles session checks, request validation, and consistent API errors.",
         logo: "express",
       },
-      {
-        title: "Cron jobs",
-        description: "Cron support for running recurring tasks.",
-        logo: "clock",
-      },
     ],
   },
   {
     title: "Ship and maintain",
     description: "A path from your laptop to deployment.",
-    start: 9,
+    start: 8,
     features: [
       {
         title: "Deno Deploy",
@@ -242,9 +236,7 @@ function Home() {
                         {String(chapter.start + index).padStart(2, "0")}
                       </span>
                       <div className="flex size-12 items-center justify-center rounded-lg bg-muted p-3 sm:size-14">
-                        {logo === "clock" ? (
-                          <Clock3 aria-hidden="true" className="size-7" />
-                        ) : logo ? (
+                        {logo ? (
                           <img
                             src={externalLogos[logo] ?? `/brands/${logo}.svg`}
                             alt=""

@@ -20,7 +20,6 @@ const config = {
   storage: undefined,
   storageMaxUploadBytes: 25 * 1024 * 1024,
   storageAllowedMimeTypes: ["image/png"],
-  storagePendingMaxAgeHours: 24,
 } satisfies Config;
 const app = createApp(auth, config);
 

@@ -32,10 +32,6 @@ may only need a route and database query. Start with the smallest relevant path.
 
   Upload to private storage, confirm metadata, and request temporary downloads.
 
-- [**Cron jobs**](/build/cron-jobs)
-
-  Schedule cleanup of abandoned uploads.
-
 - [**Client pages**](/build/client-pages)
 
   Add typed TanStack Router pages and loaders.

@@ -12,8 +12,8 @@ one storage operation without exposing the server's storage credentials.
 
 Direct uploads keep file bytes out of the API process. The AWS SDK's S3-compatible
 client supports Cloudflare R2 and Backblaze B2 through configuration. Both are
-recommended providers. The starter ships backend routes and a cleanup job; it does
-not include an upload component, a delete endpoint, or a public serving layer.
+recommended providers. The starter ships backend routes; it does not include an
+upload component, a delete endpoint, or a public serving layer.
 
 !!! warning "A signed URL grants temporary access"
 
@@ -92,8 +92,7 @@ using HEAD and requires the exact recorded size and MIME type.
 Success returns `200` with a `FileResponse`: `id`, `key`, `ownerId`, `originalName`,
 `mimeType`, `sizeBytes`, `status`, `createdAt`, and `confirmedAt`. IDs are strings,
 dates are ISO strings, and `status` is now `confirmed`. Confirming an already
-confirmed record returns its existing timestamp. An expired pending record cannot
-be confirmed; request a new upload instead.
+confirmed record returns its existing timestamp.
 
 !!! note "Metadata validation is not content inspection"
 
@@ -118,12 +117,10 @@ private in the bucket; there is no public CDN URL.
 | `apps/server/src/schemas/uploads.ts`      | Metadata, ObjectId, and empty-body validation              |
 | `apps/server/src/models/file.ts`          | File metadata, ownership, status, and timestamps           |
 | `apps/server/src/lib/storage.ts`          | Presigned PUT/GET URLs and bucket HEAD/DELETE operations   |
-| `apps/server/src/jobs/cleanup-uploads.ts` | Remove expired pending objects and records                 |
 | `packages/shared/src/index.ts`            | Browser-safe upload response types                         |
 
 `app.ts` mounts the feature router behind `authMiddleware(auth)`. Both ID routes
-check that the record belongs to the session user. Confirmation rechecks expiry
-when updating MongoDB so a slow HEAD cannot confirm a file already eligible for cleanup.
+check that the record belongs to the session user.
 
 The [API endpoint reference](/reference/api-endpoints/#private-uploads) lists responses
 and error codes.
@@ -141,7 +138,7 @@ pnpm --filter @mern/server exec vitest run --root ../.. --config vitest.config.t
 
 The tests should pass with a temporary MongoDB database and mocked S3 network calls.
 They check signing, validation, authentication, ownership, confirmation, downloads,
-and cleanup. They do not verify credentials or CORS on a live provider.
+and downloads. They do not verify credentials or CORS on a live provider.
 
 For a provider check, complete the four requests above with a disposable file. The
 success condition is a confirmed record followed by a working private download.
@@ -151,15 +148,12 @@ success condition is a confirmed record followed by a working private download.
 | `503` from the API          | Storage connection settings are absent; complete configuration and restart the API.                |
 | `400` from the API          | Inspect `details` for an invalid filename, MIME type, byte count, ID, or unexpected body.          |
 | `401` or `403` from the API | Use a valid session belonging to the file owner.                                                   |
-| `409` during confirmation   | Complete the PUT first; restart expired uploads. Retry if another confirmation changed the record. |
+| `409` during confirmation   | Complete the PUT first; retry if another confirmation changed the record. |
 | `422` during confirmation   | The stored size or MIME metadata differs from the values in step 1.                                |
 | Bucket signature error      | Check expiry, exact content type and length, and that the signed URL is unchanged.                 |
 | Browser CORS error          | Check the bucket's allowed origin, methods, and headers; CORS is separate from API authentication. |
 
 ## Next step
-
-Schedule [pending-upload cleanup](/build/cron-jobs/#pending-upload-cleanup) so abandoned
-uploads do not accumulate.
 
 ## References
 
@@ -172,4 +166,3 @@ Related starter documentation:
 
 - [Storage configuration](/installation/development-workflow/#file-storage)
 - [API endpoints](/reference/api-endpoints/#private-uploads)
-- [Cron jobs](/build/cron-jobs)

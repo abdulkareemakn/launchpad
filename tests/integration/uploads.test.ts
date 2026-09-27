@@ -1,7 +1,6 @@
 import { randomBytes, randomUUID } from "node:crypto";
 
 import {
-  DeleteObjectCommand,
   HeadObjectCommand,
   S3Client,
   S3ServiceException,
@@ -25,7 +24,6 @@ import {
   connectDatabase,
   disconnectDatabase,
 } from "../../apps/server/src/database.ts";
-import { cleanupUploads } from "../../apps/server/src/jobs/cleanup-uploads.ts";
 import { File } from "../../apps/server/src/models/file.ts";
 
 const config = readConfig({
@@ -223,31 +221,6 @@ describe("uploads API", () => {
     expect(download.headers["cache-control"]).toBe("no-store");
   });
 
-  test("expired pending files cannot be confirmed while cleanup runs", async () => {
-    const file = await pending({
-      createdAt: new Date(Date.now() - 25 * 3_600_000),
-    });
-    expect((await owner.post(`/api/uploads/${file.id}/confirm`)).status).toBe(
-      409,
-    );
-    expect(send).not.toHaveBeenCalled();
-  });
-
-  test("rechecks expiry after a slow HEAD", async () => {
-    const file = await pending();
-    send.mockImplementationOnce(async () => {
-      await File.collection.updateOne(
-        { _id: file._id },
-        { $set: { createdAt: new Date(Date.now() - 25 * 3_600_000) } },
-      );
-      return { ContentLength: 123, ContentType: "image/png" };
-    });
-    expect((await owner.post(`/api/uploads/${file.id}/confirm`)).status).toBe(
-      409,
-    );
-    expect((await File.findById(file.id))?.status).toBe("pending");
-  });
-
   test("storage failures use the standard error response and retain pending files", async () => {
     const file = await pending();
     send.mockRejectedValueOnce(new Error("private provider details"));
@@ -269,60 +242,5 @@ describe("uploads API", () => {
       password: randomBytes(24).toString("hex"),
     });
     expect((await agent.post("/api/uploads").send(body)).status).toBe(503);
-  });
-});
-
-describe("upload cleanup", () => {
-  test("deletes only expired pending files from the bucket and database", async () => {
-    const old = new Date(Date.now() - 25 * 3_600_000);
-    const expired = await pending({ createdAt: old });
-    const confirmed = await pending({
-      createdAt: old,
-      status: "confirmed",
-      confirmedAt: old,
-    });
-    const recent = await pending();
-    expect(await cleanupUploads(config)).toBe(1);
-    expect(send).toHaveBeenCalledTimes(1);
-    expect(send.mock.calls[0][0]).toBeInstanceOf(DeleteObjectCommand);
-    expect(send.mock.calls[0][0].input).toEqual({
-      Bucket: "test-bucket",
-      Key: expired.key,
-    });
-    expect(await File.findById(expired.id)).toBeNull();
-    expect(await File.findById(confirmed.id)).not.toBeNull();
-    expect(await File.findById(recent.id)).not.toBeNull();
-  });
-
-  test("honors the configured retention threshold and ignores missing bucket objects", async () => {
-    const file = await pending({
-      createdAt: new Date(Date.now() - 2 * 3_600_000),
-    });
-    expect(await cleanupUploads(config)).toBe(0);
-    send.mockRejectedValueOnce(
-      new S3ServiceException({
-        name: "NoSuchKey",
-        $fault: "client",
-        $metadata: { httpStatusCode: 404 },
-      }),
-    );
-    expect(
-      await cleanupUploads({ ...config, storagePendingMaxAgeHours: 1 }),
-    ).toBe(1);
-    expect(await File.findById(file.id)).toBeNull();
-  });
-
-  test("retains failed deletions for retry while cleaning other files", async () => {
-    const old = new Date(Date.now() - 25 * 3_600_000);
-    const retained = await pending({ createdAt: old });
-    const removed = await pending({ createdAt: old });
-    send.mockImplementation(async (command) => {
-      if (command.input.Key === retained.key)
-        throw new Error("provider unavailable");
-      return {};
-    });
-    await expect(cleanupUploads(config)).rejects.toThrow("1 files");
-    expect(await File.findById(retained.id)).not.toBeNull();
-    expect(await File.findById(removed.id)).toBeNull();
   });
 });

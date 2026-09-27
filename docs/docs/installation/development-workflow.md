@@ -178,11 +178,9 @@ The following policy settings already have defaults:
 | ------------------------------- | ------------------------------------------------- | ------------------------------------------------------------------------------- |
 | `STORAGE_MAX_UPLOAD_BYTES`      | `26214400` (25 MiB)                               | Whole bytes from 1 to 5000000000                                                |
 | `STORAGE_ALLOWED_MIME_TYPES`    | `image/jpeg,image/png,image/webp,application/pdf` | Comma-separated MIME types with known extensions; no wildcards or empty entries |
-| `STORAGE_PENDING_MAX_AGE_HOURS` | `24`                                              | Whole hours from 1 to 8760                                                      |
 
 The allowlist is trimmed and lowercased during configuration parsing. Requests must
-use an exact resulting MIME type. The pending age controls eligibility for
-[cleanup](/build/cron-jobs/#pending-upload-cleanup); it does not start a scheduler.
+use an exact resulting MIME type.
 
 For browser uploads, configure the bucket's CORS rules to allow the application
 origin, `PUT` and `GET`, and the `Content-Type` request header. CORS tells the browser
