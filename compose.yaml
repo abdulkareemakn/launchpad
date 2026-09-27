@@ -32,7 +32,7 @@ services:
     restart: unless-stopped
 
   mongo:
-    image: mongo:8.0
+    image: mongo:8.0@sha256:4968f22d0c6c10ef29952f3e807f62872ba22b3312f25803564fbfc08255efc2
     # Database is accessible only to services on this Compose network.
     volumes:
       - mongo-data:/data/db

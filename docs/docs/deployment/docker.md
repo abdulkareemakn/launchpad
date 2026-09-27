@@ -17,7 +17,9 @@ From the repository root:
 docker build -t mern-template .
 ```
 
-Every push to the application repository also runs `.github/workflows/docker.yaml`. GitHub Actions builds the image with Buildx, tags it with the commit SHA, and caches layers; it does not publish to a registry or need runtime secrets. Add registry login and `push: true` only when you have chosen a registry and secret policy.
+Pushes, pull requests, and manual runs start `.github/workflows/docker.yaml`. It calls the reusable checks workflow for formatting, linting, unit tests, integration tests, and end-to-end tests. After all checks pass, Buildx builds the production image and caches layers. Runs on the default branch publish `ghcr.io/<owner>/<repository>` with `sha-<full-commit-sha>` and `latest` tags; pull requests and other branches only build. Publishing uses the built-in `GITHUB_TOKEN` with package write permission and needs no additional registry secret. GHCR stores the image; deploying it to a running host is a separate step.
+
+Actions are pinned to commit SHAs. The Node base image and MongoDB and RustFS service images are pinned to manifest digests. Update these pins regularly to receive security fixes.
 
 The image contains the compiled server and `apps/client/dist`. It expects a reachable
 MongoDB instance plus the production settings from [Production build](/deployment/production-build).
