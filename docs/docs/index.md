@@ -1,19 +1,18 @@
 ---
-title: Introduction
-description: Documentation for the MERN course starter, a pnpm workspace with a typed React client, an Express 5 API, shared contracts, MongoDB, and Better Auth sessions.
+title: Launchpad
+description: A complete starter kit for the MERN stack, with guides for setup, building, and deployment.
 sidebar:
   label: Introduction
   order: 0
 ---
 
-# Build a MERN app without starting from zero
+# Launchpad
 
-The MERN course starter gives you a working React application, Express API, MongoDB
-database, authentication, emails and emails in one repository. You can begin building your project
-instead of spending your first week wiring tools together.
+A complete starter kit for the MERN stack. Launchpad connects a React client,
+Express API, MongoDB database, authentication, email, and file storage foundations
+in one repository, with guides for setup, development, and deployment.
 
-The decisions for the tech stack have been made to simplify development, avail free tiers and use well known and reliable products used by millions of developers.
-See the [**reference**](/reference/tech-stack) for the complete tech stack
+See the [tech stack reference](/reference/tech-stack) for the complete technology list.
 
 Read this site in order if this is your first full-stack app. It starts with getting
 the project running, then covers the decisions that shape its interface, followed by
@@ -66,4 +65,3 @@ use Code quality as their finishing checklist; operators can start with Deployme
 - [React](https://react.dev/)
 - [Express](https://expressjs.com/)
 - [MongoDB](https://www.mongodb.com/docs/)
-- [Zensical](https://zensical.org/)
