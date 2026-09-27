@@ -24,7 +24,12 @@ Open **http://localhost:3000**. Create an account, then use **Test protected API
 
 Local email is captured automatically by MailDev. Open **http://localhost:3003** to inspect messages; application code sends through `sendEmail` from `apps/server/src/lib/email-client.ts`. Development uses local SMTP on port 3025, while production uses Resend and requires `RESEND_API_KEY`. Run `pnpm dev:mail` separately when authoring templates, then open **http://localhost:3002**.
 
-Already have MongoDB or Atlas? Set `MONGODB_URI` and skip `pnpm db:up`. The app connects before accepting requests and exits if startup fails.
+`pnpm db:up` also starts local RustFS object storage. Before uploading files,
+[create the local bucket](docs/docs/installation/development-workflow.md#create-the-local-bucket-once).
+That guide also covers native Windows setup without Docker/WSL2.
+
+Already have MongoDB or Atlas? Set `MONGODB_URI` and start only RustFS with
+`docker compose -f compose.db.yaml up -d --wait rustfs`. The app connects before accepting requests and exits if startup fails.
 
 Node 24 loads the root `.env` at the server startup boundary. `readConfig(process.env)` then uses Zod to validate and transform raw strings into typed configuration; invalid settings name the affected variable and stop startup. Application modules receive that validated config instead of reading `process.env`. Production does not require an environment file: a host or container can inject the same variables directly.
 
@@ -70,6 +75,10 @@ Configure `STORAGE_ENDPOINT`, `STORAGE_REGION`, `STORAGE_BUCKET`,
 That page documents provider endpoints, policy defaults, credentials, and bucket CORS.
 Without storage configuration, authenticated upload requests return `503`.
 
+`STORAGE_MAX_UPLOAD_BYTES` defaults to 26214400 (25 MiB),
+`STORAGE_ALLOWED_MIME_TYPES` to `image/jpeg,image/png,image/webp,application/pdf`,
+and `STORAGE_PENDING_MAX_AGE_HOURS` to 24.
+
 Follow the [File uploads guide](docs/docs/build/file-uploads.md) for the complete
 request sequence, implementation, and verification.
 
@@ -88,24 +97,24 @@ The root [llms.txt](llms.txt) is a short index that helps AI tools find this sta
 
 Run these at the repository root:
 
-| Command | Purpose |
-| --- | --- |
-| `pnpm dev` | Start the API and MailDev inbox/SMTP server |
-| `pnpm dev:ui` | Start the interactive Vite client on port 3000 |
-| `pnpm dev:mail` | Start the React Email preview on port 3002 |
-| `pnpm build` | Build the client and compile the server |
-| `pnpm typecheck` | Generate route types and check all packages |
-| `pnpm ui add <component>` | Add a shadcn Base UI component to the client |
-| `pnpm check` | Check formatting and lint rules |
-| `pnpm format` | Apply formatting and safe lint fixes |
-| `pnpm test` | Run unit and API integration tests |
-| `pnpm test:unit` | Run fast Vitest unit tests |
-| `pnpm test:integration` | Run Vitest + Supertest API tests |
-| `pnpm test:e2e` | Run the Playwright user workflow in Chromium |
-| `pnpm test:e2e:ui` | Open Playwright's interactive UI |
-| `pnpm db:up` / `pnpm db:down` | Start/stop local MongoDB |
-| `pnpm docker:up` / `pnpm docker:down` | Build/start or stop the complete stack |
-| `pnpm start` | Run the compiled server |
+| Command                               | Purpose                                        |
+| ------------------------------------- | ---------------------------------------------- |
+| `pnpm dev`                            | Start the API and MailDev inbox/SMTP server    |
+| `pnpm dev:ui`                         | Start the interactive Vite client on port 3000 |
+| `pnpm dev:mail`                       | Start the React Email preview on port 3002     |
+| `pnpm build`                          | Build the client and compile the server        |
+| `pnpm typecheck`                      | Generate route types and check all packages    |
+| `pnpm ui add <component>`             | Add a shadcn Base UI component to the client   |
+| `pnpm check`                          | Check formatting and lint rules                |
+| `pnpm format`                         | Apply formatting and safe lint fixes           |
+| `pnpm test`                           | Run unit and API integration tests             |
+| `pnpm test:unit`                      | Run fast Vitest unit tests                     |
+| `pnpm test:integration`               | Run Vitest + Supertest API tests               |
+| `pnpm test:e2e`                       | Run the Playwright user workflow in Chromium   |
+| `pnpm test:e2e:ui`                    | Open Playwright's interactive UI               |
+| `pnpm db:up` / `pnpm db:down`         | Start/stop local MongoDB and RustFS                       |
+| `pnpm docker:up` / `pnpm docker:down` | Build/start or stop the complete stack         |
+| `pnpm start`                          | Run the compiled server                        |
 
 ## Testing
 
@@ -150,7 +159,7 @@ Use the configured shadcn icon library for interface controls. For actual brand/
 
 ## Two Docker workflows
 
-**Local development:** `compose.db.yaml` runs MongoDB with a named volume, exposing port 27017 only on the host's loopback address. Node and Vite run on your computer.
+**Local development:** `compose.db.yaml` runs MongoDB and RustFS with separate named volumes, exposing ports 27017, 9000 (S3), and 9001 (console) only on the host's loopback address. Node and Vite run on your computer.
 
 **Complete deployment example:** `compose.yaml` builds both apps into one image. Express serves the built SPA and API; MongoDB has a persistent volume and no published port. The runtime container runs as a non-root user. Start it with:
 

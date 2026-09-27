@@ -20,5 +20,27 @@ services:
       retries: 12
     restart: unless-stopped
 
+  rustfs:
+    image: rustfs/rustfs:1.0.0
+    ports:
+      - "127.0.0.1:9000:9000"
+      - "127.0.0.1:9001:9001"
+    environment:
+      RUSTFS_ACCESS_KEY: ${STORAGE_ACCESS_KEY_ID:?Set local STORAGE_ACCESS_KEY_ID in the root .env}
+      RUSTFS_SECRET_KEY: ${STORAGE_SECRET_ACCESS_KEY:?Set local STORAGE_SECRET_ACCESS_KEY in the root .env}
+      RUSTFS_ADDRESS: ":9000"
+      RUSTFS_CONSOLE_ADDRESS: ":9001"
+      RUSTFS_CONSOLE_ENABLE: "true"
+    volumes:
+      - rustfs-data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://127.0.0.1:9000/health/ready"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 15s
+    restart: unless-stopped
+
 volumes:
   mongo-data:
+  rustfs-data:

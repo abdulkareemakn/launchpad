@@ -43,8 +43,10 @@ connection string and skip the local database step below.
     ```
 
     This runs `compose.db.yaml`, stores data in the `mongo-data` Docker volume, and
-    publishes MongoDB on `127.0.0.1:27017`. Stop it with `pnpm db:down` when you are
-    finished.
+    publishes MongoDB on `127.0.0.1:27017`. It also starts RustFS for local file
+    storage. Stop both with `pnpm db:down` when you are finished.
+
+For local file uploads, complete the [RustFS setup and one-time bucket creation](/installation/development-workflow/#file-storage) before uploading. That section includes native Windows alternatives for developers without Docker.
 
 ## Run the client and server
 
