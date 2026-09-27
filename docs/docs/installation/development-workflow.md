@@ -8,6 +8,18 @@ description: The commands you run while building, including dev servers, type ch
 This starter kit gives each local service a fixed localhost port and keeps interactive tools in separate terminals. Return to this page while you work. The normal loop is simple: run the app,
 make one focused change, check it, then run the smallest test that can prove it works.
 
+## Replace the starter landing page
+
+This starter kit includes a landing page that introduces Launchpad and links to
+its documentation. Remove that starter content from
+`apps/client/src/routes/index.tsx` and replace it with the application's own home
+page. Update the page title in `apps/client/index.html` and replace the starter
+logo in `apps/client/public/` when choosing the application's branding.
+
+The `docs/` directory contains the starter's documentation site. Applications
+created from the template can remove it and replace the root `README.md` with
+their own setup instructions.
+
 ## Environment variables
 
 The root `.env` file holds settings that change between your computer, tests, and a
