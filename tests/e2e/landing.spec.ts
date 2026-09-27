@@ -30,9 +30,9 @@ test("introduces the course starter", async ({ page }) => {
     "GitHub Actions",
   ]);
   await expect(
-    page.getByRole("link", { name: "Read the setup guide" }).first(),
+    page.getByRole("link", { name: "Documentation" }).first(),
   ).toHaveAttribute(
     "href",
-    "https://mern-app-starter.pages.dev/installation/installation/",
+    "https://mern-app-starter.pages.dev/installation/",
   );
 });
