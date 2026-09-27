@@ -24,6 +24,20 @@ Actions are pinned to commit SHAs. The Node base image and MongoDB and RustFS se
 The image contains the compiled server and `apps/client/dist`. It expects a reachable
 MongoDB instance plus the production settings from [Production build](/deployment/production-build).
 
+## Publish to GHCR
+
+Push the workflow changes to the repository's default branch. Once all checks pass,
+the workflow publishes the image to GitHub Container Registry (GHCR). No additional
+registry secrets are required; GitHub supplies `GITHUB_TOKEN` automatically.
+
+The package is private on first publication. To allow anonymous pulls, open the
+package's settings on GitHub and change its visibility to public. For private
+packages, the deployment host must authenticate to GHCR with access to the package.
+
+Publishing does not start or update the application on a server. Configure the
+deployment host separately to pull the image, supply production settings, and run
+the container.
+
 ## Run the complete stack
 
 For a local stack, copy `.env.example` to `.env`. Set a generated `BETTER_AUTH_SECRET`, set `RESEND_API_KEY`, and set both `APP_URL` and `BETTER_AUTH_URL` to `http://localhost:3000`. For a public host, use its real HTTPS origin for both URLs and provide the secrets through the host. Then run:
@@ -74,5 +88,6 @@ Use the [Security checklist](/reference/security-checklist) before exposing the 
 
 ## References
 
+- [GitHub Container Registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry)
 - [Docker Compose](https://docs.docker.com/compose/)
 - [Security checklist](/reference/security-checklist)
