@@ -1,113 +1,354 @@
 ---
-title: Production deployment
-description: Deploy the complete React, Express, and MongoDB application to Deno Deploy from GitHub.
+title: Railway deployment
+description: Deploy the application, MongoDB, and private file storage to Railway from GitHub using infrastructure as code.
 ---
 
-# Production deployment
+# Railway deployment
 
-The starter kit runs as **one Deno Deploy app**. In production, Express serves the
-built React SPA and the `/api` routes from the same HTTPS origin.
+This starter kit deploys to Railway as one web service, one MongoDB service with a
+persistent volume, and one private S3-compatible bucket. Express serves the built
+React app and `/api` from the same HTTPS origin. Railway builds the repository's
+`Dockerfile`; the frontend does not need a separate hosting service.
 
-The repository includes `deno.json`, which tells Deno Deploy to install the locked
-pnpm workspace, build the client and server, and start the compiled Express server. Do
-not create a second static-site app for `apps/client`: Express already serves
-`apps/client/dist` after the build.
+Infrastructure as code (IaC) describes the resources in a TypeScript file. The
+Railway CLI previews changes before applying them. Application secrets remain in
+Railway, while database and bucket references connect the resources automatically.
 
 ## Before you deploy
 
-1. Create a Deno Deploy account and organization at
-   [console.deno.com](https://console.deno.com). Deno Deploy needs an organization
-   before it can create an app.
-2. Use **GitHub → Use this template** to make your own copy of
-   [the starter repository](https://github.com/abdulkareemakn/mern-app-starter), then
-   clone and push that copy. Deno Deploy builds from that GitHub repository; it does
-   not deploy an unpushed local change.
-3. Provision a reachable MongoDB database.
+1. Create a Railway account, connect GitHub, and install the Railway GitHub App
+   with access to the application's repository. Accept any pending permission
+   updates in [GitHub's installation settings](https://github.com/settings/installations).
+2. Select **Singapore** as the preferred deployment region in the Railway
+   dashboard before creating resources, where the account's plan permits it.
+   The bucket example below explicitly selects Singapore with `sin`.
+3. Use **Use this template** on
+   [Launchpad](https://github.com/abdulkareemakn/launchpad) to create an application
+   repository, then clone it. A template copy has its own history and is independent
+   of Launchpad. This also works when both repositories belong to the same account.
+4. Install dependencies with `pnpm install`. The root development dependencies
+   include `@railway/cli` and the `railway` IaC SDK.
+5. Set up Resend and have its API key ready. `RESEND_API_KEY` is required whenever
+   `NODE_ENV=production`, including before the first successful health check.
 
-## Create the app
+Application copies can remove the starter's `docs/` directory and replace its root
+README. Replace the starter landing page when building the application's own UI;
+see [Development workflow](/installation/development-workflow/#replace-the-starter-landing-page).
 
-From the repository root, run the one command:
+!!! note "Free plan and usage"
 
-```sh
-deno deploy create
-```
+    Railway Free includes a small monthly usage credit, not unlimited compute or
+    storage. The trial and Free plan have different limits. The pilot used a
+    500 MB MongoDB volume and one bucket. Sleeping services reduce idle compute
+    usage but introduce cold starts; storage is still metered. Check
+    [current pricing](https://railway.com/pricing) and usage in the dashboard.
+    Region choices and resource limits depend on the plan.
 
-The authenticated CLI opens its setup wizard. Choose your Deno organization, give the
-app a unique name, select **GitHub** as the source, then select your copied repository.
-Keep the application directory at the repository root and accept the configuration in
-`deno.json`.
+## Create and describe the project
 
-The app name becomes its default `*.deno.net` URL. You can rename it later in Deno
-Deploy's app settings. The CLI does not currently accept an app description; add or
-edit that in the same app settings screen after the first deployment.
-
-!!! note "Why the wizard is the pasteable command"
-
-    Your organization, GitHub owner, repository, and unique app name are personal values.
-    The wizard collects them while still creating a GitHub-backed app, so every later push
-    automatically builds and deploys it.
-
-## Set environment variables
-
-After the first build returns the production URL, create a temporary `.env.production` file in the project root:
-
-```dotenv
-NODE_ENV=production
-MONGODB_URI=mongodb+srv://...
-BETTER_AUTH_SECRET=paste-generated-secret
-RESEND_API_KEY=paste-resend-key
-APP_URL=https://your-app.deno.net
-BETTER_AUTH_URL=https://your-app.deno.net
-```
-
-Replace the placeholders with your production values and replace `https://your-app.deno.net` with the production URL returned by Deno Deploy. `APP_URL` and `BETTER_AUTH_URL` must be identical.
-
-Generate `BETTER_AUTH_SECRET` locally with the Node.js command in [Development workflow](/installation/development-workflow/#environment-variables). Verify a sending domain with Resend before sending production mail.
-
-Load the variables into Deno Deploy:
+Run all commands from the application's repository root:
 
 ```sh
-deno deploy env load .env.production
+pnpm exec railway login
+pnpm exec railway init --name your-app
+pnpm exec railway config init
 ```
 
-Once the command succeeds, **delete `.env.production` immediately**. It contains production credentials and should not be committed or kept in the repository:
+`init` creates and links a fresh Railway project. For an existing project, use
+`pnpm exec railway link` instead. Check the selected project and environment with
+`pnpm exec railway status` before applying infrastructure changes.
+
+Replace the generated authoring file with the following example. Replace
+`YOUR_OWNER/YOUR_REPO` with the application's GitHub repository and `your-app` with
+its project name. Use its actual default branch if it is not `main`.
+
+```ts title=".railway/railway.ts"
+import {
+  bucket,
+  defineRailway,
+  github,
+  mongo,
+  preserve,
+  project,
+  ref,
+  service,
+} from "railway/iac";
+
+export default defineRailway(() => {
+  const database = Object.assign(mongo("mongodb"), {
+    deploy: { sleepApplication: true },
+  });
+  const uploads = bucket("uploads", { region: "sin" });
+  const web = service("web", {
+    source: github("YOUR_OWNER/YOUR_REPO", {
+      branch: "main",
+      checkSuites: true,
+    }),
+    build: { builder: "DOCKERFILE", dockerfilePath: "Dockerfile" },
+    healthcheck: "/api/health",
+    deploy: { sleepApplication: true },
+    env: {
+      MONGODB_URI: database.env.MONGO_URL,
+      APP_URL: preserve(),
+      BETTER_AUTH_URL: preserve(),
+      BETTER_AUTH_SECRET: preserve(),
+      RESEND_API_KEY: preserve(),
+      STORAGE_ENDPOINT: ref(uploads, "ENDPOINT"),
+      STORAGE_REGION: ref(uploads, "REGION"),
+      STORAGE_BUCKET: ref(uploads, "BUCKET"),
+      STORAGE_ACCESS_KEY_ID: ref(uploads, "ACCESS_KEY_ID"),
+      STORAGE_SECRET_ACCESS_KEY: ref(uploads, "SECRET_ACCESS_KEY"),
+    },
+  });
+
+  return project("your-app", { resources: [database, uploads, web] });
+});
+```
+
+The MongoDB helper provisions the database and its persistent volume. Its connection
+reference uses Railway's private network. Keep MongoDB private; only the web service
+needs a public domain. The bucket is a separate storage resource, not a process
+inside the application container.
+
+`preserve()` retains values configured outside IaC without committing them to source.
+It does not generate a secret or supply a missing value. Bucket references resolve
+credentials inside Railway. `BUCKET` supplies the actual S3 bucket name, including
+its unique suffix; the dashboard display name alone is not the S3 name. The S3
+`REGION` value comes from the bucket and may be `auto`, even when its physical
+location is Singapore.
+
+`checkSuites: true` enables **Wait for CI**. The existing Docker workflow runs on
+pushes and invokes the checks workflow. Railway waits for GitHub Actions check
+suites before deploying; a failed workflow prevents deployment. Ensure the Railway
+GitHub App has the required permissions. See
+[Railway's CI requirements](https://docs.railway.com/deployments/github-autodeploys#wait-for-ci)
+for cancellation and timeout behavior.
+
+Preview and apply the configuration:
 
 ```sh
-rm .env.production
+pnpm exec railway config plan
+pnpm exec railway config apply
 ```
 
-Then restrict the variables to the `production` context:
+Review every change. The initial plan should create MongoDB, the bucket, and the web
+service without deleting anything. Commit `.railway/` and push it to GitHub.
+Subsequent infrastructure edits require another plan and apply; pushing the authoring
+file alone does not apply its resource changes. GitHub pushes deploy application code.
+
+The first app deployment can fail while required production settings are missing.
+Continue with the next section, then redeploy. Do not remove configuration validation
+to make an incomplete deployment pass.
+
+## Configure the public URL and secrets
+
+Create a Railway domain for the web service:
 
 ```sh
-deno deploy env update-contexts NODE_ENV production
-deno deploy env update-contexts MONGODB_URI production
-deno deploy env update-contexts BETTER_AUTH_SECRET production
-deno deploy env update-contexts RESEND_API_KEY production
-deno deploy env update-contexts APP_URL production
-deno deploy env update-contexts BETTER_AUTH_URL production
+pnpm exec railway domain --service web --port 8080
 ```
 
-The CLI saves the app selected during creation. If you open another checkout or shell,
-select it before managing variables: `deno deploy switch --org your-org --app your-app`.
+Railway supplied `PORT=8080` in the verified deployment; the server honors `PORT`.
+The Dockerfile sets `NODE_ENV=production`. The domain's target port must match the
+runtime port, not the local development default of 3001. Confirm the server's
+listening port in runtime logs if the platform settings differ.
 
-## Verify and keep deploying
+Set these variables on **web** using the returned HTTPS URL:
 
-Open `https://your-app.deno.net/api/health`. It returns `{ "status": "ok" }` only
-after the server connects to MongoDB. Then create an account and test a protected route.
+| Variable             | Required value                                   |
+| -------------------- | ------------------------------------------------ |
+| `APP_URL`            | The public HTTPS origin, without a path          |
+| `BETTER_AUTH_URL`    | Exactly the same origin as `APP_URL`             |
+| `BETTER_AUTH_SECRET` | A unique random secret of at least 32 characters |
+| `RESEND_API_KEY`     | The application's Resend API key                 |
 
-Every push to the linked GitHub repository automatically creates a new build; the Deno
-Deploy dashboard shows its build logs and preview URL. Stream runtime logs when needed:
+Use Railway's dashboard Variables tab or its CLI editor:
 
 ```sh
-deno deploy logs
+pnpm exec railway variable edit --service web --skip-deploys
 ```
 
-Use the dashboard to add a custom domain, then update both public URL variables to that
-domain and redeploy. Deno documents the GitHub-triggered build flow in its
-[Applications reference](https://docs.deno.com/deploy/reference/apps/) and the build
-configuration in its [Builds reference](https://docs.deno.com/deploy/reference/builds/).
+The editor uses the shell's configured `EDITOR`. It shows a redacted diff before
+applying. Keep secrets in Railway; do not create a production environment file in
+the repository or paste credentials into chat. To generate and set the authentication
+secret without printing it, run:
+
+```sh
+node -e "process.stdout.write(require('node:crypto').randomBytes(32).toString('base64'))" | pnpm exec railway variable set BETTER_AUTH_SECRET --stdin --service web --skip-deploys
+```
+
+Generate it once for the environment. Replacing it later invalidates existing sessions.
+`--skip-deploys` avoids starting a deployment for each individual setting.
+
+IaC supplies `MONGODB_URI` and all five storage variables automatically. Do not copy
+bucket access keys manually. Storage limits, allowed MIME types, and proxy settings
+are described in [Development workflow](/installation/development-workflow/#environment-variables).
+The local test database and MailDev settings are not production requirements.
+
+Redeploy after completing the settings:
+
+```sh
+pnpm exec railway redeploy --service web --from-source --yes
+```
+
+## Allow browser access to the bucket
+
+Direct browser uploads and downloads use presigned URLs. Configure the bucket's
+CORS policy to allow the application's origin, `PUT` and `GET`, and `Content-Type`.
+The bucket remains private; CORS does not grant unauthenticated object access.
+
+Railway supports configuring CORS through the S3 API. A dashboard CORS control is
+not required. The following command uses the application's installed AWS SDK,
+injects the web service's variables into a local process, and preserves existing
+rules. It does not print credentials. Run it only on a trusted computer.
+
+```sh
+pnpm exec railway run --service web --no-local -- node --input-type=module -e '
+import { createRequire } from "node:module";
+const require = createRequire(new URL("./apps/server/package.json", import.meta.url));
+const { S3Client, GetBucketCorsCommand, PutBucketCorsCommand } = require("@aws-sdk/client-s3");
+const env = process.env;
+const client = new S3Client({
+  endpoint: env.STORAGE_ENDPOINT,
+  region: env.STORAGE_REGION,
+  forcePathStyle: true,
+  credentials: {
+    accessKeyId: env.STORAGE_ACCESS_KEY_ID,
+    secretAccessKey: env.STORAGE_SECRET_ACCESS_KEY,
+  },
+});
+const matches = (rule) =>
+  rule.AllowedOrigins?.includes(env.APP_URL) &&
+  ["PUT", "GET"].every((method) => rule.AllowedMethods?.includes(method)) &&
+  rule.AllowedHeaders?.some((header) =>
+    header === "*" || header.toLowerCase() === "content-type");
+try {
+  let rules = [];
+  try {
+    rules = (await client.send(new GetBucketCorsCommand({
+      Bucket: env.STORAGE_BUCKET,
+    }))).CORSRules ?? [];
+  } catch (error) {
+    if (!["NoSuchCORSConfiguration", "NoSuchCORS"].includes(error.name)) throw error;
+  }
+  if (!rules.some(matches)) {
+    rules.push({
+      AllowedOrigins: [env.APP_URL],
+      AllowedMethods: ["PUT", "GET"],
+      AllowedHeaders: ["Content-Type"],
+      MaxAgeSeconds: 3600,
+    });
+    await client.send(new PutBucketCorsCommand({
+      Bucket: env.STORAGE_BUCKET,
+      CORSConfiguration: { CORSRules: rules },
+    }));
+  }
+  const saved = await client.send(new GetBucketCorsCommand({ Bucket: env.STORAGE_BUCKET }));
+  if (!saved.CORSRules?.some(matches)) throw new Error("CORS verification failed");
+  console.log("Bucket CORS configured and verified.");
+} catch (error) {
+  console.error("Bucket CORS failed:", error.name);
+  process.exitCode = 1;
+} finally {
+  client.destroy();
+}
+'
+```
+
+The endpoint and URL style in the bucket's Credentials tab are authoritative.
+New Railway buckets normally use virtual-hosted URLs. The pilot also verified
+bucket access with this starter's existing path-style S3 client. Verify the complete
+[upload, confirmation, and private download sequence](/build/file-uploads/#verify-and-troubleshoot),
+not just the presence of variables. Repeat CORS configuration when the public origin
+changes or a new environment gets its own bucket.
+
+## CDN caching
+
+Railway's CDN caches static assets at the edge and is configured separately from the
+installed IaC SDK. Inspect and enable it with:
+
+```sh
+pnpm exec railway cdn status --service web
+pnpm exec railway cdn enable --service web
+pnpm exec railway cdn update --service web --html-caching never --purge-on-deploy html
+```
+
+This keeps HTML dynamic while allowing static asset caching. Cache duration follows
+response headers; the fallback TTL applies when the origin supplies no freshness
+value. JSON API responses need explicit freshness headers to be cached. Keep private
+responses out of shared caches with `Cache-Control: no-store` or `private` when adding
+caching behavior. Session cookies alone do not guarantee cache isolation.
+
+Check a static asset's response headers for `x-cache`; a repeated request should
+produce `HIT` when the response is cacheable. Follow
+[Railway's caching rules](https://docs.railway.com/networking/cdn) when changing headers
+or enabling HTML caching.
+
+## Verify the deployment
+
+```sh
+pnpm exec railway deployment list --service web --json
+pnpm exec railway deployment list --service mongodb --json
+curl https://your-app.up.railway.app/api/health
+```
+
+Replace the example URL with the application's domain. Confirm both deployments
+reach `SUCCESS`, the homepage responds, and `/api/health` returns HTTP 200 with
+`{"status":"ok"}`. The health endpoint checks the live MongoDB connection.
+A successful build or deployment status alone does not establish public reachability.
+
+Create an account, sign in, and exercise a protected API route. Verify file upload,
+confirmation, and private download, and test delivery from a verified Resend sending
+domain for application features that send email. Inspect Railway usage and arrange
+backups for persistent data before relying on the deployment.
+
+### MongoDB refuses to start on Linux kernel 6.19 or newer
+
+The pilot encountered `MongoDB cannot start: Linux kernel versions 6.19 and newer`
+with Railway's MongoDB image. Railway support recommended the following workaround,
+which restored the pilot's database and passed the application's health check:
+
+```sh
+pnpm exec railway variable set GLIBC_TUNABLES=glibc.pthread.rseq=1 --service mongodb
+```
+
+Apply it only when that exact startup error appears. Preserve the volume and inspect
+runtime logs after redeployment. Avoid downgrading to an old image or deleting the
+volume to work around a kernel issue. Track the
+[Railway support thread](https://station.railway.com/questions/mongo-db-resource-keeps-crashing-63d79afc)
+and [MongoDB issue](https://jira.mongodb.org/browse/SERVER-121912) for updates.
+
+### The domain returns 502 despite a successful deployment
+
+```sh
+pnpm exec railway logs --service web --lines 100
+pnpm exec railway domain list --service web --json
+```
+
+Compare `Server listening on port ...` with `targetPort`. A domain targeting 3001
+while the app listens on 8080 produces connection-refused errors. Correct it using
+the actual domain and runtime port:
+
+```sh
+pnpm exec railway domain update your-app.up.railway.app --port 8080 --service web
+```
+
+A cold start can delay the first request. Repeated connection-refused errors still
+need investigation; also inspect startup validation and MongoDB connectivity.
+
+### A plan proposes deleting production variables
+
+Do not apply it. Retain `preserve()` entries for variables configured by the user and
+regenerate the plan. Review any proposed deletion, including variables, before
+applying. Keep plan artifacts outside `.railway/` and out of Git because they can
+contain sensitive configuration.
 
 ## References
 
-- [Deno Deploy CLI](https://docs.deno.com/runtime/reference/cli/deploy/)
+- [Railway infrastructure as code](https://docs.railway.com/infrastructure-as-code)
+- [Railway GitHub autodeploys and Wait for CI](https://docs.railway.com/deployments/github-autodeploys)
+- [Railway bucket references](https://docs.railway.com/storage-buckets#variable-references)
+- [Railway bucket uploads and CORS](https://docs.railway.com/storage-buckets/uploading-serving)
+- [Railway CDN](https://docs.railway.com/networking/cdn)
+- [Railway pricing](https://railway.com/pricing)
 - [Resend domain verification](https://resend.com/docs/dashboard/domains/introduction)

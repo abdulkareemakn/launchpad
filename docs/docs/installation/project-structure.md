@@ -47,7 +47,7 @@ This starter kit is organized as a monorepo, with separate pnpm workspaces for t
 ├── .oxlintrc.json              # Oxlint configuration
 ├── compose.db.yaml             # Development MongoDB service
 ├── compose.yaml                # Full app + MongoDB stack
-├── deno.json                   # Deno Deploy configuration
+├── deno.json                   # Legacy Deno Deploy configuration (unused by Railway)
 ├── Dockerfile                  # Production image build
 ├── package.json                # Root scripts and workspace metadata
 ├── playwright.config.ts         # End-to-end test configuration
@@ -72,8 +72,7 @@ import { authClient } from "@/lib/auth-client";
 
 TypeScript uses the `paths` mappings. Vite resolves the client mapping, and
 `apps/server/alias-runtime.js` resolves server imports to `src/` in development
-and `dist/` in production. Deno's deploy import map points the same alias at the
-compiled server files.
+and `dist/` in production, including the Railway Docker deployment.
 
 ## Root configuration files
 

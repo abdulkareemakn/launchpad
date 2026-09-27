@@ -38,7 +38,7 @@ the parts users depend on most: accounts, data, and safe API input.
 
 - [**Deployment**](/deployment)
 
-  Deno Deploy with MongoDB Atlas, Docker Compose, and production builds.
+  Railway with MongoDB and private storage, Docker Compose, and production builds.
 
 - [**Reference**](/reference)
 

@@ -57,7 +57,9 @@ browser code.
 ### File storage
 
 This starter kit uses RustFS, an Apache 2.0 S3-compatible server, for local file
-uploads. Keep local development on RustFS; use separate R2/B2 buckets in production.
+uploads. Keep local development on RustFS; use a separate private Railway, R2, or B2
+bucket in production. The [Railway deployment guide](/deployment/production) wires
+bucket variables automatically and configures browser CORS.
 The existing S3 client already uses the path-style addressing RustFS needs.
 
 #### Docker (recommended)
@@ -163,14 +165,16 @@ check that guide when using a newer release.
 
 #### Production storage and upload policy
 
-Cloudflare R2 and Backblaze B2 remain the production providers. Create a private
-bucket and a bucket-scoped credential that can read, write, and delete objects.
-Inject these five settings through the production host's secret settings:
+Railway is the recommended production provider for this deployment path; Cloudflare
+R2 and Backblaze B2 are alternatives. Use a private bucket and credentials that can
+read, write, and delete objects. The [Railway guide](/deployment/production) supplies
+these five settings through bucket references. Other hosts inject them through their
+environment settings:
 
 | Variable                    | Value                                                                                   |
 | --------------------------- | --------------------------------------------------------------------------------------- |
 | `STORAGE_ENDPOINT`          | The provider's S3 HTTP(S) origin, without a bucket path, query, or embedded credentials |
-| `STORAGE_REGION`            | `auto` for R2; the bucket's region for B2                                               |
+| `STORAGE_REGION`            | The provider's S3 region value; Railway and R2 may use `auto`                           |
 | `STORAGE_BUCKET`            | The private bucket name                                                                 |
 | `STORAGE_ACCESS_KEY_ID`     | The storage access key ID; B2 uses an application key ID                                |
 | `STORAGE_SECRET_ACCESS_KEY` | The corresponding secret access key; B2 uses the application key                        |
@@ -197,7 +201,8 @@ use an exact resulting MIME type.
 For browser uploads, configure the bucket's CORS rules to allow the application
 origin, `PUT` and `GET`, and the `Content-Type` request header. CORS tells the browser
 which cross-origin requests it can make; it does not make the bucket public. Use the
-provider's [R2 CORS guide](https://developers.cloudflare.com/r2/buckets/cors/) or
+[Railway CORS instructions](/deployment/production/#allow-browser-access-to-the-bucket),
+the provider's [R2 CORS guide](https://developers.cloudflare.com/r2/buckets/cors/), or
 [B2 CORS guide](https://www.backblaze.com/docs/cloud-storage-cross-origin-resource-sharing-rules)
 for the provider-specific format.
 
