@@ -1,6 +1,6 @@
 ---
 title: Launchpad
-description: A complete starter kit for the MERN stack, with guides for setup, building, and deployment.
+description: A MERN starter with foundations and guides for setup, building, and deployment.
 sidebar:
   label: Introduction
   order: 0
@@ -12,9 +12,9 @@ sidebar:
 
 # Launchpad
 
-Build and ship a full stack app with  **React**, **Express API**, **Node** and **MongoDB**.
+Build and ship a full stack app with **React**, **Express API**, **Node** and **MongoDB**.
 
-An opinionated MERN starter with authentication, email, file storage, and practical guides from first install to production.
+An opinionated MERN starter with authentication, email, and file storage foundations, plus practical guides from first install to production.
 
 [Get started](/installation/prerequisites){ .md-button .md-button--primary }
 [Explore the stack](/reference/tech-stack){ .md-button }

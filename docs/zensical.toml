@@ -1,6 +1,6 @@
 [project]
 site_name = "Launchpad"
-site_description = "A complete starter kit for the MERN stack."
+site_description = "A MERN starter with foundations and guides for setup, building, and deployment."
 
 copyright = 'Copyright &copy; 2026 Abdul Kareem · <a href="https://github.com/abdulkareemakn/launchpad/blob/main/LICENSE">MIT License</a>'
 

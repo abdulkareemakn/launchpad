@@ -5,8 +5,8 @@ import { buttonVariants } from "@/components/ui/button";
 export const Route = createFileRoute("/")({ component: Home });
 
 const repository = "https://github.com/abdulkareemakn/launchpad";
-const docs = "https://mern-app-starter.pages.dev";
-const setupGuide = `${docs}/installation/`;
+const docs = "https://launchpad-docs-1ki.pages.dev";
+const setupGuide = `${docs}/installation/installation/`;
 const productName = "Launchpad";
 const externalLogos: Record<string, string> = {
   react: "https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/react.svg",
@@ -46,7 +46,7 @@ const chapters = [
       {
         title: "Better Auth",
         description:
-          "Email and password authentication, database-backed sessions and rate limiting, plus protected API routes.",
+          "Authentication foundation with email/password endpoints, database-backed sessions, rate limiting, and protected API middleware.",
         logo: "better-auth",
       },
       {
@@ -65,7 +65,7 @@ const chapters = [
       {
         title: "Resend & local email",
         description:
-          "Send production email with Resend, capture local messages in MailDev, and preview templates with React Email.",
+          "Email integration foundation with Resend delivery support, local MailDev capture, and React Email template previews.",
         logo: "resend",
       },
       {
@@ -114,7 +114,7 @@ const chapters = [
       {
         title: "GitHub Actions",
         description:
-          "Automated workflows run tests, build the Docker image, and publish the documentation site.",
+          "Runs formatting, linting, and tests. Builds the Docker image on pushes and pull requests, then publishes it to GHCR on default-branch pushes.",
         logo: "githubactions",
       },
     ],
@@ -172,9 +172,9 @@ function Home() {
             </span>
           </h1>
           <p className="mt-6 max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg">
-            Launchpad gives you a production grade MERN stack foundation with
-            the setup, services, and decisions documented. Spend your time
-            building your product instead of setting up services.
+            Launchpad gives you a MERN stack foundation with the setup,
+            services, and decisions documented. Spend your time building your
+            product instead of setting up services.
           </p>
           <p className="mt-5 text-sm text-muted-foreground">
             MongoDB · Express · React · Node.js
@@ -277,7 +277,8 @@ function Home() {
                 <span className="text-lg">{productName}</span>
               </a>
               <p className="mt-3 max-w-md text-sm leading-6 text-muted-foreground">
-                A complete starter kit for the MERN stack.
+                A MERN starter with documented foundations for building and
+                shipping an app.
               </p>
             </div>
             <nav

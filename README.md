@@ -1,12 +1,12 @@
 # Launchpad — MERN starter
 
-A complete starter kit for the MERN stack.
+A MERN starter for building and shipping full-stack apps.
 
-[Documentation](https://mern-app-starter.pages.dev) · [Quick start](https://mern-app-starter.pages.dev/installation/installation/) · [MIT License](LICENSE)
+[Documentation](https://launchpad-docs-1ki.pages.dev/) · [Quick start](https://launchpad-docs-1ki.pages.dev/installation/installation/) · [MIT License](LICENSE)
 
 ## What’s included
 
-MongoDB, Express, React, authentication, email, file storage, validation, testing, and deployment foundations. See the [documentation](https://mern-app-starter.pages.dev) for details and setup instructions.
+MongoDB, Express, React, and foundations for authentication, email, file storage, validation, testing, and deployment. See the [documentation](https://launchpad-docs-1ki.pages.dev/) for setup instructions.
 
 ## License
 

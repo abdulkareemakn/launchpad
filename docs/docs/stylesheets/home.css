@@ -82,7 +82,9 @@ body:has(.home-hero) .md-content__inner {
   border-radius: 0.6rem;
   color: var(--md-default-fg-color);
   text-decoration: none;
-  transition: border-color 150ms ease, background-color 150ms ease;
+  transition:
+    border-color 150ms ease,
+    background-color 150ms ease;
 }
 
 .home-card:hover {
