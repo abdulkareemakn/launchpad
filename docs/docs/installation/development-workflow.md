@@ -62,9 +62,10 @@ bucket in production. The [Railway deployment guide](/deployment/production) wir
 bucket variables automatically and configures browser CORS.
 The existing S3 client already uses the path-style addressing RustFS needs.
 
-#### Docker (recommended)
+#### Start local services with Docker
 
-After copying `.env.example` to the root `.env`, run from the repository root:
+After copying `.env.example` to the root `.env`, start MongoDB and RustFS from the
+repository root:
 
 ```sh
 pnpm db:up
@@ -77,7 +78,7 @@ variable substitution, just like the deployment Compose file. Existing checkouts
 must copy the five local storage settings from `.env.example` into `.env` first.
 Use only local credentials here.
 
-If MongoDB already runs elsewhere, start only storage:
+If MongoDB already runs elsewhere, start only RustFS:
 
 ```sh
 docker compose -f compose.db.yaml up -d --wait rustfs
@@ -91,13 +92,13 @@ would not resolve from the host or the browser receiving a presigned URL.
 
 #### Create the local bucket once
 
-RustFS does not create the application's bucket at startup. After either Docker
-or Windows setup, open `http://localhost:9001`, sign in with the configured access
+RustFS does not create the application's bucket at startup. After the Docker
+services start, open `http://localhost:9001`, sign in with the configured access
 and secret keys, and use **Create Bucket** on the **Buckets** page to create
 `mern-local` (or the exact `STORAGE_BUCKET` value). Keep the bucket private.
 The RustFS 1.0.0 console supports this operation; see the
 [official bucket creation guide](https://docs.rustfs.com/en/administration/data/bucket/creation).
-The bucket and objects survive restarts in `rustfs-data` or the Windows data directory.
+The bucket and objects survive restarts in the `rustfs-data` Docker volume.
 
 For browser uploads, set the bucket's CORS rule to allow `http://localhost:3000`,
 methods `PUT` and `GET`, and header `Content-Type`. Alternatively, RustFS supports a server-wide
@@ -106,62 +107,6 @@ methods `PUT` and `GET`, and header `Content-Type`. Alternatively, RustFS suppor
 Use the [file upload verification sequence](/build/file-uploads/#verify-and-troubleshoot)
 to upload, confirm, and download a file. A healthy container alone does not prove
 that the bucket exists or that object access works.
-
-#### Windows without Docker or WSL2
-
-Use one of these alternatives on Windows x86-64, with ports `9000` and `9001` free.
-Both run a single-node development process, not a Windows service. Create a dedicated
-empty data directory first, for example `C:\rustfs\data`.
-
-=== "RustFS Launcher (GUI)"
-
-    Download the Windows x86-64 installer from the official
-    [Launcher releases](https://github.com/rustfs/launcher/releases), install it,
-    and open RustFS Launcher. Choose an installer asset, not the source archive.
-
-    Set **Data Path** to `C:\rustfs\data`, **Host** to `127.0.0.1`, and **API Port**
-    to `9000`. Enable **Console Endpoint** (disabled by default in Launcher) and set
-    **Console Port** to `9001`. Replace the supplied access and secret keys with
-    your own non-default local values. Select **Launch RustFS** and wait for online status.
-
-    Use **Stop RustFS** to stop it. Closing the window leaves it in the tray;
-    choose **Quit** from the tray to stop and exit.
-
-=== "Standalone binary (PowerShell)"
-
-    Download the Windows x86-64 ZIP asset from the
-    [RustFS 1.0.0 release](https://github.com/rustfs/rustfs/releases/tag/1.0.0).
-    Choose `rustfs-windows-x86_64-v1.0.0.zip`, then extract it:
-
-    ```powershell
-    New-Item -ItemType Directory -Force -Path C:\rustfs\bin, C:\rustfs\data
-    Expand-Archive -Path "$HOME\Downloads\rustfs-windows-x86_64-v1.0.0.zip" -DestinationPath C:\rustfs\bin -Force
-    Set-Location C:\rustfs\bin
-    .\rustfs.exe --help
-    ```
-
-    If the archive has a nested folder, change to the directory containing
-    `rustfs.exe`. Replace the credential placeholders with your own local values:
-
-    ```powershell
-    $env:RUSTFS_ACCESS_KEY = "<your-local-access-key>"
-    $env:RUSTFS_SECRET_KEY = "<your-local-secret-key>"
-    .\rustfs.exe server `
-        --address "127.0.0.1:9000" `
-        --console-enable true `
-        --console-address "127.0.0.1:9001" `
-        "C:\rustfs\data"
-    ```
-
-    Keep this PowerShell session open. Press Ctrl+C to stop RustFS.
-
-For either Windows option, set the app's root `.env` to
-`STORAGE_ENDPOINT=http://localhost:9000`, `STORAGE_REGION=us-east-1`, and
-`STORAGE_BUCKET=mern-local`. Set `STORAGE_ACCESS_KEY_ID` and
-`STORAGE_SECRET_ACCESS_KEY` to the same credentials selected above. Restart the API,
-then complete **Create the local bucket once** above. The commands and Launcher
-fields follow the [official Windows guide](https://docs.rustfs.com/en/installation/windows);
-check that guide when using a newer release.
 
 #### Production storage and upload policy
 
@@ -213,10 +158,9 @@ verify bucket access.
 ### Upload test database
 
 The upload integration tests read the test database address from the process
-environment, not from `.env`. Start a dedicated MongoDB server first, then run one
-of these commands from the repository root in the terminal that will run tests.
-These examples use the local MongoDB server; substitute a dedicated test server
-address when needed.
+environment, not from `.env`. Start the local MongoDB container with `pnpm db:up`,
+then run one of these commands from the repository root in the terminal that will
+run tests. Substitute a separate test server address if needed.
 
 === "Windows PowerShell"
 
@@ -301,7 +245,6 @@ Continue to [Project structure](/installation/project-structure) to locate the c
 ## References
 
 - [RustFS Docker installation](https://docs.rustfs.com/en/installation/container/docker)
-- [RustFS Windows installation](https://docs.rustfs.com/en/installation/windows)
 - [RustFS health endpoints](https://docs.rustfs.com/en/operations/status-check)
 
 - [Node environment files](https://nodejs.org/api/environment_variables.html#env-files)

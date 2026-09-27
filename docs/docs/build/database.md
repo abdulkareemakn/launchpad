@@ -37,17 +37,11 @@ For a hosted environment, use a managed URI such as MongoDB Atlas (`mongodb+srv:
 Configure database users, network access, backups, and production separation for the
 managed service you choose.
 
-Start MongoDB locally:
+Start MongoDB locally with Docker:
 
-=== "Windows"
-
-    The Community Server installer runs it as the `MongoDB` service.
-
-=== "macOS / Linux"
-
-    ```sh
-    pnpm db:up
-    ```
+```sh
+pnpm db:up
+```
 
 The server connects before accepting requests. Startup fails if MongoDB is unavailable, and graceful shutdown closes the connection.
 

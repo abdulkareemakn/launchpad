@@ -26,27 +26,16 @@ connection string and skip the local database step below.
 
 ## Start MongoDB
 
-=== "Windows"
+With Docker running, start the local MongoDB and RustFS services from the repository
+root:
 
-    The MongoDB Community Server installer starts the `MongoDB` Windows service. No
-    Docker command is needed. If it has been stopped, start it from **Services** or
-    run PowerShell as an administrator:
+```sh
+pnpm db:up
+```
 
-    ```powershell
-    Start-Service MongoDB
-    ```
-
-=== "macOS / Linux"
-
-    ```sh
-    pnpm db:up
-    ```
-
-    This runs `compose.db.yaml`, stores data in the `mongo-data` Docker volume, and
-    publishes MongoDB on `127.0.0.1:27017`. It also starts RustFS for local file
-    storage. Stop both with `pnpm db:down` when you are finished.
-
-For local file uploads, complete the [RustFS setup and one-time bucket creation](/installation/development-workflow/#file-storage) before uploading. That section includes native Windows alternatives for developers without Docker.
+This runs `compose.db.yaml`, stores data in Docker volumes, and publishes MongoDB on
+`127.0.0.1:27017`. Stop both services with `pnpm db:down` when you are finished.
+Create the local RustFS bucket once using the [file storage setup](/installation/development-workflow/#file-storage).
 
 ## Run the client and server
 

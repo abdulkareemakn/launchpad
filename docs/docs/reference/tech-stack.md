@@ -51,5 +51,5 @@ For the exact installed dependency graph, inspect `pnpm-lock.yaml` in the applic
 
 ## References
 
-- [Application repository](https://github.com/abdulkareemakn/mern-app-starter)
+- [Application repository](https://github.com/abdulkareemakn/launchpad)
 - [Commands](/reference/commands)

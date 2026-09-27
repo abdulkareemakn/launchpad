@@ -72,7 +72,7 @@ export function createAuth(config: Config) {
 }
 ```
 
-Keep the existing URL, secret, trusted origin, client IP handling, password limits, and rate limit when you add a feature. The standalone local MongoDB server has no multi-document transactions; use a replica set and pass its client to the adapter if a later feature needs them.
+Keep the existing URL, secret, trusted origin, client IP handling, password limits, and rate limit when you add a feature. The local Compose MongoDB runs as a standalone server without multi-document transactions; use a replica set and pass its client to the adapter if a later feature needs them.
 
 ### Client configuration
 

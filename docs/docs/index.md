@@ -6,62 +6,35 @@ sidebar:
   order: 0
 ---
 
+<div class="home-hero" markdown>
+
+<div class="home-hero__copy" markdown>
+
 # Launchpad
 
-A complete starter kit for the MERN stack. Launchpad connects a React client,
-Express API, MongoDB database, authentication, email, and file storage foundations
-in one repository, with guides for setup, development, and deployment.
+Build and ship a full stack app with  **React**, **Express API**, **Node** and **MongoDB**.
 
-See the [tech stack reference](/reference/tech-stack) for the complete technology list.
+An opinionated MERN starter with authentication, email, file storage, and practical guides from first install to production.
 
-Read this site in order if this is your first full-stack app. It starts with getting
-the project running, then covers the decisions that shape its interface, followed by
-the parts users depend on most: accounts, data, and safe API input.
-
-<div class="grid cards" markdown>
-
-- [**Start here**](/installation/prerequisites)
-
-  Install the workspace and run the client, server, and database together.
-
-- [**Design and UI**](/build/design-system)
-
-  Choose a visual direction before generating components or writing screens.
-
-- [**Build your app**](/build)
-
-  Build authentication, data, routes, UI, validation, and email features.
-
-- [**Code quality**](/quality)
-
-  Formatting, linting, tests, and documentation for the whole workspace.
-
-- [**Deployment**](/deployment)
-
-  Railway with MongoDB and private storage, Docker Compose, and production builds.
-
-- [**Reference**](/reference)
-
-  Commands, API endpoints, the security checklist, and starter references.
+[Get started](/installation/prerequisites){ .md-button .md-button--primary }
+[Explore the stack](/reference/tech-stack){ .md-button }
 
 </div>
 
-## What is included
+<div class="home-hero__art" markdown>
 
-- pnpm workspace with `apps/client`, `apps/server`, and `packages/shared`
-- React 19 + Vite 8 + TanStack Router (file-based routes)
-- Express 5 with async-aware error handling and Better Auth sessions
-- MongoDB through Mongoose, plus Better Auth's MongoDB adapter
-- React Email templates, Resend delivery, and Tailwind CSS v4
-- Oxfmt formatting, Oxlint linting, and Node-based tests
+![Launchpad mark](/assets/launchpad.svg){ .home-hero__logo }
 
-## How to use these docs
+</div>
+</div>
 
-Newcomers should read Start here, Design and UI, then Build your app. Contributors can
-use Code quality as their finishing checklist; operators can start with Deployment.
+<div class="home-features">
 
-## References
+<div class="home-card"><strong>Start building</strong><span>Set up the workspace and run the client, server, and database.</span></div>
+<div class="home-card"><strong>Design your UI</strong><span>Choose a visual direction, then build with fonts, icons, and components.</span></div>
+<div class="home-card"><strong>Add app features</strong><span>Build authentication, data, routes, validation, and email.</span></div>
+<div class="home-card"><strong>Ship with confidence</strong><span>Format, lint, and test the workspace before deploying.</span></div>
+<div class="home-card"><strong>Deploy your app</strong><span>Configure Railway, Docker Compose, and production builds.</span></div>
+<div class="home-card"><strong>Find a reference</strong><span>Look up commands, API endpoints, security guidance, and the stack.</span></div>
 
-- [React](https://react.dev/)
-- [Express](https://expressjs.com/)
-- [MongoDB](https://www.mongodb.com/docs/)
+</div>

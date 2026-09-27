@@ -45,7 +45,7 @@ This starter kit is organized as a monorepo, with separate pnpm workspaces for t
 ├── DESIGN.md                    # Product design direction
 ├── .oxfmtrc.json               # Oxfmt configuration
 ├── .oxlintrc.json              # Oxlint configuration
-├── compose.db.yaml             # Development MongoDB service
+├── compose.db.yaml             # Local MongoDB and RustFS services
 ├── compose.yaml                # Full app + MongoDB stack
 ├── deno.json                   # Legacy Deno Deploy configuration (unused by Railway)
 ├── Dockerfile                  # Production image build

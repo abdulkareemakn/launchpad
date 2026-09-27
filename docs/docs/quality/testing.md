@@ -134,13 +134,12 @@ artifacts are written under `test-results/` and are uploaded by CI when availabl
 
 ## Local prerequisites
 
-The project requires Node.js 24 or newer and pnpm.
+The project requires Node.js 24 or newer, pnpm, and Docker with Compose for MongoDB-backed tests.
 
 ### MongoDB
 
-Integration and E2E tests require a dedicated MongoDB server. On Windows, use the
-MongoDB service installed with Community Server. On macOS and Linux, start the local
-container with:
+Integration and E2E tests require MongoDB. Start the local container with Docker
+Compose:
 
 ```bash
 pnpm db:up
