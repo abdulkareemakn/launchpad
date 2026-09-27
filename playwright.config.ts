@@ -26,7 +26,8 @@ export default defineConfig({
   projects: [{ name: "chromium", use: { ...devices["Desktop Chrome"] } }],
   webServer: [
     {
-      command: "node --import ./apps/server/alias-runtime.js tests/e2e/server.ts",
+      command:
+        "node --import ./apps/server/alias-runtime.js tests/e2e/server.ts",
       url: "http://127.0.0.1:3001/api/health",
       reuseExistingServer: false,
       timeout: 30_000,

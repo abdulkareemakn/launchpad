@@ -1,6 +1,6 @@
 import { registerHooks } from "node:module";
-import { fileURLToPath, pathToFileURL } from "node:url";
 import { resolve } from "node:path";
+import { fileURLToPath, pathToFileURL } from "node:url";
 
 const root = fileURLToPath(new URL(".", import.meta.url));
 
@@ -11,7 +11,9 @@ registerHooks({
     const directory = context.parentURL.includes("/dist/") ? "dist" : "src";
     const extension = directory === "dist" ? ".js" : ".ts";
     return nextResolve(
-      pathToFileURL(resolve(root, directory, `${specifier.slice(2)}${extension}`)).href,
+      pathToFileURL(
+        resolve(root, directory, `${specifier.slice(2)}${extension}`),
+      ).href,
       context,
     );
   },

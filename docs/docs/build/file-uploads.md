@@ -111,13 +111,13 @@ private in the bucket; there is no public CDN URL.
 
 ## Implementation
 
-| File                                      | Responsibility                                             |
-| ----------------------------------------- | ---------------------------------------------------------- |
-| `apps/server/src/routes/uploads.ts`       | Create, confirm, and download routes with ownership checks |
-| `apps/server/src/schemas/uploads.ts`      | Metadata, ObjectId, and empty-body validation              |
-| `apps/server/src/models/file.ts`          | File metadata, ownership, status, and timestamps           |
-| `apps/server/src/lib/storage.ts`          | Presigned PUT/GET URLs and bucket HEAD/DELETE operations   |
-| `packages/shared/src/index.ts`            | Browser-safe upload response types                         |
+| File                                 | Responsibility                                             |
+| ------------------------------------ | ---------------------------------------------------------- |
+| `apps/server/src/routes/uploads.ts`  | Create, confirm, and download routes with ownership checks |
+| `apps/server/src/schemas/uploads.ts` | Metadata, ObjectId, and empty-body validation              |
+| `apps/server/src/models/file.ts`     | File metadata, ownership, status, and timestamps           |
+| `apps/server/src/lib/storage.ts`     | Presigned PUT/GET URLs and bucket HEAD/DELETE operations   |
+| `packages/shared/src/index.ts`       | Browser-safe upload response types                         |
 
 `app.ts` mounts the feature router behind `authMiddleware(auth)`. Both ID routes
 check that the record belongs to the session user.
@@ -148,7 +148,7 @@ success condition is a confirmed record followed by a working private download.
 | `503` from the API          | Storage connection settings are absent; complete configuration and restart the API.                |
 | `400` from the API          | Inspect `details` for an invalid filename, MIME type, byte count, ID, or unexpected body.          |
 | `401` or `403` from the API | Use a valid session belonging to the file owner.                                                   |
-| `409` during confirmation   | Complete the PUT first; retry if another confirmation changed the record. |
+| `409` during confirmation   | Complete the PUT first; retry if another confirmation changed the record.                          |
 | `422` during confirmation   | The stored size or MIME metadata differs from the values in step 1.                                |
 | Bucket signature error      | Check expiry, exact content type and length, and that the signed URL is unchanged.                 |
 | Browser CORS error          | Check the bucket's allowed origin, methods, and headers; CORS is separate from API authentication. |

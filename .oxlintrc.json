@@ -21,7 +21,7 @@
     "vitest/no-standalone-expect": "off",
     "vitest/require-mock-type-parameters": "off",
     "vitest/require-to-throw-message": "off",
-    "shadcn/no-restyle": ["error", {"allow": ["layout"]}],
+    "shadcn/no-restyle": ["error", { "allow": ["layout"] }],
     "shadcn/no-unknown-classes": "error",
     "shadcn/no-inline-styles": "error",
     "shadcn/require-static-classes": "error"

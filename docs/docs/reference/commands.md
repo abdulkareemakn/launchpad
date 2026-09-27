@@ -26,7 +26,7 @@ These are the root scripts currently provided by `package.json`.
 | `pnpm test:integration`               | Run all tests in `tests/integration/`            |
 | `pnpm test:e2e`                       | Run Playwright tests in Chromium                 |
 | `pnpm test:e2e:ui`                    | Open Playwright's interactive test UI            |
-| `pnpm db:up` / `pnpm db:down`         | Start or stop local MongoDB and RustFS                      |
+| `pnpm db:up` / `pnpm db:down`         | Start or stop local MongoDB and RustFS           |
 | `pnpm docker:up` / `pnpm docker:down` | Build/start or stop the complete stack           |
 
 ## Per-package scripts

@@ -174,10 +174,10 @@ Restart the API after changing configuration. Never prefix storage credentials w
 
 The following policy settings already have defaults:
 
-| Variable                        | Default                                           | Accepted values                                                                 |
-| ------------------------------- | ------------------------------------------------- | ------------------------------------------------------------------------------- |
-| `STORAGE_MAX_UPLOAD_BYTES`      | `26214400` (25 MiB)                               | Whole bytes from 1 to 5000000000                                                |
-| `STORAGE_ALLOWED_MIME_TYPES`    | `image/jpeg,image/png,image/webp,application/pdf` | Comma-separated MIME types with known extensions; no wildcards or empty entries |
+| Variable                     | Default                                           | Accepted values                                                                 |
+| ---------------------------- | ------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `STORAGE_MAX_UPLOAD_BYTES`   | `26214400` (25 MiB)                               | Whole bytes from 1 to 5000000000                                                |
+| `STORAGE_ALLOWED_MIME_TYPES` | `image/jpeg,image/png,image/webp,application/pdf` | Comma-separated MIME types with known extensions; no wildcards or empty entries |
 
 The allowlist is trimmed and lowercased during configuration parsing. Requests must
 use an exact resulting MIME type.

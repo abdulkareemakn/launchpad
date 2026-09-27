@@ -9,6 +9,7 @@ export default {
   resolve: {
     alias: Object.fromEntries(
       [
+        "@",
         "@aws-sdk/client-s3",
         "@aws-sdk/s3-request-presigner",
         "mime-types",
@@ -23,17 +24,19 @@ export default {
         "zod",
       ].map((name) => [
         name,
-        name === "better-auth/adapters/mongodb"
-          ? path.join(
-              serverNodeModules,
-              "better-auth/dist/adapters/mongodb-adapter/index.mjs",
-            )
-          : name === "better-auth/node"
+        name === "@"
+          ? path.resolve(import.meta.dirname, "apps/server/src")
+          : name === "better-auth/adapters/mongodb"
             ? path.join(
                 serverNodeModules,
-                "better-auth/dist/integrations/node.mjs",
+                "better-auth/dist/adapters/mongodb-adapter/index.mjs",
               )
-            : path.join(serverNodeModules, name),
+            : name === "better-auth/node"
+              ? path.join(
+                  serverNodeModules,
+                  "better-auth/dist/integrations/node.mjs",
+                )
+              : path.join(serverNodeModules, name),
       ]),
     ),
   },

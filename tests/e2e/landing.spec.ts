@@ -31,8 +31,5 @@ test("introduces the course starter", async ({ page }) => {
   ]);
   await expect(
     page.getByRole("link", { name: "Documentation" }).first(),
-  ).toHaveAttribute(
-    "href",
-    "https://mern-app-starter.pages.dev/installation/",
-  );
+  ).toHaveAttribute("href", "https://mern-app-starter.pages.dev/installation/");
 });
