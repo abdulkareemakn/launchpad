@@ -1,6 +1,6 @@
 {
   "deploy": {
-    "install": "npx --yes pnpm@11.3.0 install --frozen-lockfile",
+    "install": "deno run --unstable-unsafe-proto npm:pnpm@11.3.0/bin/pnpm.mjs install --frozen-lockfile",
     "build": "pnpm --filter @mern/client build && pnpm --filter @mern/server build",
     "runtime": {
       "type": "dynamic",
