@@ -10,7 +10,6 @@ const setupGuide = `${docs}/installation/installation/`;
 const productName = "Launchpad";
 const externalLogos: Record<string, string> = {
   react: "https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/react.svg",
-  bucket: "https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/backblaze.svg",
   "better-auth":
     "https://raw.githubusercontent.com/better-auth/better-auth/v1.7.5/docs/public/branding/svg/better-auth-mark-bg-light.svg",
   oxc: "https://cdn.jsdelivr.net/gh/oxc-project/oxc-assets@main/icon-flat-light.svg",
@@ -69,10 +68,10 @@ const chapters = [
         logo: "resend",
       },
       {
-        title: "Object storage",
+        title: "File uploads",
         description:
-          "Private S3-compatible uploads with signed URLs, ownership checks, upload confirmation, and private downloads.",
-        logo: "bucket",
+          "Secure uploads with signed URLs, ownership checks, upload confirmation, and private downloads, backed by S3-compatible storage with local RustFS.",
+        logo: "rustfs",
       },
       {
         title: "Reusable middleware",
@@ -90,13 +89,13 @@ const chapters = [
       {
         title: "Railway",
         description:
-          "Deploy the React client and Express API together from GitHub with the production Dockerfile.",
+          "Deploy the React client and Express API together from GitHub. Railway IaC provisions the web service, MongoDB, and private bucket automatically.",
         logo: "railway",
       },
       {
         title: "Docker & Compose",
         description:
-          "Compose files provide local MongoDB and storage services, plus a production app and database stack.",
+          "Compose files provide local MongoDB and RustFS object storage services, plus a production app, database, and object storage stack.",
         logo: "docker",
       },
       {
