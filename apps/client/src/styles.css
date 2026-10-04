@@ -24,6 +24,16 @@ body,
   background-color: var(--landing-accent-hover);
 }
 
+::selection {
+  background-color: #4b9ab5;
+  color: #fff;
+}
+
+::-moz-selection {
+  background-color: #4b9ab5;
+  color: #fff;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
