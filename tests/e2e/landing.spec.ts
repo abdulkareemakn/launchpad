@@ -21,7 +21,7 @@ test("introduces the course starter", async ({ page }) => {
     "Better Auth",
     "Zod validation",
     "Resend & local email",
-    "Object storage",
+    "File uploads",
     "Reusable middleware",
     "Railway",
     "Docker & Compose",
