@@ -46,10 +46,12 @@ For a local stack, copy `.env.example` to `.env`. Set a generated `BETTER_AUTH_S
 pnpm docker:up
 ```
 
-This runs `compose.yaml`: one app image, Express serving the SPA and API, and MongoDB
-on an internal network with a persistent volume. The app is published on port 3000 by
+This runs `compose.yaml`: one app image, Express serving the SPA and API, MongoDB
+on an internal network with a persistent volume, and a RustFS object storage service
+with its own volume. The app is published on port 3000 by
 default; change `APP_PORT` to use another host port. Stop `pnpm dev:ui` first if it is using
-that port.
+that port. For browser uploads in this stack, map `127.0.0.1 rustfs` in the host's
+`/etc/hosts` once so presigned URLs resolve the same way in the browser and the app.
 
 ## Data and volumes
 
@@ -59,9 +61,9 @@ Stop the stack with:
 pnpm docker:down
 ```
 
-This preserves its `mongo-data` volume. `docker compose down --volumes` permanently
-deletes the full-stack database. The local development database below uses a separate
-Compose project and volume, so it does not share accounts or data with this stack.
+This preserves its `mongo-data` and `rustfs-data` volumes. `docker compose down --volumes` permanently
+deletes the full-stack database and stored files. The local development database below uses a separate
+Compose project and volumes, so it does not share accounts or data with this stack.
 
 ## Local development database
 
@@ -72,7 +74,8 @@ pnpm db:up
 pnpm db:down
 ```
 
-It runs MongoDB 8.0 with a health check and exposes port 27017 only on loopback.
+It runs MongoDB 8.0 with a health check and exposes port 27017 only on loopback, plus a
+RustFS object storage service on loopback ports 9000 and 9001.
 
 ## What the template does not do
 

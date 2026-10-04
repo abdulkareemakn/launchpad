@@ -14,8 +14,20 @@ services:
       BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET:?Set BETTER_AUTH_SECRET in the root .env}
       RESEND_API_KEY: ${RESEND_API_KEY:-}
       TRUST_PROXY: ${TRUST_PROXY:-}
+      # Keep STORAGE_ENDPOINT and the browser-facing host identical: presigned
+      # URLs are signed for this host. For browser uploads in this local stack,
+      # map it once with `127.0.0.1 rustfs` in the host's /etc/hosts.
+      STORAGE_ENDPOINT: http://rustfs:9000
+      STORAGE_REGION: ${STORAGE_REGION:-us-east-1}
+      STORAGE_BUCKET: ${STORAGE_BUCKET:-mern-local}
+      STORAGE_ACCESS_KEY_ID: ${STORAGE_ACCESS_KEY_ID:?Set STORAGE_ACCESS_KEY_ID in the root .env}
+      STORAGE_SECRET_ACCESS_KEY: ${STORAGE_SECRET_ACCESS_KEY:?Set STORAGE_SECRET_ACCESS_KEY in the root .env}
+      STORAGE_MAX_UPLOAD_BYTES: ${STORAGE_MAX_UPLOAD_BYTES:-26214400}
+      STORAGE_ALLOWED_MIME_TYPES: ${STORAGE_ALLOWED_MIME_TYPES:-image/jpeg,image/png,image/webp,application/pdf}
     depends_on:
       mongo:
+        condition: service_healthy
+      rustfs:
         condition: service_healthy
     healthcheck:
       test:
@@ -50,5 +62,29 @@ services:
       retries: 12
     restart: unless-stopped
 
+  rustfs:
+    image: rustfs/rustfs:1.0.0@sha256:8cc9801755448b71a786705ce76692c77e14936cccd87cf2fc31842e58f4d1ff
+    # Object storage is accessible only to services on this Compose network;
+    # the published ports below are for the presigned-URL browser flow and console.
+    ports:
+      - "127.0.0.1:9000:9000"
+      - "127.0.0.1:9001:9001"
+    environment:
+      RUSTFS_ACCESS_KEY: ${STORAGE_ACCESS_KEY_ID:?Set STORAGE_ACCESS_KEY_ID in the root .env}
+      RUSTFS_SECRET_KEY: ${STORAGE_SECRET_ACCESS_KEY:?Set STORAGE_SECRET_ACCESS_KEY in the root .env}
+      RUSTFS_ADDRESS: ":9000"
+      RUSTFS_CONSOLE_ADDRESS: ":9001"
+      RUSTFS_CONSOLE_ENABLE: "true"
+    volumes:
+      - rustfs-data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://127.0.0.1:9000/health/ready"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 15s
+    restart: unless-stopped
+
 volumes:
   mongo-data:
+  rustfs-data:
