@@ -37,8 +37,8 @@ This site documents the shipped starter for learners, contributors, and operator
 18. Order “Start here” as prerequisites, installation, development workflow, then project structure. Installation must not send a beginner forward for a required step without explaining that sequence.
 19. Keep environment-variable documentation inside Development workflow. Installation may point to the exact setup section, but must make the handoff explicit.
 20. Put Design and UI before feature implementation.
-21. Within Design and UI, decide product direction, typography and fonts, icon strategy, colors, density, and shape before applying a design system or generating shadcn components.
-22. Keep typography and fonts together. Do not restore a separate Fonts page.
+21. Within Design and UI, decide product direction, typography and fonts, icon strategy, colors, density, and shape before applying a design system or generating shadcn components. Give typography, icons, and colors distinct decision pages.
+22. Keep typeface selection and typography guidance together on the Fonts page.
 23. Put Database and Authentication at the top of Build your app, followed by Validation, API routes, Client pages, Emails, Middleware, and the 404 page.
 24. Keep middleware and small edge concerns lower in the navigation.
 25. Merge topics that do not justify their own page. Create a page only when it has a distinct reader goal.

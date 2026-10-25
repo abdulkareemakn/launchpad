@@ -15,11 +15,13 @@ nav = [
     "installation/installation.md",
     "installation/development-workflow.md",
     "installation/project-structure.md",
+    "installation/project-kickoff.md",
   ] },
   { "Design and UI" = [
     "build/design-system.md",
     "build/fonts.md",
     "build/icons.md",
+    "build/colors.md",
     "build/shadcn-ui.md",
   ] },
   { "Build your app" = [

@@ -9,9 +9,7 @@ This starter kit uses shadcn/ui for interface components. Its CLI copies editabl
 source into `apps/client/src/components/ui`, where you own it. The starter uses its Base
 UI option because accessible primitives and editable code are a good fit for a starter.
 
-Choose your typography, colors, and icons on [Design and UI](/build/design-system)
-before applying a preset. `DESIGN.md` describes the decision; `styles.css` and copied
-components implement it.
+Choose your typography, colors, and icons on [Design and UI](/build/design-system), then read the [Fonts](/build/fonts), [Icons](/build/icons), and [Colors](/build/colors) guides before applying a preset. `DESIGN.md` describes the decision; `styles.css` and copied components implement it.
 
 ## Add components
 
