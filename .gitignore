@@ -8,6 +8,4 @@ dist/
 !.env.example
 *.local
 *.tsbuildinfo
-playwright-report/
-test-results/
 .DS_Store

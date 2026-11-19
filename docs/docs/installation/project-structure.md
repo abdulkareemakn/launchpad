@@ -53,9 +53,8 @@ This starter kit is organized as a monorepo, with separate Bun workspaces for th
 ├── Dockerfile                  # Production image build
 ├── docs/                       # Documentation site
 ├── package.json                # Root scripts and workspace metadata
-├── playwright.config.ts         # End-to-end test configuration
 ├── tsconfig.json               # Shared TypeScript options and root test config
-├── tests/                      # Unit, integration, and end-to-end tests
+├── tests/                      # Unit and integration tests
 ├── vitest.config.ts             # Unit and integration test configuration
 └── bun.lock                    # Locked dependency versions
 ```

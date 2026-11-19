@@ -106,7 +106,7 @@ This site documents the shipped starter for learners, contributors, and operator
 72. shadcn/ui must explain that the CLI copies editable source into the repository and that Base UI supplies the underlying accessible primitives.
 73. API routes must explain the request and response contract before middleware and handler details.
 74. Client pages must explain file-based routing and generated route types before route APIs.
-75. Testing must explain the purpose and cost of unit, integration, and end-to-end tests before listing commands.
+75. Testing must explain the purpose and cost of unit and integration tests before listing commands.
 76. Deployment must start with the supported choices and their tradeoffs, then lead into provider-specific instructions.
 
 ### 9. References and maintenance

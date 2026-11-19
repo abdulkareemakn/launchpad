@@ -23,8 +23,6 @@
     "test": "bun run test:unit && bun run test:integration",
     "test:unit": "bun run --filter @mern/server test:unit",
     "test:integration": "bun run --filter @mern/server test:integration",
-    "test:e2e": "playwright test",
-    "test:e2e:ui": "playwright test --ui",
     "db:up": "docker compose -f compose.db.yaml up -d --wait",
     "db:down": "docker compose -f compose.db.yaml down",
     "docker:up": "docker compose up -d --build --wait",

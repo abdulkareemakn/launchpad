@@ -24,8 +24,6 @@ These are the root scripts currently provided by `package.json`.
 | `bun run test`                      | Run unit tests followed by API integration tests |
 | `bun run test:unit`                 | Run all tests in `tests/unit/`                   |
 | `bun run test:integration`          | Run all tests in `tests/integration/`            |
-| `bun run test:e2e`                  | Run Playwright tests in Chromium                 |
-| `bun run test:e2e:ui`               | Open Playwright's interactive test UI            |
 | `bun db:up` / `bun db:down`         | Start or stop local MongoDB and RustFS           |
 | `bun docker:up` / `bun docker:down` | Build/start or stop the complete stack           |
 
