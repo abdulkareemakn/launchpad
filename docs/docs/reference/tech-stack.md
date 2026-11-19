@@ -5,14 +5,14 @@ description: The starter's direct dependencies and the files that define their v
 
 # Tech stack
 
-The starter is a pnpm workspace. This page names the tools you work with directly; the manifests and lockfile are the source of truth for versions, including transitive packages.
+The starter is a Bun workspace. This page names the tools you work with directly; the manifests and lockfile are the source of truth for versions, including transitive packages.
 
 ## Runtime and workspace
 
 | Tool                | Role                           | Canonical file                       |
 | ------------------- | ------------------------------ | ------------------------------------ |
 | Node.js 24 or newer | Application runtime            | Root `package.json` `engines`        |
-| pnpm 11.3.0         | Workspace and package manager  | Root `package.json` `packageManager` |
+| Bun 1.4.4           | Workspace and package manager  | Root `package.json` `packageManager` |
 | TypeScript          | Type checking and server build | Root `package.json`                  |
 
 ## Client
@@ -47,7 +47,7 @@ Check `apps/server/package.json` for versions. `compose.db.yaml` and `compose.ya
 
 `packages/emails/package.json` defines React Email; `packages/mail/package.json` defines MailDev. The root and server manifests define Oxfmt, Oxlint, Vitest, Supertest, and Playwright. `Dockerfile` builds the production image; Railway builds it from GitHub. The root manifest includes the Railway CLI and IaC SDK. `compose.yaml` defines the local container path. See [Railway deployment](/deployment/production) for infrastructure and production configuration.
 
-For the exact installed dependency graph, inspect `pnpm-lock.yaml` in the application repository. Update this page when a direct technology or its role changes, not for every lockfile refresh.
+For the exact installed dependency graph, inspect `bun.lock` in the application repository. Update this page when a direct technology or its role changes, not for every lockfile refresh.
 
 ## References
 

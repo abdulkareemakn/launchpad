@@ -12,7 +12,7 @@ This starter kit uses [Oxfmt](https://oxc.rs/docs/guide/usage/formatter) to form
 Run this from the repository root:
 
 ```sh
-pnpm format
+bun format
 ```
 
 This applies Oxlint's safe fixes, then writes Oxfmt changes and sorts imports. Review the resulting diff because the command can update several packages.
@@ -20,7 +20,7 @@ This applies Oxlint's safe fixes, then writes Oxfmt changes and sorts imports. R
 ## Check without writing
 
 ```sh
-pnpm check
+bun check
 ```
 
 This runs Oxlint and verifies Oxfmt output without changing files. Use it before committing and in continuous integration.
@@ -42,13 +42,13 @@ The root configuration uses Oxfmt defaults, enables import sorting, and excludes
 }
 ```
 
-Oxfmt also respects `.gitignore`, ignores dependency and version-control directories, and always ignores lockfiles. Do not hand-format `routeTree.gen.ts`, generated documentation, or `pnpm-lock.yaml`; their generators own those files.
+Oxfmt also respects `.gitignore`, ignores dependency and version-control directories, and always ignores lockfiles. Do not hand-format `routeTree.gen.ts`, generated documentation, or `bun.lock`; their generators own those files.
 
 ## Editor setup
 
 Install the recommended Oxc extension in VS Code or a compatible editor. The committed workspace settings use it for supported files, enable format-on-save, and apply explicit safe lint fixes on save.
 
-Keep shared policy in the root configuration. Add an option only when the project needs a stable rule that differs from Oxfmt's default. After a global rule changes, run `pnpm format` and review the full diff.
+Keep shared policy in the root configuration. Add an option only when the project needs a stable rule that differs from Oxfmt's default. After a global rule changes, run `bun format` and review the full diff.
 
 ## References
 

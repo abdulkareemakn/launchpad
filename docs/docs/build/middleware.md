@@ -166,8 +166,8 @@ The central handler is the fallback for malformed JSON, oversized bodies, and un
 Middleware is best tested through a small Express app with Supertest. Verify both branches: rejected requests return the expected status and accepted requests reach a handler with the expected `res.locals` value.
 
 ```sh
-pnpm test:integration
-pnpm typecheck
+bun run test:integration
+bun typecheck
 ```
 
 ## References

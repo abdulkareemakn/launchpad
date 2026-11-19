@@ -12,10 +12,10 @@ and MongoDB is running locally.
 ## Install dependencies
 
 ```sh
-pnpm install
+bun install
 ```
 
-Run this from the repository root. pnpm installs all workspace packages and
+Run this from the repository root. Bun installs all workspace packages and
 uses the checked-in lockfile to keep dependency versions consistent.
 
 ## Create your environment file
@@ -30,29 +30,29 @@ With Docker running, start the local MongoDB and RustFS services from the reposi
 root:
 
 ```sh
-pnpm db:up
+bun db:up
 ```
 
 This runs `compose.db.yaml`, stores data in Docker volumes, and publishes MongoDB on
-`127.0.0.1:27017`. Stop both services with `pnpm db:down` when you are finished.
+`127.0.0.1:27017`. Stop both services with `bun db:down` when you are finished.
 Create the local RustFS bucket once using the [file storage setup](/installation/development-workflow/#file-storage).
 
 ## Run the client and server
 
 ```sh
-pnpm dev
-pnpm dev:ui
+bun dev
+bun dev:ui
 ```
 
 Run the commands in separate terminals:
 
-- client: [http://localhost:3000](http://localhost:3000) via `pnpm dev:ui`
-- API: [http://localhost:3001](http://localhost:3001) via `pnpm dev`
-- MailDev inbox: [http://localhost:3003](http://localhost:3003) via `pnpm dev`
-- local SMTP: `localhost:3025` via `pnpm dev`
-- optional email preview: [http://localhost:3002](http://localhost:3002) via `pnpm dev:mail`
+- client: [http://localhost:3000](http://localhost:3000) via `bun dev:ui`
+- API: [http://localhost:3001](http://localhost:3001) via `bun dev`
+- MailDev inbox: [http://localhost:3003](http://localhost:3003) via `bun dev`
+- local SMTP: `localhost:3025` via `bun dev`
+- optional email preview: [http://localhost:3002](http://localhost:3002) via `bun dev:mail`
 
-Press Ctrl+C in either terminal to stop that command. Vite's interactive keyboard commands are available in the `pnpm dev:ui` terminal.
+Press Ctrl+C in either terminal to stop that command. Vite's interactive keyboard commands are available in the `bun dev:ui` terminal.
 
 ## Verify the setup
 
@@ -66,5 +66,5 @@ Next, read [Development workflow](/installation/development-workflow) for the da
 
 ## References
 
-- [pnpm installation](https://pnpm.io/installation)
+- [Bun installation](https://bun.com/docs/installation)
 - [Development workflow](/installation/development-workflow)

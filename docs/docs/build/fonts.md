@@ -25,7 +25,7 @@ require a request to a third-party font CDN.
 For example:
 
 ```sh
-pnpm --filter @mern/client add @fontsource-variable/inter
+bun add --filter @mern/client @fontsource-variable/inter
 ```
 
 Import the family once in `apps/client/src/main.tsx`:

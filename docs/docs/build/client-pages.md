@@ -50,7 +50,7 @@ TanStack Router generates `apps/client/src/routeTree.gen.ts` during development,
 Regenerate it explicitly when needed:
 
 ```sh
-pnpm --filter @mern/client generate-routes
+bun --filter @mern/client generate-routes
 ```
 
 ### Link between pages
@@ -177,9 +177,9 @@ See [404 page](/build/not-found-page) before changing the fallback.
 Run the client, open `http://localhost:3000/widgets`, and check its loading, empty, success, and error states. Then run:
 
 ```sh
-pnpm --filter @mern/client generate-routes
-pnpm typecheck
-pnpm check
+bun --filter @mern/client generate-routes
+bun typecheck
+bun check
 ```
 
 ## Next step

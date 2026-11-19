@@ -5,21 +5,21 @@ description: Catch JavaScript and TypeScript correctness problems with Oxlint.
 
 # Linting with Oxlint
 
-This starter kit uses [Oxlint](https://oxc.rs/docs/guide/usage/linter) for JavaScript and TypeScript linting. The root `.oxlintrc.json` applies one rule set throughout the pnpm workspace.
+This starter kit uses [Oxlint](https://oxc.rs/docs/guide/usage/linter) for JavaScript and TypeScript linting. The root `.oxlintrc.json` applies one rule set throughout the Bun workspace.
 
 ## Run the linter
 
 ```sh
-pnpm lint
+bun lint
 ```
 
 Apply safe automatic fixes with:
 
 ```sh
-pnpm lint:fix
+bun lint:fix
 ```
 
-`pnpm check` runs the linter and the Oxfmt formatting check together.
+`bun check` runs the linter and the Oxfmt formatting check together.
 
 ## Configuration
 
@@ -59,15 +59,15 @@ Generated routes, generated documentation, and agent tooling are ignored. Keep l
 
 1. Read the rule name and explanation.
 2. Fix the code when the rule identifies a real issue.
-3. Run `pnpm lint:fix` for safe mechanical fixes.
-4. Run `pnpm check` again.
+3. Run `bun lint:fix` for safe mechanical fixes.
+4. Run `bun check` again.
 
 Do not disable a rule only to make the command green. If a rule conflicts with the repository's runtime or generated code, add the narrowest root override and record the reason.
 
 To check one path while iterating, run:
 
 ```sh
-pnpm exec oxlint apps/server/src
+Bun exec oxlint apps/server/src
 ```
 
 ## References

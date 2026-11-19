@@ -12,7 +12,7 @@ platform at that process.
 ## Build
 
 ```sh
-pnpm build
+bun run build
 ```
 
 This builds the client into `apps/client/dist` and compiles the server into
@@ -42,10 +42,10 @@ inject these values directly; a deployed `.env` file is not required. See
 ## Run
 
 ```sh
-pnpm start
+bun start
 ```
 
-`pnpm start` runs the compiled server. It listens on port 3001 unless `PORT` is set,
+`bun start` runs the compiled server. It listens on port 3001 unless `PORT` is set,
 serves `apps/client/dist`, and falls back to the SPA for browser routes. Your public
 URL must reach this server directly or through a reverse proxy.
 

@@ -1,8 +1,10 @@
 {
+  "extends": "../../tsconfig.json",
   "include": ["src/**/*.ts"],
   "compilerOptions": {
     "target": "ES2023",
     "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "resolveJsonModule": true,
     "rootDir": "src",
     "outDir": "dist",
@@ -12,10 +14,6 @@
     "customConditions": ["development"],
     "rewriteRelativeImportExtensions": true,
     "erasableSyntaxOnly": true,
-    "verbatimModuleSyntax": true,
-    "strict": true,
-    "skipLibCheck": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true
+    "noEmit": false
   }
 }
