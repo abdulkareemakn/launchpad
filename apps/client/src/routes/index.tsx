@@ -105,9 +105,9 @@ const chapters = [
         logo: "oxc",
       },
       {
-        title: "Unit, integration & end-to-end tests",
+        title: "Unit & integration tests",
         description:
-          "Vitest unit and API integration tests, Playwright end-to-end tests, and MongoDB-backed CI workflows.",
+          "Vitest unit and API integration tests with MongoDB-backed CI workflows.",
         logo: "vitest",
       },
       {

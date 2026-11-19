@@ -218,12 +218,10 @@ and [Oxlint](https://oxc.rs/docs/guide/usage/linter) documentation.
 
 ```sh
 pnpm test
-pnpm test:e2e
 ```
 
 `pnpm test` runs the Vitest unit suite followed by the API integration suite.
-`pnpm test:e2e` runs the Playwright browser suite. Integration and E2E tests use
-separate randomly named databases when persistence is required. See
+Integration tests use a randomly named database when persistence is required. See
 [Commands](/reference/commands) and [Testing](/quality/testing) for the current test
 commands and database setup.
 

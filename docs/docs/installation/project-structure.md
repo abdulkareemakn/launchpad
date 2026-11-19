@@ -53,9 +53,8 @@ This starter kit is organized as a monorepo, with separate pnpm workspaces for t
 ├── Dockerfile                  # Production image build
 ├── docs/                       # Documentation site
 ├── package.json                # Root scripts and workspace metadata
-├── playwright.config.ts         # End-to-end test configuration
 ├── pnpm-workspace.yaml         # Workspace package globs
-├── tests/                      # Unit, integration, and end-to-end tests
+├── tests/                      # Unit and integration tests
 ├── vitest.config.ts             # Unit and integration test configuration
 └── pnpm-lock.yaml              # Locked dependency versions
 ```
@@ -106,8 +105,7 @@ Put new code in the package that owns it:
 - Add routed browser pages under `apps/client/src/routes/`, and reusable UI components to `apps/client/src/components/ui/`.
 - Add browser/server response contracts to `packages/shared/src/index.ts`. Keep database and server-only code out of this package.
 - Add React Email templates to `packages/emails/`.
-- Add tests under `tests/unit/`, `tests/integration/`, or `tests/e2e/` for the
-  matching test level.
+- Add tests under `tests/unit/` or `tests/integration/` for the matching test level.
 
 ## Next step
 

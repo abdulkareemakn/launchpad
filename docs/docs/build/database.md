@@ -128,7 +128,7 @@ A unique index is the final protection against concurrent duplicate writes. Hand
 
 ## Test databases
 
-Integration and E2E tests use `TEST_MONGODB_URI`, then create a random `mern_test_*` or `mern_e2e_*` database. They never fall back to the application database.
+Integration tests use `TEST_MONGODB_URI`, then create a random `mern_test_*` database. They never fall back to the application database.
 
 ```bash
 TEST_MONGODB_URI=mongodb://127.0.0.1:27017
