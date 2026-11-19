@@ -15,7 +15,7 @@ export default defineRailway(() => {
   });
   const uploads = bucket("uploads", { region: "sin" });
   const web = service("web", {
-    source: github("abdulkareemakn/triage", { branch: "main" }),
+    source: github("abdulkareemakn/launchpad", { branch: "main" }),
     build: { builder: "DOCKERFILE", dockerfilePath: "Dockerfile" },
     healthcheck: "/api/health",
     deploy: { sleepApplication: true },
@@ -33,5 +33,5 @@ export default defineRailway(() => {
     },
   });
 
-  return project("triage", { resources: [database, uploads, web] });
+  return project("launchpad", { resources: [database, uploads, web] });
 });
