@@ -3,8 +3,6 @@ title: Fonts
 description: Choose a small type system and keep font files close to the app.
 ---
 
-# Fonts
-
 Choose three typefaces before building screens:
 
 - **Serif** for editorial or expressive moments

@@ -1,9 +1,11 @@
 ---
-title: Middleware
+title: Express middleware
 description: Compose Express middleware for authentication, Zod request validation, and centralized error handling.
+seo:
+  title: Middleware
+sidebar:
+  label: Middleware
 ---
-
-# Express middleware
 
 The starter kit uses Express middleware for work shared by several routes before the final handler runs. The starter keeps reusable middleware in `apps/server/src/middleware/` and uses `res.locals` for request-scoped, trusted data.
 

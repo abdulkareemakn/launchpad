@@ -1,9 +1,11 @@
 ---
-title: Formatting
+title: Formatting with Oxfmt
 description: Format the workspace consistently with the root Oxfmt configuration.
+seo:
+  title: Formatting
+sidebar:
+  label: Formatting
 ---
-
-# Formatting with Oxfmt
 
 This starter kit uses [Oxfmt](https://oxc.rs/docs/guide/usage/formatter) to format source, tests, documentation, and configuration files. The root `.oxfmtrc.json` keeps every workspace package consistent.
 

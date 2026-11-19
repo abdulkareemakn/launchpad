@@ -3,8 +3,6 @@ title: Colors
 description: Choose a color direction and let the agent map it to readable interface roles.
 ---
 
-# Colors
-
 Choose a color direction for the product, then let the agent build a small palette around it. A brand color by itself is not a usable interface palette: pages also need readable text, quiet surfaces, borders, focus indicators, and clear feedback for destructive actions.
 
 ## Choose a direction

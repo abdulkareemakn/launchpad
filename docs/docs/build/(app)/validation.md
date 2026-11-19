@@ -3,8 +3,6 @@ title: Validation
 description: Validate request data with Zod before application code uses it.
 ---
 
-# Validation
-
 This starter kit uses Zod to check data at the Express boundary. Browser forms help people enter valid values, but any client can send an API request. A schema checks the value at runtime and supplies its TypeScript type.
 
 The example feature throughout this section is a widget with a name. The starter already includes a separate `create-user.ts` example and `/api/example/users` route; the widget code below is a guide to add, not an endpoint that ships today.

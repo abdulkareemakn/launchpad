@@ -53,22 +53,22 @@ This site documents the shipped starter for learners, contributors, and operator
 31. Do not make every topic a peer heading. Heading depth must express the actual hierarchy.
 32. Keep paragraphs focused and reasonably short. Break dense reference material into lists or tables when that makes scanning easier.
 33. Use ordered lists for procedures, bullets for choices or facts, and tables for exact comparisons or mappings.
-34. Give code fences a language. Give file excerpts a Zensical title with the real repository path.
+34. Give code fences a language. Give file excerpts a Blume title with the real repository path.
 35. State the working directory before commands when it is not obvious.
 36. Make commands copyable. Do not hide required substitutions or prerequisites inside surrounding prose.
 
-### 5. Zensical components
+### 5. Blume components
 
 37. Use cards for section indexes and a small number of meaningful choices.
 38. Use content tabs for operating systems or genuinely parallel alternatives. Put Windows first.
 39. Use callouts for warnings, prerequisites, security boundaries, and easily missed consequences. Do not turn ordinary prose into decorative callouts.
 40. Use collapsible details for optional troubleshooting or advanced information that would interrupt the main path.
-41. Use code annotations only when a specific line needs explanation.
+41. Use line highlighting only when a specific line needs explanation.
 42. Use Mermaid only when a multi-step relationship is materially clearer as a diagram.
 43. Do not use ASCII diagrams as decoration. A small text tree remains acceptable for project structure.
 44. Use buttons only for a primary action on landing or setup pages where they improve navigation.
 45. Preview components in light and dark modes and at narrow widths. Components must remain readable and accessible.
-46. Stay within documented Zensical syntax. The current configuration already supports cards, tabs, admonitions, details, annotations, footnotes, tooltips, and Mermaid.
+46. Stay within documented Blume syntax. Pages that need components or directives are `.mdx`; Blume supports callouts, cards, tabs, expandable details, footnotes, tooltips, line highlighting, and Mermaid.
 
 ### 6. Platform guidance
 
@@ -92,7 +92,7 @@ This site documents the shipped starter for learners, contributors, and operator
 61. Preserve validation, security, accessibility, and data-loss protections even when simplifying examples.
 62. Use current official documentation for framework-specific syntax and behavior. Consult Context7 first where available.
 63. Prefer primary sources over third-party summaries.
-64. Run Zensical strict build and check the final diff for broken links, invalid component syntax, accidental em dashes, stale paths, and formatting problems.
+64. Run the Blume build and strict validation (`bun run build` and `bun run validate`) and check the final diff for broken links, invalid component syntax, accidental em dashes, stale paths, and formatting problems.
 
 ### 8. Required explanations for key pages
 
@@ -122,16 +122,19 @@ This site documents the shipped starter for learners, contributors, and operator
 
 ## Maintain the site
 
-Edit the relevant Markdown page, confirm examples against the application source, then build from the documentation repository root:
+Edit the relevant Markdown or MDX page, confirm examples against the application source, then build and validate from the documentation package:
 
 ```sh
-zensical build --clean --strict
+cd docs
+bun run build
+bun run validate
 ```
 
 Review the generated page at desktop and narrow widths in light and dark modes. Check internal links, navigation, headings, references, and the final Git diff before publishing. A changed command or environment variable should be updated at its canonical page and linked from other guides.
 
 ## References
 
-- [Zensical authoring](https://zensical.org/docs/authoring/)
-- [Zensical validation](https://zensical.org/docs/setup/validation/)
+- [Blume content authoring](https://useblume.dev/docs/content)
+- [Blume syntax and components](https://useblume.dev/docs/content/syntax)
+- [Blume CLI validation](https://useblume.dev/docs/cli/validate)
 - [Application repository](https://github.com/abdulkareemakn/launchpad)

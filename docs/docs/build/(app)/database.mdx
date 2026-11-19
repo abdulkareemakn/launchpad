@@ -1,19 +1,21 @@
 ---
-title: Database
+title: Database with MongoDB and Mongoose
 description: Connect to MongoDB, create Mongoose models, and use them safely from validated API routes.
+seo:
+  title: Database
+sidebar:
+  label: Database
 ---
-
-# Database with MongoDB and Mongoose
 
 The starter kit stores the application data in MongoDB.
 
 [Mongoose](https://mongoosejs.com/) is an ODM (Object Document Mapper) that makes MongoDB documents easier to describe and query from TypeScript. It is chosen here for its mature MongoDB model API and schema
 constraints.
 
-!!! note "Validation and database constraints solve different problems"
-
-    Zod is used for input validation at the application level while Mongoose protects write access at the database
-    level. It's a good habit to adopt both.
+:::note[Validation and database constraints solve different problems]
+Zod is used for input validation at the application level while Mongoose protects write access at the database
+level. It's a good habit to adopt both.
+:::
 
 ## Project structure
 

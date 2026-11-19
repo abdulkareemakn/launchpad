@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title">
   <title id="title">Launchpad</title>
   <style>
-    .tile { fill: #eef2ff; }
+    .tile { fill: var(--home-logo-tile, #eef2ff); }
     .mark { fill: #258ea6; }
     @media (prefers-color-scheme: dark) {
       .tile { fill: #1e293b; }

@@ -1,9 +1,11 @@
 ---
-title: Authentication
+title: Authentication with Better Auth
 description: Configure Better Auth for email/password auth, use its session on the server, and keep protected UI in sync with server authorization.
+seo:
+  title: Authentication
+sidebar:
+  label: Authentication
 ---
-
-# Authentication with Better Auth
 
 The starter kit uses Better Auth for authentication and authorization. Better Auth was chosen as it's considered the best TypeScript authentication library currently available, is free and open-source and you keep control of your own data.
 

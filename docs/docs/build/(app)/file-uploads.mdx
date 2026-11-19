@@ -3,8 +3,6 @@ title: File uploads
 description: Upload directly to a private bucket, confirm file metadata, and request temporary download links.
 ---
 
-# File uploads
-
 This starter kit uploads files directly to private object storage. Object storage keeps
 file bytes in a bucket; MongoDB keeps the file's owner, name, size, and upload status.
 Express checks permission and issues a presigned URL, a temporary link that authorizes
@@ -16,12 +14,12 @@ The [Railway deployment guide](/deployment/production) connects the bucket using
 infrastructure references. The starter ships backend routes; it does not include an
 upload component, a delete endpoint, or a public serving layer.
 
-!!! warning "A signed URL grants temporary access"
-
-    Anyone holding a presigned URL can use it until it expires. Keep these URLs out of
-    logs and public pages. The API checks the session and ownership before issuing a
-    download URL, but the bucket does not require that session when the URL is used.
-    Upload URLs can also be reused until expiry, including after confirmation.
+:::warning[A signed URL grants temporary access]
+Anyone holding a presigned URL can use it until it expires. Keep these URLs out of
+logs and public pages. The API checks the session and ownership before issuing a
+download URL, but the bucket does not require that session when the URL is used.
+Upload URLs can also be reused until expiry, including after confirmation.
+:::
 
 ## Configure storage
 
@@ -95,11 +93,11 @@ Success returns `200` with a `FileResponse`: `id`, `key`, `ownerId`, `originalNa
 dates are ISO strings, and `status` is now `confirmed`. Confirming an already
 confirmed record returns its existing timestamp.
 
-!!! note "Metadata validation is not content inspection"
-
-    Confirmation checks the stored length and declared MIME type. It does not inspect
-    file contents or scan for malware. The shared TypeScript response types describe
-    JSON contracts; Zod validates incoming request data at runtime.
+:::note[Metadata validation is not content inspection]
+Confirmation checks the stored length and declared MIME type. It does not inspect
+file contents or scan for malware. The shared TypeScript response types describe
+JSON contracts; Zod validates incoming request data at runtime.
+:::
 
 ### 4. Request a download
 

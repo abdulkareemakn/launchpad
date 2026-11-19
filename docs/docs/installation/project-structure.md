@@ -1,9 +1,11 @@
 ---
-title: Project Structure
+title: Project structure
 description: A tour of the Bun workspace, from the apps and packages to the root configuration files.
+seo:
+  title: Project Structure
+sidebar:
+  label: Project Structure
 ---
-
-# Project structure
 
 This starter kit is organized as a monorepo, with separate Bun workspaces for the client, server, and shared packages. This simplifies development by reducing context switching, eliminating redundant configuration, and keeping shared types in sync across the codebase. It also enables the Express API and React frontend to be served from a single deployment.
 
@@ -116,4 +118,4 @@ Continue to [Design and UI](/build/design-system) before adding screens.
 
 - [Bun workspaces](https://bun.com/docs/pm/workspaces)
 - [TanStack Router file-based routing](https://tanstack.com/router/latest/docs/framework/react/routing/file-based-routing)
-- [Build your app](/build/)
+- [Build your app](/build)

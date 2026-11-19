@@ -1,0 +1,26 @@
+---
+title: Code quality
+description: Keep the workspace consistent and verify changes before they ship.
+sidebar:
+  hidden: true
+---
+
+Run the checks from the repository root after each focused change.
+
+<CardGroup cols={2}>
+  <Card title="Formatting" href="/quality/formatting" icon="paintbrush">
+    Format source with Oxfmt.
+  </Card>
+  <Card title="Linting" href="/quality/linting" icon="scan-search">
+    Find common correctness and style problems.
+  </Card>
+  <Card title="Testing" href="/quality/testing" icon="flask-conical">
+    Run Vitest unit tests and Supertest API integration tests against in-memory
+    MongoDB.
+  </Card>
+</CardGroup>
+
+## References
+
+- [Development workflow](/installation/development-workflow)
+- [Commands](/reference/commands)

@@ -3,8 +3,6 @@ title: Emails
 description: Build React Email templates, inspect local messages with MailDev, and send production mail through Resend.
 ---
 
-# Emails
-
 This starter kit separates email authoring, local delivery, inspection, and production delivery:
 
 | Tool        | Responsibility                                                        |

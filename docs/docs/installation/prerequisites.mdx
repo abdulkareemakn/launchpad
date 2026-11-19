@@ -3,8 +3,6 @@ title: Prerequisites
 description: Install Git, Node.js 24+, Bun 1.4.4, and Docker before starting the workspace.
 ---
 
-# Prerequisites
-
 This starter kit needs Git, Node.js 24 or newer, Bun 1.4.4, and Docker with Compose.
 Docker runs the local MongoDB and RustFS services. A GitHub account is only needed if
 you plan to publish the repository or deploy the documentation site.
@@ -13,42 +11,49 @@ you plan to publish the repository or deploy the documentation site.
 
 Node.js 24+ is required.
 
-=== "Windows"
+<Tabs>
+<Tab title="Windows">
 
-    ```powershell
-    winget install --id Git.Git
-    winget install -e --id OpenJS.NodeJS
-    ```
+```powershell
+winget install --id Git.Git
+winget install -e --id OpenJS.NodeJS
+```
 
-=== "macOS"
+</Tab>
+<Tab title="macOS">
 
-    ```sh
-    brew install git node
-    ```
+```sh
+brew install git node
+```
 
-=== "Ubuntu / Debian / Mint"
+</Tab>
+<Tab title="Ubuntu / Debian / Mint">
 
-    ```sh
-    sudo apt install git
-    ```
+```sh
+sudo apt install git
+```
 
-    Install Node.js 24 or newer from the [official Node.js downloads](https://nodejs.org/en/download) and verify `node --version`. The distribution package may be older than the required version.
+Install Node.js 24 or newer from the [official Node.js downloads](https://nodejs.org/en/download) and verify `node --version`. The distribution package may be older than the required version.
 
-    ```sh
-    node --version
-    ```
+```sh
+node --version
+```
 
-=== "Fedora / RHEL"
+</Tab>
+<Tab title="Fedora / RHEL">
 
-    ```sh
-    sudo dnf install git
-    ```
+```sh
+sudo dnf install git
+```
 
-    Install Node.js 24 or newer from the [official Node.js downloads](https://nodejs.org/en/download) and verify `node --version`. The distribution package may be older than the required version.
+Install Node.js 24 or newer from the [official Node.js downloads](https://nodejs.org/en/download) and verify `node --version`. The distribution package may be older than the required version.
 
-    ```sh
-    node --version
-    ```
+```sh
+node --version
+```
+
+</Tab>
+</Tabs>
 
 Official install instructions: [Git](https://git-scm.com/downloads) · [Node.js](https://nodejs.org/en/download)
 
@@ -57,17 +62,17 @@ Official install instructions: [Git](https://git-scm.com/downloads) · [Node.js]
 The repository pins Bun 1.4.4 in the root `package.json`. Install that version with
 the official installer.
 
-=== "Windows"
+<CodeGroup>
 
-    ```powershell
-    powershell -c "irm bun.sh/install.ps1|iex"
-    ```
+```powershell title="Windows"
+powershell -c "irm bun.sh/install.ps1|iex"
+```
 
-=== "macOS / Linux"
+```sh title="macOS / Linux"
+curl -fsSL https://bun.com/install | bash
+```
 
-    ```sh
-    curl -fsSL https://bun.com/install | bash
-    ```
+</CodeGroup>
 
 Open a new terminal, then verify each tool:
 

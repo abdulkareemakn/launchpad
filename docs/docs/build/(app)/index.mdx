@@ -1,0 +1,56 @@
+---
+title: Build your app
+description: Build the application one connected concern at a time, from identity and data to routes, pages, and email.
+seo:
+  title: Development
+sidebar:
+  label: Development
+  hidden: true
+---
+
+Build in the same order your users experience the product. Start with the data your feature owns, then decide who can access it. Validate each request before an API route writes data. Add a client page once the server contract is clear.
+
+You do not need every page for every feature. A public read-only page, for example,
+may only need a route and database query. Start with the smallest relevant path.
+
+<CardGroup cols={2}>
+  <Card title="Database" href="/build/database" icon="database">
+    Add application models with Mongoose.
+  </Card>
+  <Card title="Authentication" href="/build/authentication" icon="shield-check">
+    Configure Better Auth and protect data on the server.
+  </Card>
+  <Card title="Validation" href="/build/validation" icon="check-check">
+    Check untrusted request data before it reaches the database or another
+    service.
+  </Card>
+  <Card title="API routes" href="/build/api-routes" icon="route">
+    Define a contract, implement an Express handler, and call it from the
+    client.
+  </Card>
+  <Card title="File uploads" href="/build/file-uploads" icon="upload">
+    Upload to private storage, confirm metadata, and request temporary
+    downloads.
+  </Card>
+  <Card title="Client pages" href="/build/client-pages" icon="app-window">
+    Add typed TanStack Router pages and loaders.
+  </Card>
+  <Card title="Emails" href="/build/emails" icon="mail">
+    Render React Email templates and send them with Resend.
+  </Card>
+  <Card title="Middleware" href="/build/middleware" icon="workflow">
+    Reuse authentication and authorization guards.
+  </Card>
+  <Card title="404 page" href="/build/not-found-page" icon="file-question-mark">
+    Customize the screen shown for an unknown URL.
+  </Card>
+</CardGroup>
+
+## Next step
+
+Start with [Database](/build/database), then follow the widget example through Validation, API routes, and Client pages.
+
+## References
+
+- [Project structure](/installation/project-structure)
+- [Development workflow](/installation/development-workflow)

@@ -3,8 +3,6 @@ title: Security checklist
 description: Confirm these settings before exposing an environment to real users.
 ---
 
-# Security checklist
-
 Run this checklist before exposing an environment to real users.
 
 ## Secrets

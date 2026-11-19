@@ -3,8 +3,6 @@ title: Project kickoff
 description: Give an agent a product brief and let it prepare this starter around your decisions.
 ---
 
-# Project kickoff
-
 Use the prompt below when you are ready to turn this starter into an application. Replace the bracketed brief with what you know. If you are unsure about a choice, say “recommend for me” and let the agent propose a direction.
 
 ```text

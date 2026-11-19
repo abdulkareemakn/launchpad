@@ -3,8 +3,6 @@ title: Icons
 description: Choose one coherent icon system and add brand marks only when needed.
 ---
 
-# Icons
-
 Pick an icon style that fits the product, then let the agent apply it
 consistently. The starter uses [Lucide](https://lucide.dev/) for interface icons
 because it works with shadcn/ui and gives the UI one clear visual language.

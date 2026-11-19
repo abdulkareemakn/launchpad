@@ -3,8 +3,6 @@ title: Development workflow
 description: The commands you run while building, including dev servers, type checking, formatting, and tests.
 ---
 
-# Development workflow
-
 This starter kit gives each local service a fixed localhost port and keeps interactive tools in separate terminals. Return to this page while you work. The normal loop is simple: run the app,
 make one focused change, check it, then run the smallest test that can prove it works.
 
@@ -25,17 +23,17 @@ their own setup instructions.
 The root `.env` file holds settings that change between your computer, tests, and a
 production host. Copy the safe template once:
 
-=== "Windows PowerShell"
+<CodeGroup>
 
-    ```powershell
-    Copy-Item .env.example .env
-    ```
+```powershell title="Windows PowerShell"
+Copy-Item .env.example .env
+```
 
-=== "macOS / Linux"
+```sh title="macOS / Linux"
+cp .env.example .env
+```
 
-    ```sh
-    cp .env.example .env
-    ```
+</CodeGroup>
 
 Generate a value for `BETTER_AUTH_SECRET` and paste it into `.env`:
 
@@ -49,10 +47,10 @@ own in-memory MongoDB server and need no test database setting. `APP_URL` and
 database URL, or API key in a variable beginning with `VITE_`: Vite exposes those to
 browser code.
 
-!!! warning "Keep `.env` private"
-
-    Commit `.env.example`, never `.env`. Production hosts should inject the same values
-    through their secret settings instead of copying a development file.
+:::warning[Keep `.env` private]
+Commit `.env.example`, never `.env`. Production hosts should inject the same values
+through their secret settings instead of copying a development file.
+:::
 
 ### File storage
 

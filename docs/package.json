@@ -1,0 +1,13 @@
+{
+  "name": "@mern/docs",
+  "private": true,
+  "scripts": {
+    "dev": "blume dev",
+    "build": "blume build",
+    "preview": "blume preview",
+    "validate": "blume validate --strict"
+  },
+  "dependencies": {
+    "blume": "^2"
+  }
+}

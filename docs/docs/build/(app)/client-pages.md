@@ -1,9 +1,11 @@
 ---
-title: Client Pages
+title: Client pages with TanStack Router
 description: Add typed pages, loaders, links, path parameters, and search parameters with TanStack Router.
+seo:
+  title: Client Pages
+sidebar:
+  label: Client Pages
 ---
-
-# Client pages with TanStack Router
 
 This starter kit uses [TanStack Router](https://tanstack.com/router/latest) with file-based routing. Files in `apps/client/src/routes/` become URLs, and the generated route tree provides typed navigation, parameters, search values, and loader data.
 

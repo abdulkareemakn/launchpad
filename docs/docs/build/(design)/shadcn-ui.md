@@ -3,8 +3,6 @@ title: shadcn/ui
 description: Add and maintain shadcn components on the Base UI foundation.
 ---
 
-# shadcn/ui
-
 This starter kit uses shadcn/ui for interface components. Its CLI copies editable component
 source into `apps/client/src/components/ui`, where you own it. The starter uses its Base
 UI option because accessible primitives and editable code are a good fit for a starter.
@@ -72,7 +70,7 @@ Test keyboard navigation, focus containment and return for overlays, disabled/er
 
 ## Next step
 
-Continue to [Build your app](/build/) when your design direction is ready.
+Continue to [Build your app](/build) when your design direction is ready.
 
 ## References
 

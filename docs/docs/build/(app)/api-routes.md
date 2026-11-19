@@ -1,9 +1,11 @@
 ---
-title: API Routes
+title: API routes with Express
 description: Build Express 5 API routes with shared response contracts, Zod request validation, and integration tests.
+seo:
+  title: API Routes
+sidebar:
+  label: API Routes
 ---
-
-# API routes with Express
 
 This starter kit uses Express 5 to expose application data to its React client. An API route is the agreement between the browser and server: what the browser can ask
 for, what it gets back, and what happens when the request is invalid.

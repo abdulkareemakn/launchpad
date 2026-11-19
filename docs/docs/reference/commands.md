@@ -3,8 +3,6 @@ title: Commands
 description: Every script in the root package.json, what it runs, and when to use it.
 ---
 
-# Commands
-
 All commands run from the repository root unless noted.
 
 ## Root scripts
