@@ -26,20 +26,23 @@ This starter kit is organized as a monorepo, with separate pnpm workspaces for t
 │   │   └── vite.config.ts
 │   ├── server/                 # Express + MongoDB API
 │   │   ├── src/
-│   │   │   ├── app.ts          # API routes
+│   │   │   ├── app.ts          # Express app assembly and error handling
 │   │   │   ├── auth.ts         # Better Auth configuration
 │   │   │   ├── config.ts       # Environment validation
 │   │   │   ├── database.ts     # MongoDB connection
 │   │   │   ├── index.ts        # Server startup
-│   │   │   ├── lib/            # Server integrations, such as email
+│   │   │   ├── lib/            # Server integrations, such as email and storage
 │   │   │   ├── middleware/     # Authentication and authorization guards
+│   │   │   ├── models/         # Mongoose models
+│   │   │   ├── routes/         # Feature routers mounted under /api
 │   │   │   └── schemas/        # Request-validation schemas
 │   │   └── tsconfig.json
 ├── packages/
 │   ├── emails/                 # React Email templates
 │   ├── mail/                   # Local MailDev service
-│   └── shared/                 # Browser-safe shared TypeScript contracts
+│   └── shared/                 # Types-only contracts shared by client and server
 │       └── src/index.ts
+├── .railway/                   # Railway project and service definitions
 ├── .vscode/                    # Workspace editor settings
 ├── .env.example                # Local environment template
 ├── DESIGN.md                    # Product design direction
@@ -47,8 +50,8 @@ This starter kit is organized as a monorepo, with separate pnpm workspaces for t
 ├── .oxlintrc.json              # Oxlint configuration
 ├── compose.db.yaml             # Local MongoDB and RustFS services
 ├── compose.yaml                # Full app + MongoDB stack
-├── deno.json                   # Legacy Deno Deploy configuration (unused by Railway)
 ├── Dockerfile                  # Production image build
+├── docs/                       # Documentation site
 ├── package.json                # Root scripts and workspace metadata
 ├── playwright.config.ts         # End-to-end test configuration
 ├── pnpm-workspace.yaml         # Workspace package globs
@@ -86,12 +89,14 @@ Most root-level configuration is for development and deployment:
 - `compose.db.yaml` starts MongoDB for local development; `compose.yaml` starts
   the production-style app and MongoDB stack.
 - `Dockerfile` builds the client and server into the production image.
+- `.railway/` defines the Railway project and its services.
 
 ## Where to add code
 
 Put new code in the package that owns it:
 
-- Add API endpoints in `apps/server/src/app.ts` and server integrations under
+- Add feature routers under `apps/server/src/routes/`, mount them in
+  `apps/server/src/app.ts`, and add server integrations under
   `apps/server/src/lib/`.
 - Add authentication changes in `apps/server/src/auth.ts`; keep environment
   validation in `apps/server/src/config.ts`.

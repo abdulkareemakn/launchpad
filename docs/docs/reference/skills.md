@@ -9,7 +9,7 @@ These skills live in `.agents/skills/` in the application repository. They guide
 coding agents; they are not runtime dependencies of the application.
 
 The `better-*` skills are integrated in the primary repository at
-`/home/abdulkareem/code/mern/.agents/skills/`. They are not copied into this
+`/home/abdulkareem/code/launchpad/.agents/skills/`. They are not copied into this
 documentation repository; this repo documents the application repository's
 skills and links to them.
 
