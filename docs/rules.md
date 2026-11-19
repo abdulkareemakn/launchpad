@@ -81,7 +81,7 @@ This site documents the shipped starter for learners, contributors, and operator
 
 ### 7. Repository and technical accuracy
 
-53. Treat `~/code/mern` as the source of truth for shipped behavior.
+53. Treat `~/code/launchpad` as the source of truth for shipped behavior.
 54. Verify every path, script, environment variable, port, endpoint, package, generated file, test command, and deployment claim against the current repository.
 55. Inspect the relevant implementation and its callers before documenting a pattern.
 56. Distinguish existing code from code the reader is being asked to create.
