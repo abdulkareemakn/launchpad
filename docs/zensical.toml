@@ -69,8 +69,8 @@ extra_css = ["stylesheets/home.css"]
 # custom_dir = "overrides"
 favicon = "assets/favicon.svg"
 
-font.text = "Rubik"
-font.code = "Martian Mono"
+font.text = "IBM Plex Sans"
+font.code = "IBM Plex Mono"
 language = "en"
 features = [
   # "content.action.edit",
