@@ -3,8 +3,6 @@ title: Tech stack
 description: The starter's direct dependencies and the files that define their versions.
 ---
 
-# Tech stack
-
 The starter is a Bun workspace. This page names the tools you work with directly; the manifests and lockfile are the source of truth for versions, including transitive packages.
 
 ## Runtime and workspace

@@ -1,9 +1,11 @@
 ---
-title: Linting
+title: Linting with Oxlint
 description: Catch JavaScript and TypeScript correctness problems with Oxlint.
+seo:
+  title: Linting
+sidebar:
+  label: Linting
 ---
-
-# Linting with Oxlint
 
 This starter kit uses [Oxlint](https://oxc.rs/docs/guide/usage/linter) for JavaScript and TypeScript linting. The root `.oxlintrc.json` applies one rule set throughout the Bun workspace.
 

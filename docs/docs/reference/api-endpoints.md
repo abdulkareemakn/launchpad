@@ -3,8 +3,6 @@ title: API endpoints
 description: The starter's HTTP surface, including health, the session-protected user route, and Better Auth endpoints.
 ---
 
-# API endpoints
-
 These are the routes the template ships. Add feature routes to `apps/server/src/app.ts` and keep their request/response contracts documented here.
 
 ## Health

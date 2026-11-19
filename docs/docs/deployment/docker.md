@@ -3,8 +3,6 @@ title: Docker
 description: Build the production image or run the complete application and MongoDB stack with Docker Compose.
 ---
 
-# Docker
-
 This starter kit includes a multi-stage `Dockerfile` that builds the client and server, then creates a
 smaller production image that runs as the non-root `node` user. Environment files are
 excluded from the image; provide secrets only at runtime.

@@ -3,8 +3,6 @@ title: Production build
 description: Build the workspace and run the Express server that serves both the API and React app.
 ---
 
-# Production build
-
 This starter kit uses one Express process in production. That process serves the built React app and its `/api` routes from
 the same origin. Build from the repository root, then point your HTTPS proxy or
 platform at that process.

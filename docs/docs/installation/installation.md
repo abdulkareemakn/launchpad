@@ -3,8 +3,6 @@ title: Install
 description: Install dependencies, generate the Better Auth secret, start MongoDB, and open the app.
 ---
 
-# Install
-
 This starter kit runs four local services on fixed localhost ports. After this page, the client is available at
 [http://localhost:3000](http://localhost:3000), the API is proxied through it,
 and MongoDB is running locally.

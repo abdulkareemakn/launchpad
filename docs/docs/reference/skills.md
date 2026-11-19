@@ -3,8 +3,6 @@ title: Agent skills
 description: The repository-local skills available to coding agents and the work they guide.
 ---
 
-# Agent skills
-
 These skills live in `.agents/skills/` in the application repository. They guide
 coding agents; they are not runtime dependencies of the application.
 
@@ -50,5 +48,5 @@ typechecking, or tests.
 
 ## References
 
-- [Code quality](/quality/)
+- [Code quality](/quality)
 - [Project structure](/installation/project-structure)

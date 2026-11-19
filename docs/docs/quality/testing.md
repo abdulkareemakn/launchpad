@@ -3,8 +3,6 @@ title: Testing
 description: Test schemas, API behavior, and authentication with Vitest and Supertest.
 ---
 
-# Testing
-
 This starter kit uses two test layers. Unit tests check isolated logic quickly, and API integration tests check how server pieces work together against in-memory MongoDB. Choose the cheapest layer that can prove a change works.
 
 The tests live under one root directory:

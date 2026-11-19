@@ -3,8 +3,6 @@ title: Recommendations
 description: Practical defaults for domains, documentation sites, and API references.
 ---
 
-# Recommendations
-
 These are opinionated defaults for a small-to-medium web project. Choose the
 boring option that solves the current problem, and change it when the project
 has a clear reason to do more.
@@ -31,16 +29,17 @@ until non-developers genuinely need one.
 
 | Situation                                           | Recommendation                                             |
 | --------------------------------------------------- | ---------------------------------------------------------- |
-| This starter or a Markdown-first project            | [Zensical](https://zensical.org/docs/create-your-site/)    |
+| This starter or a Markdown-first project            | [Blume](https://useblume.dev/docs/quickstart)              |
 | React/MDX, versioned docs, or a larger product site | [Docusaurus](https://docusaurus.io/docs/docs-introduction) |
 | Vue/Vite or a fast content-focused site             | [VitePress](https://vitepress.dev/guide/what-is-vitepress) |
 
-For this repository, keep using Zensical. It already matches the Markdown
-content, navigation, preview, and static build workflow here.
+For this repository, keep using Blume. Its file-based navigation, Markdown and
+MDX authoring, preview, and static build fit the content here without a separate
+documentation application.
 
 ## Small-project defaults
 
-- **Hosting:** use the deployment path already documented in [Deployment](/deployment/).
+- **Hosting:** use the deployment path already documented in [Deployment](/deployment).
 - **Email:** use a transactional provider such as [Resend](https://resend.com/docs) once production email is required.
 - **Search:** use the documentation host's built-in search before adding a separate search service.
 
@@ -48,6 +47,6 @@ content, navigation, preview, and static build workflow here.
 
 - [Cloudflare Registrar](https://developers.cloudflare.com/registrar/)
 - [Porkbun domain pricing](https://porkbun.com/products/domains)
-- [Zensical: create your site](https://zensical.org/docs/create-your-site/)
+- [Blume: quickstart](https://useblume.dev/docs/quickstart)
 - [Docusaurus docs introduction](https://docusaurus.io/docs/docs-introduction)
 - [VitePress: what is VitePress?](https://vitepress.dev/guide/what-is-vitepress)

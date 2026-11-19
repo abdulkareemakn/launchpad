@@ -1,5 +1,7 @@
 node_modules
-site
+.blume/
+dist/
+.env.local
 
 .DS_Store
 .cache

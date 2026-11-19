@@ -1,0 +1,107 @@
+/* Ported from the Zensical extra_css file. Material's --md-* tokens and
+   .md-* selectors do not exist in Blume; layout rules keep their intent with
+   Blume design tokens. */
+
+:root {
+  --home-logo-tile: #eef2ff;
+}
+
+:root[data-theme="dark"] {
+  --home-logo-tile: #1e293b;
+}
+
+.home-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 15rem;
+  align-items: center;
+  gap: 2rem;
+  margin: 2rem 0 3rem;
+}
+
+.home-hero__copy p {
+  max-width: 40rem;
+  line-height: 1.7;
+}
+
+.home-hero__copy .home-button {
+  display: inline-block;
+  margin: 0.5rem 0.5rem 0 0;
+  padding: 0.5rem 0.9rem;
+  border-radius: var(--blume-radius);
+  background: var(--blume-accent);
+  color: var(--blume-accent-foreground);
+  text-decoration: none;
+}
+
+.home-hero__copy .home-button--secondary {
+  background: var(--blume-muted);
+  color: var(--blume-foreground);
+}
+
+.home-hero__art {
+  display: grid;
+  aspect-ratio: 1;
+  place-items: center;
+}
+
+.home-hero__art img {
+  display: block;
+  width: 11rem;
+}
+
+.home-features {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.home-card {
+  display: flex;
+  min-height: 7rem;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--blume-border);
+  border-radius: var(--blume-radius);
+  color: var(--blume-foreground);
+  text-decoration: none;
+  transition:
+    border-color 150ms ease,
+    background-color 150ms ease;
+}
+
+.home-card:hover {
+  border-color: var(--blume-accent);
+  background: var(--blume-muted);
+}
+
+.home-card span {
+  color: var(--blume-muted-foreground);
+  font-size: 0.85rem;
+}
+
+@media (max-width: 700px) {
+  .home-hero {
+    grid-template-columns: minmax(0, 1fr) 6rem;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .home-hero__art {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: start;
+  }
+
+  .home-hero__art img {
+    width: 5.5rem;
+  }
+
+  .home-features {
+    grid-template-columns: 1fr;
+  }
+
+  .home-card {
+    min-height: auto;
+  }
+}
