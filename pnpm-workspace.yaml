@@ -9,3 +9,4 @@ allowBuilds:
   "@scarf/scarf": true
   esbuild: true
   lightningcss: true
+  mongodb-memory-server: true

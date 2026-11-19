@@ -2,7 +2,7 @@ import { randomBytes, randomUUID } from "node:crypto";
 
 import mongoose from "mongoose";
 import request from "supertest";
-import { afterAll, beforeAll, describe, expect, test } from "vitest";
+import { afterAll, beforeAll, describe, expect, inject, test } from "vitest";
 
 import { createApp } from "../../apps/server/src/app.ts";
 import { createAuth } from "../../apps/server/src/auth.ts";
@@ -26,6 +26,7 @@ beforeAll(async () => {
     APP_URL: origin,
     BETTER_AUTH_URL: origin,
     BETTER_AUTH_SECRET: randomBytes(32).toString("hex"),
+    TEST_MONGODB_URI: inject("mongoUri"),
   });
   await connectDatabase(config.mongodbUri, dbName);
   app = createApp(createAuth(config), config);

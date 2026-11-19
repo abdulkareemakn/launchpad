@@ -5,14 +5,14 @@ description: Test schemas, API behavior, authentication, and complete browser wo
 
 # Testing
 
-This starter kit uses three test layers. Unit tests check isolated logic quickly, API integration tests check how server pieces work together, and end-to-end tests check complete browser workflows. Choose the cheapest layer that can prove a change works.
+This starter kit uses three test layers. Unit tests check isolated logic quickly, API integration tests check how server pieces work together against an in-memory MongoDB, and end-to-end tests check complete browser workflows. Choose the cheapest layer that can prove a change works.
 
 The tests live under one root directory:
 
 ```text
 tests/
 ├── unit/                         # Fast, isolated server tests
-├── integration/                  # Express/API tests
+├── integration/                  # Express/API tests with in-memory MongoDB
 └── e2e/                          # Full browser workflows
     ├── auth.spec.ts
     ├── not-found.spec.ts
@@ -44,10 +44,13 @@ a browser, and use MongoDB, so they are kept as an explicit, slower check.
 
 Location: `tests/unit/`
 
-Unit tests use Vitest and do not start an HTTP server or require MongoDB.
+Unit tests use Vitest and do not require MongoDB or a running application server.
 
 Current coverage includes:
 
+- `api.test.ts`
+  - Returns JSON errors for unknown API routes.
+  - Returns a JSON error for malformed request bodies.
 - `config.test.ts`
   - Parses valid application configuration.
   - Applies defaults and transforms values such as `PORT` and `TRUST_PROXY`.
@@ -64,8 +67,8 @@ Current coverage includes:
   - Checks signed upload headers, URL expiry, and R2/B2 endpoint configuration.
   - Distinguishes missing bucket objects from provider failures using mocked calls.
 
-Use unit tests for pure functions, configuration parsing, schemas, and other logic that
-can be tested without assembling the server.
+Use unit tests for pure functions, configuration parsing, schemas, and API behavior that
+can be checked with a faked auth handler and no database.
 
 ## API integration tests
 
@@ -75,12 +78,13 @@ API integration tests use Vitest and Supertest. They call Express application in
 directly, so they exercise routing, middleware, validation, authentication, and database
 behavior without starting a network listener.
 
+Vitest starts one in-memory MongoDB server before the integration suite and stops it
+afterward. A global setup file shares the connection URI with the test workers. Each
+database test uses a random database name on that server and drops it during teardown.
+This layer needs no Docker container and no `TEST_MONGODB_URI`.
+
 Current coverage includes:
 
-- `api.test.ts`
-  - Accepts a valid example user.
-  - Returns structured errors for invalid request bodies.
-  - Returns JSON errors for unknown API routes and malformed JSON.
 - `validation.test.ts`
   - Validates and normalizes request bodies.
   - Validates route parameters and query strings.
@@ -97,7 +101,7 @@ Use integration tests when several server pieces must work together but browser 
 is not part of the requirement.
 
 `uploads.test.ts` covers upload validation, ownership, confirmation, private downloads,
-and pending-file cleanup with real MongoDB and mocked S3 network calls. See
+and pending-file cleanup with the in-memory MongoDB and mocked S3 network calls. See
 [File uploads: Verify and troubleshoot](/build/file-uploads/#verify-and-troubleshoot)
 for the focused command and provider-check boundaries.
 
@@ -134,12 +138,17 @@ artifacts are written under `test-results/` and are uploaded by CI when availabl
 
 ## Local prerequisites
 
-The project requires Node.js 24 or newer, pnpm, and Docker with Compose for MongoDB-backed tests.
+The project requires Node.js 24 or newer and pnpm. Docker with Compose is needed for
+local application development and for E2E tests.
 
 ### MongoDB
 
-Integration and E2E tests require MongoDB. Start the local container with Docker
-Compose:
+Integration tests need no local MongoDB server. `pnpm test:integration` starts one
+in-memory MongoDB server, shares its URI with the test workers, and stops it when the
+suite finishes. Vitest downloads the MongoDB binary on first use and caches it in the
+user's home directory.
+
+E2E tests use a real MongoDB service. Start the local container with Docker Compose:
 
 ```bash
 pnpm db:up
@@ -154,18 +163,13 @@ TEST_MONGODB_URI=mongodb://127.0.0.1:27017
 Test mode deliberately does not fall back to `MONGODB_URI`. This prevents tests from
 accidentally modifying the development database.
 
-Upload integration tests additionally require the test address in the process
-environment. Follow [Development workflow: Upload test database](/installation/development-workflow/#upload-test-database)
-before running that file or the full integration suite; its configuration does not
-load `.env`.
+Each persistence test run uses a random database name on its own server:
 
-Each persistence test run uses a random database name:
+- Integration tests use `mern_test_<random-id>` on the in-memory server.
+- E2E tests use `mern_e2e_<random-id>` on the server configured by `TEST_MONGODB_URI`.
 
-- Integration tests use `mern_test_<random-id>`.
-- E2E tests use `mern_e2e_<random-id>`.
-
-The tests drop their databases during cleanup. The MongoDB user configured by
-`TEST_MONGODB_URI` therefore needs permission to create and drop databases.
+The tests drop their databases during cleanup. The MongoDB user configured for E2E
+tests therefore needs permission to create and drop databases.
 
 ### Playwright browser
 
@@ -226,12 +230,19 @@ root as its project root:
 
 ```text
 vitest run --root ../.. --config vitest.config.ts tests/unit
-vitest run --root ../.. --config vitest.config.ts tests/integration
+vitest run --root ../.. --config vitest.integration.config.ts tests/integration
 ```
 
 `vitest.config.ts` resolves dependencies installed in `apps/server/node_modules` so
 root-level tests can import server dependencies such as Express, Mongoose, Supertest,
 Zod, Better Auth, Nodemailer, and Resend.
+
+`vitest.integration.config.ts` extends that configuration with a global setup file for
+the integration suite. The setup file starts one `MongoMemoryServer`, shares its URI
+with the tests through Vitest's `provide` API, and stops the server after the suite.
+Database integration tests read the URI with `inject` and pass it to the application
+configuration as `TEST_MONGODB_URI` at runtime. The application configuration is
+unchanged.
 
 Do not remove the `--root`, `--config`, or resolver configuration without verifying that
 tests still discover files under `tests/` and can resolve the server package
@@ -258,8 +269,8 @@ and pull requests.
 CI has three jobs:
 
 1. **Unit tests** install dependencies and run `pnpm test:unit`.
-2. **Integration tests** start MongoDB 8 as a service, set `TEST_MONGODB_URI`, and run
-   `pnpm test:integration`.
+2. **Integration tests** install dependencies and run `pnpm test:integration`. Vitest
+   starts the in-memory MongoDB server for the suite.
 3. **E2E tests** start MongoDB 8, install Chromium with system dependencies, run
    `pnpm test:e2e`, and upload Playwright artifacts from `test-results/`.
 
@@ -270,10 +281,10 @@ and so the fast unit job can finish independently.
 
 Choose the narrowest layer that proves the behavior:
 
-- Add a file under `tests/unit/` when the behavior is isolated and does not need an app,
-  database, browser, or HTTP request.
+- Add a file under `tests/unit/` when the behavior is isolated and needs no database or
+  browser. API error handling with a faked auth handler belongs here.
 - Add a file under `tests/integration/` when the behavior involves Express routes,
-  middleware, authentication, or MongoDB but not the browser.
+  middleware, authentication, or MongoDB against the assembled app but not the browser.
 - Add a file under `tests/e2e/` only when the behavior depends on the complete
   client/server/browser workflow.
 
@@ -287,10 +298,11 @@ system is wired together correctly.
 
 ## Troubleshooting
 
-### `TEST_MONGODB_URI` is required
+### E2E tests require `TEST_MONGODB_URI`
 
-Set `TEST_MONGODB_URI` in the root `.env` file or export it in the shell. Do not use
-only `MONGODB_URI`; test mode intentionally rejects that fallback.
+Set `TEST_MONGODB_URI` in the root `.env` file or export it in the shell before
+`pnpm test:e2e`. Do not use only `MONGODB_URI`; test mode intentionally rejects that
+fallback. Integration tests do not use this variable.
 
 ### Chromium is missing
 
@@ -318,12 +330,15 @@ from `tests/e2e/`.
 
 ### A test database remains after a failed run
 
-The normal teardown removes the random database. If a process is terminated before
-teardown runs, inspect MongoDB for databases beginning with `mern_test_` or
-`mern_e2e_` and remove only the test database that belongs to the failed run.
+The normal teardown removes the random database. Integration databases live on the
+in-memory server and disappear when its process exits. If an E2E process terminates
+before teardown runs, inspect MongoDB for databases beginning with `mern_e2e_` and
+remove only the database that belongs to the failed run.
 
 ## References
 
+- [mongodb-memory-server quick start](https://typegoose.github.io/mongodb-memory-server/docs/guides/quick-start-guide)
+- [Vitest global setup](https://vitest.dev/config/globalsetup)
 - [Vitest](https://vitest.dev/)
 - [Supertest](https://github.com/forwardemail/supertest)
 - [Playwright](https://playwright.dev/)

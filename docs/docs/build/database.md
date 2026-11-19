@@ -128,13 +128,18 @@ A unique index is the final protection against concurrent duplicate writes. Hand
 
 ## Test databases
 
-Integration and E2E tests use `TEST_MONGODB_URI`, then create a random `mern_test_*` or `mern_e2e_*` database. They never fall back to the application database.
+Integration tests start one in-memory MongoDB server and create a random `mern_test_*`
+database on it. They drop that database during teardown and need no `TEST_MONGODB_URI`
+or running MongoDB container.
+
+E2E tests use `TEST_MONGODB_URI` and create a random `mern_e2e_*` database:
 
 ```bash
 TEST_MONGODB_URI=mongodb://127.0.0.1:27017
 ```
 
-The configured MongoDB user must be allowed to create and drop those temporary databases.
+Neither layer falls back to the application database. The MongoDB user configured for
+E2E tests must be allowed to create and drop those temporary databases.
 
 ## Verify
 
@@ -149,6 +154,7 @@ Continue to [Authentication](/build/authentication) if records need an owner, th
 
 ## References
 
+- [mongodb-memory-server quick start](https://typegoose.github.io/mongodb-memory-server/docs/guides/quick-start-guide)
 - [Mongoose schemas](https://mongoosejs.com/docs/guide.html)
 - [Mongoose connections](https://mongoosejs.com/docs/connections.html)
 - [Mongoose queries](https://mongoosejs.com/docs/queries.html)
