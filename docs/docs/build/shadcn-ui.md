@@ -63,7 +63,7 @@ Keep reusable primitives in `components/ui` and feature compositions in `compone
 
 ```sh
 bun design:lint
-bun check
+bun quality
 bun --filter @mern/client typecheck
 bun --filter @mern/client build
 ```

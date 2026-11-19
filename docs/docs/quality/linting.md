@@ -19,7 +19,7 @@ Apply safe automatic fixes with:
 bun lint:fix
 ```
 
-`bun check` runs the linter and the Oxfmt formatting check together.
+`bun quality` runs the linter and the Oxfmt formatting check together.
 
 ## Configuration
 
@@ -60,7 +60,7 @@ Generated routes, generated documentation, and agent tooling are ignored. Keep l
 1. Read the rule name and explanation.
 2. Fix the code when the rule identifies a real issue.
 3. Run `bun lint:fix` for safe mechanical fixes.
-4. Run `bun check` again.
+4. Run `bun quality` again.
 
 Do not disable a rule only to make the command green. If a rule conflicts with the repository's runtime or generated code, add the narrowest root override and record the reason.
 

@@ -184,7 +184,7 @@ Add a Supertest integration test for the success response and every meaningful r
 ```sh
 bun run test:integration
 bun typecheck
-bun check
+bun quality
 ```
 
 ## Next step

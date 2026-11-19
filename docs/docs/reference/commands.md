@@ -19,7 +19,7 @@ These are the root scripts currently provided by `package.json`.
 | `bun run build`                     | Build the client and compile the server          |
 | `bun start`                         | Run the compiled server                          |
 | `bun typecheck`                     | Generate route types and check all packages      |
-| `bun check`                         | Check formatting and lint rules                  |
+| `bun quality`                       | Check formatting and lint rules                  |
 | `bun format`                        | Apply formatting and safe lint fixes             |
 | `bun run test`                      | Run unit tests followed by API integration tests |
 | `bun run test:unit`                 | Run all tests in `tests/unit/`                   |

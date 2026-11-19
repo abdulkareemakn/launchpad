@@ -179,7 +179,7 @@ Run the client, open `http://localhost:3000/widgets`, and check its loading, emp
 ```sh
 bun --filter @mern/client generate-routes
 bun typecheck
-bun check
+bun quality
 ```
 
 ## Next step

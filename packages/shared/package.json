@@ -8,6 +8,6 @@
     }
   },
   "scripts": {
-    "typecheck": "bun check --no-script"
+    "typecheck": "bun check"
   }
 }

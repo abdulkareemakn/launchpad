@@ -20,7 +20,7 @@ This applies Oxlint's safe fixes, then writes Oxfmt changes and sorts imports. R
 ## Check without writing
 
 ```sh
-bun check
+bun quality
 ```
 
 This runs Oxlint and verifies Oxfmt output without changing files. Use it before committing and in continuous integration.

@@ -196,11 +196,11 @@ script.
 ## Format and lint
 
 ```sh
-bun check
+bun quality
 bun format
 ```
 
-`bun check` reports lint and formatting problems. `bun format` writes
+`bun quality` reports lint and formatting problems. `bun format` writes
 formatting changes and safe lint fixes. See [formatting](/quality/formatting),
 [linting](/quality/linting), and the official [Oxfmt](https://oxc.rs/docs/guide/usage/formatter)
 and [Oxlint](https://oxc.rs/docs/guide/usage/linter) documentation.
