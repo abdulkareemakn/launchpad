@@ -106,8 +106,7 @@ Put new code in the package that owns it:
 - Add routed browser pages under `apps/client/src/routes/`, and reusable UI components to `apps/client/src/components/ui/`.
 - Add browser/server response contracts to `packages/shared/src/index.ts`. Keep database and server-only code out of this package.
 - Add React Email templates to `packages/emails/`.
-- Add tests under `tests/unit/`, `tests/integration/`, or `tests/e2e/` for the
-  matching test level.
+- Add tests under `tests/unit/` or `tests/integration/` for the matching test level.
 
 ## Next step
 

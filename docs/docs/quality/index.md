@@ -19,7 +19,7 @@ Run the checks from the repository root after each focused change.
 
 - [**Testing**](/quality/testing)
 
-  Run Vitest unit tests and Supertest API integration tests.
+  Run Vitest unit tests and Supertest API integration tests against in-memory MongoDB.
 
 </div>
 

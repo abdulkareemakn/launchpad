@@ -37,9 +37,8 @@ bun --filter @mern/client generate-routes
 
 ## Test databases
 
-Integration tests create and delete a random `mern_test_*` database. E2E tests use a
-random `mern_e2e_*` database. Both need permission to create and drop temporary
-databases and never use the application database.
+Integration tests start an in-memory MongoDB server and create and delete a random
+`mern_test_*` database on it. Tests never use the application database.
 
 ## References
 

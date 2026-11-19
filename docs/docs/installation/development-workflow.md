@@ -43,8 +43,8 @@ Generate a value for `BETTER_AUTH_SECRET` and paste it into `.env`:
 node -e "console.log(require('node:crypto').randomBytes(32).toString('base64'))"
 ```
 
-`MONGODB_URI` identifies the application database. `TEST_MONGODB_URI` is deliberately
-separate because test runs create and remove temporary databases. `APP_URL` and
+`MONGODB_URI` identifies the application database. API integration tests start their
+own in-memory MongoDB server and need no test database setting. `APP_URL` and
 `BETTER_AUTH_URL` must be the same public origin in this starter. Do not put a secret,
 database URL, or API key in a variable beginning with `VITE_`: Vite exposes those to
 browser code.
@@ -157,26 +157,17 @@ verify bucket access.
 
 ### Upload test database
 
-The upload integration tests read the test database address from the process
-environment, not from `.env`. Start the local MongoDB container with `bun db:up`,
-then run one of these commands from the repository root in the terminal that will
-run tests. Substitute a separate test server address if needed.
+The upload integration tests run against the in-memory MongoDB server started by the
+integration suite. They do not read a database address from `.env` or from the process
+environment. Run them from the repository root with:
 
-=== "Windows PowerShell"
-
-    ```powershell
-    $env:TEST_MONGODB_URI = "mongodb://127.0.0.1:27017"
-    ```
-
-=== "macOS / Linux"
-
-    ```sh
-    export TEST_MONGODB_URI=mongodb://127.0.0.1:27017
-    ```
+```sh
+bun run test:integration
+```
 
 The tests supply dummy storage settings and mock S3 network calls. Real bucket
 credentials are not needed. See [File uploads: Verify and troubleshoot](/build/file-uploads/#verify-and-troubleshoot)
-for the test commands and [Testing](/quality/testing/#mongodb) for MongoDB setup.
+for the focused test commands.
 
 ## Start the workspace
 

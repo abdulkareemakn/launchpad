@@ -128,13 +128,9 @@ A unique index is the final protection against concurrent duplicate writes. Hand
 
 ## Test databases
 
-Integration tests use `TEST_MONGODB_URI`, then create a random `mern_test_*` database. They never fall back to the application database.
-
-```bash
-TEST_MONGODB_URI=mongodb://127.0.0.1:27017
-```
-
-The configured MongoDB user must be allowed to create and drop those temporary databases.
+Integration tests start one in-memory MongoDB server and create a random `mern_test_*`
+database on it. They drop that database during teardown and need no `TEST_MONGODB_URI`
+or running MongoDB container. Test mode never falls back to the application database.
 
 ## Verify
 
@@ -149,6 +145,7 @@ Continue to [Authentication](/build/authentication) if records need an owner, th
 
 ## References
 
+- [mongodb-memory-server quick start](https://typegoose.github.io/mongodb-memory-server/docs/guides/quick-start-guide)
 - [Mongoose schemas](https://mongoosejs.com/docs/guide.html)
 - [Mongoose connections](https://mongoosejs.com/docs/connections.html)
 - [Mongoose queries](https://mongoosejs.com/docs/queries.html)

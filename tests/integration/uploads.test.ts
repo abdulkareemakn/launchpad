@@ -13,6 +13,7 @@ import {
   beforeEach,
   describe,
   expect,
+  inject,
   test,
   vi,
 } from "vitest";
@@ -29,7 +30,7 @@ import { File } from "../../apps/server/src/models/file.ts";
 
 const config = readConfig({
   NODE_ENV: "test",
-  TEST_MONGODB_URI: process.env.TEST_MONGODB_URI,
+  TEST_MONGODB_URI: inject("mongoUri"),
   APP_URL: "http://localhost:3000",
   BETTER_AUTH_URL: "http://localhost:3000",
   BETTER_AUTH_SECRET: randomBytes(32).toString("hex"),
