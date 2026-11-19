@@ -68,7 +68,7 @@ After copying `.env.example` to the root `.env`, start MongoDB and RustFS from t
 repository root:
 
 ```sh
-pnpm db:up
+bun db:up
 ```
 
 This starts MongoDB and RustFS from `compose.db.yaml`. RustFS is pinned to `1.0.0`;
@@ -87,7 +87,7 @@ docker compose -f compose.db.yaml up -d --wait rustfs
 The API runs on the host, so keep `STORAGE_ENDPOINT=http://localhost:9000`,
 `STORAGE_REGION=us-east-1`, and `STORAGE_BUCKET=mern-local`. A Docker service name
 would not resolve from the host or the browser receiving a presigned URL.
-`pnpm db:down` stops both services but preserves their named volumes. Adding
+`bun db:down` stops both services but preserves their named volumes. Adding
 `--volumes` deletes the local database and object storage data.
 
 #### Create the local bucket once
@@ -158,7 +158,7 @@ verify bucket access.
 ### Upload test database
 
 The upload integration tests read the test database address from the process
-environment, not from `.env`. Start the local MongoDB container with `pnpm db:up`,
+environment, not from `.env`. Start the local MongoDB container with `bun db:up`,
 then run one of these commands from the repository root in the terminal that will
 run tests. Substitute a separate test server address if needed.
 
@@ -181,22 +181,22 @@ for the test commands and [Testing](/quality/testing/#mongodb) for MongoDB setup
 ## Start the workspace
 
 ```sh
-pnpm dev
-pnpm dev:ui
+bun dev
+bun dev:ui
 ```
 
 Run these commands in separate terminals:
 
-- `pnpm dev`: API on `http://localhost:3001`, MailDev inbox on `http://localhost:3003`, and SMTP on `localhost:3025`
-- `pnpm dev:ui`: interactive Vite client on `http://localhost:3000`
-- `pnpm dev:mail`: optional React Email preview on `http://localhost:3002`
+- `bun dev`: API on `http://localhost:3001`, MailDev inbox on `http://localhost:3003`, and SMTP on `localhost:3025`
+- `bun dev:ui`: interactive Vite client on `http://localhost:3000`
+- `bun dev:mail`: optional React Email preview on `http://localhost:3002`
 
-Each command owns its terminal. Press Ctrl+C there to stop its processes; Vite's keyboard commands work in the `pnpm dev:ui` terminal.
+Each command owns its terminal. Press Ctrl+C there to stop its processes; Vite's keyboard commands work in the `bun dev:ui` terminal.
 
 ## Type check while you work
 
 ```sh
-pnpm typecheck
+bun typecheck
 ```
 
 This generates TanStack Router route types and runs each package's typecheck
@@ -205,11 +205,11 @@ script.
 ## Format and lint
 
 ```sh
-pnpm check
-pnpm format
+bun check
+bun format
 ```
 
-`pnpm check` reports lint and formatting problems. `pnpm format` writes
+`bun check` reports lint and formatting problems. `bun format` writes
 formatting changes and safe lint fixes. See [formatting](/quality/formatting),
 [linting](/quality/linting), and the official [Oxfmt](https://oxc.rs/docs/guide/usage/formatter)
 and [Oxlint](https://oxc.rs/docs/guide/usage/linter) documentation.
@@ -217,12 +217,12 @@ and [Oxlint](https://oxc.rs/docs/guide/usage/linter) documentation.
 ## Run the tests
 
 ```sh
-pnpm test
-pnpm test:e2e
+bun run test
+bun run test:e2e
 ```
 
-`pnpm test` runs the Vitest unit suite followed by the API integration suite.
-`pnpm test:e2e` runs the Playwright browser suite. Integration and E2E tests use
+`bun run test` runs the Vitest unit suite followed by the API integration suite.
+`bun run test:e2e` runs the Playwright browser suite. Integration and E2E tests use
 separate randomly named databases when persistence is required. See
 [Commands](/reference/commands) and [Testing](/quality/testing) for the current test
 commands and database setup.
@@ -230,11 +230,11 @@ commands and database setup.
 ## Build and run
 
 ```sh
-pnpm build
-pnpm start
+bun run build
+bun start
 ```
 
-`pnpm build` builds the client and server. `pnpm start` runs the compiled
+`bun run build` builds the client and server. `bun start` runs the compiled
 server; use the Docker commands in [Deployment](/deployment) for the complete
 production-style stack.
 

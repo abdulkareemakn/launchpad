@@ -6,8 +6,8 @@
 **/.env
 **/.env.*
 **/*.local
-**/pnpm-lock.yaml
-!pnpm-lock.yaml
+**/bun.lock
+!bun.lock
 .agents
 .codex
 .claude

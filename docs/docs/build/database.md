@@ -40,7 +40,7 @@ managed service you choose.
 Start MongoDB locally with Docker:
 
 ```sh
-pnpm db:up
+bun db:up
 ```
 
 The server connects before accepting requests. Startup fails if MongoDB is unavailable, and graceful shutdown closes the connection.
@@ -139,8 +139,8 @@ The configured MongoDB user must be allowed to create and drop those temporary d
 ## Verify
 
 ```sh
-pnpm test:integration
-pnpm typecheck
+bun run test:integration
+bun typecheck
 ```
 
 ## Next step

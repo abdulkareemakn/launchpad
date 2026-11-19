@@ -33,10 +33,10 @@ apps/server/src/lib/
 
 The email tools use fixed localhost ports:
 
-| Tool                | Command         | URL                     |
-| ------------------- | --------------- | ----------------------- |
-| React Email preview | `pnpm dev:mail` | `http://localhost:3002` |
-| MailDev inbox       | `pnpm dev`      | `http://localhost:3003` |
+| Tool                | Command        | URL                     |
+| ------------------- | -------------- | ----------------------- |
+| React Email preview | `bun dev:mail` | `http://localhost:3002` |
+| MailDev inbox       | `bun dev`      | `http://localhost:3003` |
 
 React Email previews templates while you edit them. MailDev shows messages actually sent by the application during development.
 
@@ -84,12 +84,12 @@ Use absolute URLs for links and images. Keep the props limited to values the tem
 
 ### Preview templates
 
-Run `pnpm dev:mail`, then open `http://localhost:3002`. The React Email development server reloads when a template changes.
+Run `bun dev:mail`, then open `http://localhost:3002`. The React Email development server reloads when a template changes.
 
 The equivalent package-level command is:
 
 ```sh
-pnpm --filter @mern/emails dev
+bun --filter @mern/emails dev
 ```
 
 ### Send an email
@@ -145,7 +145,7 @@ This lets integration work use realistic email content without requiring provide
 
 ### Local development flow
 
-1. Run `pnpm dev` once from the repository root.
+1. Run `bun dev` once from the repository root.
 2. Write server code that calls `sendEmail()`.
 3. Trigger that code from the application or an integration test.
 4. Open `http://localhost:3003`.
@@ -166,8 +166,8 @@ Configure and verify the sender domain in Resend before using it in the `from` f
 ## Verify
 
 ```sh
-pnpm dev
-pnpm dev:mail
+bun dev
+bun dev:mail
 ```
 
 Then:

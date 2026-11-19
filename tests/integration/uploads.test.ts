@@ -16,6 +16,7 @@ import {
   test,
   vi,
 } from "vitest";
+import type { MockInstance } from "vitest";
 
 import { createApp } from "../../apps/server/src/app.ts";
 import { createAuth } from "../../apps/server/src/auth.ts";
@@ -40,7 +41,10 @@ const config = readConfig({
   STORAGE_ALLOWED_MIME_TYPES: "image/png,application/pdf",
 });
 const dbName = `mern_test_${randomUUID().replaceAll("-", "")}`;
-const send = vi.spyOn(S3Client.prototype, "send");
+type HeadResult = { ContentLength: number; ContentType: string };
+const send = vi.spyOn(S3Client.prototype, "send") as unknown as MockInstance<
+  (command: HeadObjectCommand) => Promise<HeadResult>
+>;
 let app: ReturnType<typeof createApp>;
 let owner: ReturnType<typeof request.agent>;
 let other: ReturnType<typeof request.agent>;

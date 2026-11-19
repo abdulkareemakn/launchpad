@@ -30,8 +30,8 @@ Before using the upload routes:
 1. Create a private bucket and configure credentials using
    [Development workflow: File storage](/installation/development-workflow/#file-storage).
 2. For browser clients, configure bucket CORS as described in that section.
-3. Start the API and development proxy from the repository root with `pnpm dev` and
-   `pnpm dev:ui` in separate terminals.
+3. Start the API and development proxy from the repository root with `bun dev` and
+   `bun dev:ui` in separate terminals.
 4. Sign in through Better Auth. Use the same session cookie for all `/api/uploads`
    requests. See [Authentication](/build/authentication/#use-sessions).
 
@@ -133,8 +133,8 @@ as described in [Development workflow: Upload test database](/installation/devel
 Then run from the repository root:
 
 ```sh
-pnpm test:unit
-pnpm --filter @mern/server exec vitest run --root ../.. --config vitest.config.ts tests/integration/uploads.test.ts
+bun run test:unit
+cd apps/server && bunx vitest run --root ../.. --config vitest.config.ts tests/integration/uploads.test.ts
 ```
 
 The tests should pass with a temporary MongoDB database and mocked S3 network calls.

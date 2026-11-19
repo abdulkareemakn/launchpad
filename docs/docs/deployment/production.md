@@ -26,7 +26,7 @@ Railway, while database and bucket references connect the resources automaticall
    [Launchpad](https://github.com/abdulkareemakn/launchpad) to create an application
    repository, then clone it. A template copy has its own history and is independent
    of Launchpad.
-4. Install dependencies with `pnpm install`. The root development dependencies
+4. Install dependencies with `bun install`. The root development dependencies
    include `@railway/cli` and the `railway` IaC SDK.
 5. Set up Resend and have its API key ready.
 
@@ -44,9 +44,9 @@ see [Development workflow](/installation/development-workflow/#replace-the-start
 Run all commands from the application's repository root:
 
 ```sh
-pnpm exec railway login
-pnpm exec railway init --name your-app
-pnpm exec railway config init
+bunx railway login
+bunx railway init --name your-app
+bunx railway config init
 ```
 
 `init` creates and links a fresh Railway project.
@@ -123,8 +123,8 @@ for cancellation and timeout behavior.
 Preview and apply the configuration:
 
 ```sh
-pnpm exec railway config plan
-pnpm exec railway config apply
+bunx railway config plan
+bunx railway config apply
 ```
 
 Review every change. The initial plan should create MongoDB, the bucket, and the web
@@ -141,7 +141,7 @@ to make an incomplete deployment pass.
 Create a Railway domain for the web service:
 
 ```sh
-pnpm exec railway domain --service web --port 8080
+bunx railway domain --service web --port 8080
 ```
 
 IaC sets `PORT=8080`, and the domain targets the same port. The server honors
@@ -159,14 +159,14 @@ Set these variables on **web** using the returned HTTPS URL:
 Use Railway's dashboard Variables tab or its CLI editor:
 
 ```sh
-pnpm exec railway variable edit --service web --skip-deploys
+bunx railway variable edit --service web --skip-deploys
 ```
 
 The editor uses the shell's configured `EDITOR`. It shows a redacted diff before
 applying. To generate and set the authentication secret without printing it, run:
 
 ```sh
-node -e "process.stdout.write(require('node:crypto').randomBytes(32).toString('base64'))" | pnpm exec railway variable set BETTER_AUTH_SECRET --stdin --service web --skip-deploys
+node -e "process.stdout.write(require('node:crypto').randomBytes(32).toString('base64'))" | bunx railway variable set BETTER_AUTH_SECRET --stdin --service web --skip-deploys
 ```
 
 Generate it once for the environment. Replacing it later invalidates existing sessions.
@@ -180,7 +180,7 @@ The local test database and MailDev settings are not production requirements.
 Redeploy after completing the settings:
 
 ```sh
-pnpm exec railway redeploy --service web --from-source --yes
+bunx railway redeploy --service web --from-source --yes
 ```
 
 ## Allow browser access to the bucket
@@ -195,7 +195,7 @@ injects the web service's variables into a local process, and preserves existing
 rules. It does not print credentials. Run it only on a trusted computer.
 
 ```sh
-pnpm exec railway run --service web --no-local -- node --input-type=module -e '
+bunx railway run --service web --no-local -- node --input-type=module -e '
 import { createRequire } from "node:module";
 const require = createRequire(new URL("./apps/server/package.json", import.meta.url));
 const { S3Client, GetBucketCorsCommand, PutBucketCorsCommand } = require("@aws-sdk/client-s3");
@@ -257,8 +257,8 @@ changes or a new environment gets its own bucket.
 ## Verify the deployment
 
 ```sh
-pnpm exec railway deployment list --service web --json
-pnpm exec railway deployment list --service mongodb --json
+bunx railway deployment list --service web --json
+bunx railway deployment list --service mongodb --json
 curl https://your-app.up.railway.app/api/health
 ```
 

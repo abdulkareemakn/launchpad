@@ -43,13 +43,13 @@ the container.
 For a local stack, copy `.env.example` to `.env`. Set a generated `BETTER_AUTH_SECRET`, set `RESEND_API_KEY`, and set both `APP_URL` and `BETTER_AUTH_URL` to `http://localhost:3000`. For a public host, use its real HTTPS origin for both URLs and provide the secrets through the host. Then run:
 
 ```sh
-pnpm docker:up
+bun docker:up
 ```
 
 This runs `compose.yaml`: one app image, Express serving the SPA and API, MongoDB
 on an internal network with a persistent volume, and a RustFS object storage service
 with its own volume. The app is published on port 3000 by
-default; change `APP_PORT` to use another host port. Stop `pnpm dev:ui` first if it is using
+default; change `APP_PORT` to use another host port. Stop `bun dev:ui` first if it is using
 that port. For browser uploads in this stack, map `127.0.0.1 rustfs` in the host's
 `/etc/hosts` once so presigned URLs resolve the same way in the browser and the app.
 
@@ -58,7 +58,7 @@ that port. For browser uploads in this stack, map `127.0.0.1 rustfs` in the host
 Stop the stack with:
 
 ```sh
-pnpm docker:down
+bun docker:down
 ```
 
 This preserves its `mongo-data` and `rustfs-data` volumes. `docker compose down --volumes` permanently
@@ -70,8 +70,8 @@ Compose project and volumes, so it does not share accounts or data with this sta
 Use `compose.db.yaml` when development runs on your machine but MongoDB runs in Docker:
 
 ```sh
-pnpm db:up
-pnpm db:down
+bun db:up
+bun db:down
 ```
 
 It runs MongoDB 8.0 with a health check and exposes port 27017 only on loopback, plus a

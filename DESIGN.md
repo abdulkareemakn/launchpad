@@ -171,6 +171,6 @@ Lucide is the configured interface icon family. Brand identities may use on-dema
 
 ## Implementation
 
-The implementation uses Base UI, shadcn CSS variables, Tailwind v4, and `components.json`. `DESIGN.md` is canonical; shadcn configuration and CSS are implementations that must be reconciled after changes. Validate with `pnpm design:lint`.
+The implementation uses Base UI, shadcn CSS variables, Tailwind v4, and `components.json`. `DESIGN.md` is canonical; shadcn configuration and CSS are implementations that must be reconciled after changes. Validate with `bun design:lint`.
 
 The lint report may identify `ring` and dark border as unreferenced tokens because they are non-text focus/separator values rather than contrast-testable component foregrounds; they remain documented implementation roles in CSS.

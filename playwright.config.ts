@@ -34,7 +34,7 @@ export default defineConfig({
     },
     {
       command:
-        "pnpm --filter @mern/client exec vite --host 127.0.0.1 --port 4173 --strictPort",
+        "cd apps/client && bunx vite --host 127.0.0.1 --port 4173 --strictPort",
       url: "http://localhost:4173",
       reuseExistingServer: false,
       timeout: 30_000,

@@ -8,6 +8,6 @@
     }
   },
   "scripts": {
-    "typecheck": "tsc --noEmit --strict src/index.ts"
+    "typecheck": "bun check --no-script"
   }
 }

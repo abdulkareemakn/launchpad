@@ -18,8 +18,8 @@ Choose [fonts](/build/fonts), [icons](/build/icons), and [colors](/build/colors)
 Ask an agent to use `design-md`, review the resulting `DESIGN.md`, then run:
 
 ```sh
-pnpm design:lint
-pnpm ui info
+bun design:lint
+bun ui info
 ```
 
 ## Next step

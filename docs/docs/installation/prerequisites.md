@@ -1,11 +1,11 @@
 ---
 title: Prerequisites
-description: Install Git, Node.js 24+, pnpm 11.3.0, and Docker before starting the workspace.
+description: Install Git, Node.js 24+, Bun 1.4.4, and Docker before starting the workspace.
 ---
 
 # Prerequisites
 
-This starter kit needs Git, Node.js 24 or newer, pnpm 11.3.0, and Docker with Compose.
+This starter kit needs Git, Node.js 24 or newer, Bun 1.4.4, and Docker with Compose.
 Docker runs the local MongoDB and RustFS services. A GitHub account is only needed if
 you plan to publish the repository or deploy the documentation site.
 
@@ -52,24 +52,32 @@ Node.js 24+ is required.
 
 Official install instructions: [Git](https://git-scm.com/downloads) · [Node.js](https://nodejs.org/en/download)
 
-## pnpm
+## Bun
 
-The repository pins pnpm 11.3.0 in the root `package.json`.
+The repository pins Bun 1.4.4 in the root `package.json`. Install that version with
+the official installer.
 
-```sh
-npm install --global pnpm@11.3.0
-```
+=== "Windows"
 
-Verify each with:
+    ```powershell
+    powershell -c "irm bun.sh/install.ps1|iex"
+    ```
+
+=== "macOS / Linux"
+
+    ```sh
+    curl -fsSL https://bun.com/install | bash
+    ```
+
+Open a new terminal, then verify each tool:
 
 ```sh
 git --version
 node --version
-npm --version
-pnpm --version
+bun --version
 ```
 
-Official install instructions: [pnpm](https://pnpm.io/installation)
+Official install instructions: [Bun](https://bun.com/docs/installation)
 
 ## Docker
 

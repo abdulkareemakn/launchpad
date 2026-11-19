@@ -36,7 +36,7 @@ React component that can be imported by name.
 Install it only when the product needs brand icons:
 
 ```sh
-pnpm --filter @mern/client add react-icons
+bun add --filter @mern/client react-icons
 ```
 
 Import only the symbol you use:

@@ -1,11 +1,11 @@
 ---
 title: Project Structure
-description: A tour of the pnpm workspace, from the apps and packages to the root configuration files.
+description: A tour of the Bun workspace, from the apps and packages to the root configuration files.
 ---
 
 # Project structure
 
-This starter kit is organized as a monorepo, with separate pnpm workspaces for the client, server, and shared packages. This simplifies development by reducing context switching, eliminating redundant configuration, and keeping shared types in sync across the codebase. It also enables the Express API and React frontend to be served from a single deployment.
+This starter kit is organized as a monorepo, with separate Bun workspaces for the client, server, and shared packages. This simplifies development by reducing context switching, eliminating redundant configuration, and keeping shared types in sync across the codebase. It also enables the Express API and React frontend to be served from a single deployment.
 
 ## Workspace layout
 
@@ -54,10 +54,10 @@ This starter kit is organized as a monorepo, with separate pnpm workspaces for t
 ├── docs/                       # Documentation site
 ├── package.json                # Root scripts and workspace metadata
 ├── playwright.config.ts         # End-to-end test configuration
-├── pnpm-workspace.yaml         # Workspace package globs
+├── tsconfig.json               # Shared TypeScript options and root test config
 ├── tests/                      # Unit, integration, and end-to-end tests
 ├── vitest.config.ts             # Unit and integration test configuration
-└── pnpm-lock.yaml              # Locked dependency versions
+└── bun.lock                    # Locked dependency versions
 ```
 
 The `client` and `server` packages are the runnable application. `shared` contains
@@ -82,9 +82,10 @@ and `dist/` in production, including the Railway Docker deployment.
 Most root-level configuration is for development and deployment:
 
 - `.env.example` lists the environment variables used by the server and Compose.
-- `pnpm-workspace.yaml` defines `apps/*` and `packages/*` as workspace packages.
-- `package.json` contains the commands for development, builds, checks, tests,
-  and Docker Compose.
+- `package.json` defines the `apps/*` and `packages/*` workspaces and contains the
+  commands for development, builds, checks, tests, and Docker Compose.
+- `tsconfig.json` holds the shared TypeScript options and adds the root tests and
+  config files to typecheck coverage.
 - `.oxfmtrc.json` and `.oxlintrc.json` configure formatting and linting.
 - `compose.db.yaml` starts MongoDB for local development; `compose.yaml` starts
   the production-style app and MongoDB stack.
@@ -115,6 +116,6 @@ Continue to [Design and UI](/build/design-system) before adding screens.
 
 ## References
 
-- [pnpm workspaces](https://pnpm.io/workspaces)
+- [Bun workspaces](https://bun.com/docs/pm/workspaces)
 - [TanStack Router file-based routing](https://tanstack.com/router/latest/docs/framework/react/routing/file-based-routing)
 - [Build your app](/build/)

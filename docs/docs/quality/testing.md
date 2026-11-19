@@ -28,16 +28,16 @@ that a real user can complete important workflows through the browser.
 
 Run commands from the repository root.
 
-| Command                            | What it runs                                    |
-| ---------------------------------- | ----------------------------------------------- |
-| `pnpm test`                        | Unit tests followed by API integration tests    |
-| `pnpm test:unit`                   | All tests in `tests/unit/`                      |
-| `pnpm test:integration`            | All tests in `tests/integration/`               |
-| `pnpm test:e2e`                    | Playwright tests in Chromium                    |
-| `pnpm test:e2e:ui`                 | Playwright's interactive test UI                |
-| `pnpm exec playwright test --list` | Lists discovered E2E tests without running them |
+| Command                       | What it runs                                    |
+| ----------------------------- | ----------------------------------------------- |
+| `bun run test`                | Unit tests followed by API integration tests    |
+| `bun run test:unit`           | All tests in `tests/unit/`                      |
+| `bun run test:integration`    | All tests in `tests/integration/`               |
+| `bun run test:e2e`            | Playwright tests in Chromium                    |
+| `bun run test:e2e:ui`         | Playwright's interactive test UI                |
+| `bunx playwright test --list` | Lists discovered E2E tests without running them |
 
-`pnpm test` does not run E2E tests. E2E tests start two application processes, require
+`bun run test` does not run E2E tests. E2E tests start two application processes, require
 a browser, and use MongoDB, so they are kept as an explicit, slower check.
 
 ## Unit tests
@@ -134,7 +134,7 @@ artifacts are written under `test-results/` and are uploaded by CI when availabl
 
 ## Local prerequisites
 
-The project requires Node.js 24 or newer, pnpm, and Docker with Compose for MongoDB-backed tests.
+The project requires Node.js 24 or newer, Bun, and Docker with Compose for MongoDB-backed tests.
 
 ### MongoDB
 
@@ -142,7 +142,7 @@ Integration and E2E tests require MongoDB. Start the local container with Docker
 Compose:
 
 ```bash
-pnpm db:up
+bun db:up
 ```
 
 Then set this variable in the root `.env` file:
@@ -172,13 +172,13 @@ The tests drop their databases during cleanup. The MongoDB user configured by
 Install Chromium once per environment:
 
 ```bash
-pnpm exec playwright install chromium
+bunx playwright install chromium
 ```
 
 CI installs the browser and its system dependencies with:
 
 ```bash
-pnpm exec playwright install --with-deps chromium
+bunx playwright install --with-deps chromium
 ```
 
 ## Running tests during development
@@ -187,33 +187,33 @@ Use the cheapest applicable layer while iterating:
 
 ```bash
 # Pure logic or schema change
-pnpm test:unit
+bun run test:unit
 
 # Express route, middleware, auth, or database change
-pnpm test:integration
+bun run test:integration
 
 # Browser, client routing, cookies, client/API wiring, or full workflow change
-pnpm test:e2e
+bun run test:e2e
 ```
 
 Before opening a pull request or finishing a substantial change, run the relevant fast
 suite and then the broader suites:
 
 ```bash
-pnpm test
-pnpm test:e2e
+bun run test
+bun run test:e2e
 ```
 
 To run a single Playwright file:
 
 ```bash
-pnpm exec playwright test auth.spec.ts
+bunx playwright test auth.spec.ts
 ```
 
 To debug it interactively:
 
 ```bash
-pnpm exec playwright test auth.spec.ts --ui
+bunx playwright test auth.spec.ts --ui
 ```
 
 ## Test configuration
@@ -257,11 +257,11 @@ and pull requests.
 
 CI has three jobs:
 
-1. **Unit tests** install dependencies and run `pnpm test:unit`.
+1. **Unit tests** install dependencies and run `bun run test:unit`.
 2. **Integration tests** start MongoDB 8 as a service, set `TEST_MONGODB_URI`, and run
-   `pnpm test:integration`.
+   `bun run test:integration`.
 3. **E2E tests** start MongoDB 8, install Chromium with system dependencies, run
-   `pnpm test:e2e`, and upload Playwright artifacts from `test-results/`.
+   `bun run test:e2e`, and upload Playwright artifacts from `test-results/`.
 
 The integration and E2E jobs are separate so a failure in one layer is easy to identify
 and so the fast unit job can finish independently.
@@ -297,7 +297,7 @@ only `MONGODB_URI`; test mode intentionally rejects that fallback.
 Run:
 
 ```bash
-pnpm exec playwright install chromium
+bunx playwright install chromium
 ```
 
 ### E2E server health check times out
@@ -310,7 +310,7 @@ answer `http://127.0.0.1:3001/api/health` before Playwright begins.
 Run:
 
 ```bash
-TEST_MONGODB_URI=mongodb://127.0.0.1:27017 pnpm exec playwright test --list
+TEST_MONGODB_URI=mongodb://127.0.0.1:27017 bunx playwright test --list
 ```
 
 The expected result currently lists the authentication workflow and the 404 workflow
