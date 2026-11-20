@@ -175,7 +175,7 @@ Generate it once for the environment. Replacing it later invalidates existing se
 IaC supplies `MONGODB_URI` and all five storage variables automatically. Do not copy
 bucket access keys manually. Storage limits, allowed MIME types, and proxy settings
 are described in [Development workflow](/installation/development-workflow/#environment-variables).
-The local test database and MailDev settings are not production requirements.
+MailDev is not a production requirement.
 
 Redeploy after completing the settings:
 

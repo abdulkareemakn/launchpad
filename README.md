@@ -6,7 +6,7 @@ A MERN starter for building and shipping full-stack apps.
 
 ## What’s included
 
-MongoDB, Express, React, and foundations for authentication, email, file storage, validation, testing, and deployment. See the [documentation](https://launchpad-docs-1ki.pages.dev/) for setup instructions.
+MongoDB, Express, React, and foundations for authentication, email, file storage, validation, and deployment. See the [documentation](https://launchpad-docs-1ki.pages.dev/) for setup instructions.
 
 ## License
 

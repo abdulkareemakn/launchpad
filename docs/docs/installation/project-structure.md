@@ -53,14 +53,12 @@ This starter kit is organized as a monorepo, with separate Bun workspaces for th
 ├── Dockerfile                  # Production image build
 ├── docs/                       # Documentation site
 ├── package.json                # Root scripts and workspace metadata
-├── tsconfig.json               # Shared TypeScript options and root test config
-├── tests/                      # Unit and integration tests
-├── vitest.config.ts             # Unit and integration test configuration
+├── tsconfig.json               # Shared TypeScript options for workspace packages
 └── bun.lock                    # Locked dependency versions
 ```
 
 The `client` and `server` packages are the runnable application. `shared` contains
-types only, `emails` contains email templates, and `mail` runs the local development inbox. Tests live at the repository root.
+types only, `emails` contains email templates, and `mail` runs the local development inbox.
 
 ## Source path aliases
 
@@ -82,9 +80,8 @@ Most root-level configuration is for development and deployment:
 
 - `.env.example` lists the environment variables used by the server and Compose.
 - `package.json` defines the `apps/*` and `packages/*` workspaces and contains the
-  commands for development, builds, checks, tests, and Docker Compose.
-- `tsconfig.json` holds the shared TypeScript options and adds the root tests and
-  config files to typecheck coverage.
+  commands for development, builds, checks, and Docker Compose.
+- `tsconfig.json` holds the shared TypeScript options inherited by each workspace package.
 - `.oxfmtrc.json` and `.oxlintrc.json` configure formatting and linting.
 - `compose.db.yaml` starts MongoDB for local development; `compose.yaml` starts
   the production-style app and MongoDB stack.
@@ -106,7 +103,6 @@ Put new code in the package that owns it:
 - Add routed browser pages under `apps/client/src/routes/`, and reusable UI components to `apps/client/src/components/ui/`.
 - Add browser/server response contracts to `packages/shared/src/index.ts`. Keep database and server-only code out of this package.
 - Add React Email templates to `packages/emails/`.
-- Add tests under `tests/unit/` or `tests/integration/` for the matching test level.
 
 ## Next step
 

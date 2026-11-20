@@ -1,20 +1,6 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "module": "ESNext",
-    "moduleResolution": "bundler",
-    "paths": {
-      "@/*": ["./apps/server/src/*"],
-      "vitest": ["./apps/server/node_modules/vitest"],
-      "vitest/node": ["./apps/server/node_modules/vitest/node.d.ts"],
-      "supertest": ["./apps/server/node_modules/@types/supertest"],
-      "express": ["./apps/server/node_modules/@types/express"],
-      "zod": ["./apps/server/node_modules/zod"],
-      "@aws-sdk/client-s3": ["./apps/server/node_modules/@aws-sdk/client-s3"],
-      "@aws-sdk/s3-request-presigner": [
-        "./apps/server/node_modules/@aws-sdk/s3-request-presigner"
-      ]
-    },
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "strict": true,
     "skipLibCheck": true,
@@ -26,9 +12,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": [
-    "tests/**/*.ts",
-    "vitest.config.ts",
-    "vitest.integration.config.ts"
-  ]
+  "include": []
 }

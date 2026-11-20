@@ -13,7 +13,6 @@ const externalLogos: Record<string, string> = {
   "better-auth":
     "https://raw.githubusercontent.com/better-auth/better-auth/v1.7.5/docs/public/branding/svg/better-auth-mark-bg-light.svg",
   oxc: "https://cdn.jsdelivr.net/gh/oxc-project/oxc-assets@main/icon-flat-light.svg",
-  vitest: "https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/vitest.svg",
   railway: "https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/railway.svg",
 };
 const linkStyle =
@@ -105,15 +104,9 @@ const chapters = [
         logo: "oxc",
       },
       {
-        title: "Unit & integration tests",
-        description:
-          "Vitest unit and API integration tests with MongoDB-backed CI workflows.",
-        logo: "vitest",
-      },
-      {
         title: "GitHub Actions",
         description:
-          "Runs formatting, linting, and tests. Builds the Docker image on pushes and pull requests, then publishes it to GHCR on default-branch pushes.",
+          "Runs formatting and linting checks. Builds the Docker image on pushes and pull requests, then publishes it to GHCR on default-branch pushes.",
         logo: "githubactions",
       },
     ],

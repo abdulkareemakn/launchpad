@@ -46,7 +46,7 @@ skills and links to them.
 
 Use a skill when the task matches its scope. The repository code and `DESIGN.md`
 remain the source of truth, and skills do not replace formatting, linting,
-typechecking, or tests.
+or typechecking.
 
 ## References
 

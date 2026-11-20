@@ -33,7 +33,7 @@ An opinionated MERN starter with authentication, email, and file storage foundat
 <div class="home-card"><strong>Start building</strong><span>Set up the workspace and run the client, server, and database.</span></div>
 <div class="home-card"><strong>Design your UI</strong><span>Choose a visual direction, fonts, icons, and colors before building screens.</span></div>
 <div class="home-card"><strong>Add app features</strong><span>Build authentication, data, routes, validation, and email.</span></div>
-<div class="home-card"><strong>Ship with confidence</strong><span>Format, lint, and test the workspace before deploying.</span></div>
+<div class="home-card"><strong>Ship with confidence</strong><span>Format and lint the workspace before deploying.</span></div>
 <div class="home-card"><strong>Deploy your app</strong><span>Configure Railway, Docker Compose, and production builds.</span></div>
 <div class="home-card"><strong>Find a reference</strong><span>Look up commands, API endpoints, security guidance, and the stack.</span></div>
 

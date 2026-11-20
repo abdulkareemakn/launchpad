@@ -126,16 +126,9 @@ widgetSchema.index({ ownerId: 1, name: 1 }, { unique: true });
 
 A unique index is the final protection against concurrent duplicate writes. Handle duplicate-key errors as an expected conflict instead of exposing the raw database error.
 
-## Test databases
-
-Integration tests start one in-memory MongoDB server and create a random `mern_test_*`
-database on it. They drop that database during teardown and need no `TEST_MONGODB_URI`
-or running MongoDB container. Test mode never falls back to the application database.
-
 ## Verify
 
 ```sh
-bun run test:integration
 bun typecheck
 ```
 
@@ -145,7 +138,6 @@ Continue to [Authentication](/build/authentication) if records need an owner, th
 
 ## References
 
-- [mongodb-memory-server quick start](https://typegoose.github.io/mongodb-memory-server/docs/guides/quick-start-guide)
 - [Mongoose schemas](https://mongoosejs.com/docs/guide.html)
 - [Mongoose connections](https://mongoosejs.com/docs/connections.html)
 - [Mongoose queries](https://mongoosejs.com/docs/queries.html)

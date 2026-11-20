@@ -1,9 +1,3 @@
-## Testing policy
-
-- Run the cheapest relevant tests while iterating and affected tests before finishing.
-- Prefer unit or API integration tests when a browser adds no confidence.
-- Add or update tests when behavior changes; run broader suites for significant changes.
-
 ## Design system
 
 - Read the repository-root `DESIGN.md`, when present, before interface work. Its tokens and intent are canonical; shadcn configuration and `src/styles.css` implement them.

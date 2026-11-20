@@ -70,7 +70,7 @@ Mongoose constraints still protect writes from other code paths.
 
 ## Verify
 
-Add an integration check for a valid widget name and for whitespace-only input. Confirm that the saved name is trimmed and the invalid request never writes a record. Then run `bun run test:integration` and `bun typecheck`.
+Verify the change with `bun typecheck`.
 
 ## Next step
 

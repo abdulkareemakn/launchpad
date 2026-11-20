@@ -1,12 +1,11 @@
 ---
 title: Development workflow
-description: The commands you run while building, including dev servers, type checking, formatting, and tests.
+description: The commands you run while building, including dev servers, type checking, and formatting.
 ---
 
 # Development workflow
 
-This starter kit gives each local service a fixed localhost port and keeps interactive tools in separate terminals. Return to this page while you work. The normal loop is simple: run the app,
-make one focused change, check it, then run the smallest test that can prove it works.
+This starter kit gives each local service a fixed localhost port and keeps interactive tools in separate terminals. Return to this page while you work. The normal loop is simple: run the app, make one focused change, and check it.
 
 ## Replace the starter landing page
 
@@ -22,7 +21,7 @@ their own setup instructions.
 
 ## Environment variables
 
-The root `.env` file holds settings that change between your computer, tests, and a
+The root `.env` file holds settings that change between your computer and a
 production host. Copy the safe template once:
 
 === "Windows PowerShell"
@@ -43,9 +42,8 @@ Generate a value for `BETTER_AUTH_SECRET` and paste it into `.env`:
 node -e "console.log(require('node:crypto').randomBytes(32).toString('base64'))"
 ```
 
-`MONGODB_URI` identifies the application database. API integration tests start their
-own in-memory MongoDB server and need no test database setting. `APP_URL` and
-`BETTER_AUTH_URL` must be the same public origin in this starter. Do not put a secret,
+`MONGODB_URI` identifies the application database. `APP_URL` and `BETTER_AUTH_URL`
+must be the same public origin in this starter. Do not put a secret,
 database URL, or API key in a variable beginning with `VITE_`: Vite exposes those to
 browser code.
 
@@ -155,20 +153,6 @@ Follow [File uploads](/build/file-uploads) to verify the configuration with a di
 PUT, confirmation, and private download. Receiving an upload URL alone does not
 verify bucket access.
 
-### Upload test database
-
-The upload integration tests run against the in-memory MongoDB server started by the
-integration suite. They do not read a database address from `.env` or from the process
-environment. Run them from the repository root with:
-
-```sh
-bun run test:integration
-```
-
-The tests supply dummy storage settings and mock S3 network calls. Real bucket
-credentials are not needed. See [File uploads: Verify and troubleshoot](/build/file-uploads/#verify-and-troubleshoot)
-for the focused test commands.
-
 ## Start the workspace
 
 ```sh
@@ -205,17 +189,6 @@ formatting changes and safe lint fixes. See [formatting](/quality/formatting),
 [linting](/quality/linting), and the official [Oxfmt](https://oxc.rs/docs/guide/usage/formatter)
 and [Oxlint](https://oxc.rs/docs/guide/usage/linter) documentation.
 
-## Run the tests
-
-```sh
-bun run test
-```
-
-`bun run test` runs the Vitest unit suite followed by the API integration suite.
-Integration tests use a randomly named database when persistence is required. See
-[Commands](/reference/commands) and [Testing](/quality/testing) for the current test
-commands and database setup.
-
 ## Build and run
 
 ```sh
@@ -247,4 +220,3 @@ Related starter documentation:
 
 - [File uploads](/build/file-uploads)
 - [Commands](/reference/commands)
-- [Testing](/quality/testing)

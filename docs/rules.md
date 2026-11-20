@@ -82,7 +82,7 @@ This site documents the shipped starter for learners, contributors, and operator
 ### 7. Repository and technical accuracy
 
 53. Treat `~/code/launchpad` as the source of truth for shipped behavior.
-54. Verify every path, script, environment variable, port, endpoint, package, generated file, test command, and deployment claim against the current repository.
+54. Verify every path, script, environment variable, port, endpoint, package, generated file, and deployment claim against the current repository.
 55. Inspect the relevant implementation and its callers before documenting a pattern.
 56. Distinguish existing code from code the reader is being asked to create.
 57. Keep examples consistent across pages so one example feature can flow from schema to model, API, and client without contradictory names or shapes.
@@ -106,8 +106,7 @@ This site documents the shipped starter for learners, contributors, and operator
 72. shadcn/ui must explain that the CLI copies editable source into the repository and that Base UI supplies the underlying accessible primitives.
 73. API routes must explain the request and response contract before middleware and handler details.
 74. Client pages must explain file-based routing and generated route types before route APIs.
-75. Testing must explain the purpose and cost of unit and integration tests before listing commands.
-76. Deployment must start with the supported choices and their tradeoffs, then lead into provider-specific instructions.
+75. Deployment must start with the supported choices and their tradeoffs, then lead into provider-specific instructions.
 
 ### 9. References and maintenance
 
